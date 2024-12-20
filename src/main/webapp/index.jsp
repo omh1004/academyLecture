@@ -7,15 +7,17 @@
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 
 <link rel="stylesheet" href="${path}/resources/css/index.css">	
-<body style="background-image: url('${pageContext.request.contextPath}/resources/images/우주.jpg');">
+<body style="background-image: url('${pageContext.request.contextPath}/resources/images/space.jpg');">
 
 <section>
 
   <div class="login-container">
     <h1>univora</h1>
+    
+    
     <input type="text" placeholder="Id or Email" />
     <input type="password" placeholder="Password" />
-    <a href="/login/login.do"><button>LOGIN</button></a>
+    <a href="${path }/login/login.do"><button>LOGIN</button></a>
     <a href="#">FORGOT YOUR PASSWORD?</a>
   </div>
 </body>
