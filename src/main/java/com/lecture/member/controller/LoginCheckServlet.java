@@ -29,8 +29,8 @@ public class LoginCheckServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/view/main");
-		rd.forward(request, response);
+		// 메인 페이지로 포워딩
+        request.getRequestDispatcher("/WEB-INF/views/common/main.jsp").forward(request, response);
 		
 	}
 
