@@ -15,7 +15,7 @@
     <h1>univora</h1>
     <input type="text" placeholder="Id or Email" />
     <input type="password" placeholder="Password" />
-    <button>LOGIN</button>
+    <a href="/login/login.do"><button>LOGIN</button></a>
     <a href="#">FORGOT YOUR PASSWORD?</a>
   </div>
 </body>
