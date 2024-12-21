@@ -14,7 +14,7 @@
 <div id="carouselExample" class="carousel slide">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="${pageContext.request.contextPath}/resources/images/java-lecture.jpg" class="d-block w-100" alt="...">
+      <img src="${pageContext.request.contextPath}/resources/images/java-lecture.jpg" class="d-block w-200" alt="...">
     </div>
     <div class="carousel-item">
       <img src="${pageContext.request.contextPath}/resources/images/GitHub-lecture.jpg" class="d-block w-100" alt="...">
