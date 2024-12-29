@@ -15,12 +15,12 @@
  
   <div class="login-container">
     <h1>univora</h1>
-    
-    
-    <input type="text" placeholder="Id or Email" />
-    <input type="password" placeholder="Password" />
-    <a href="${path }/login/login.do"><button>LOGIN</button></a>
-    <a href="#">FORGOT YOUR PASSWORD?</a>
+    		<form class="right-panel" method="post" action="${path}/login/login.do">
+    				<input type="text" id="userId" name="memberId" placeholder="Id or Email" />
+    				<input type="password"  id="userPwd" name="password" placeholder="Password" />
+    				<a href="${path }/login/login.do"><button>LOGIN</button></a>
+    				<a href="#">FORGOT YOUR PASSWORD?</a>
+			</form>
   </div>
 </body>
 	
