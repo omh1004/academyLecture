@@ -172,7 +172,7 @@
             <span>user01234@user01234.com</span>
         </div>
         <div class="info-field">
-            <span>휴대폰 번호</span>
+            <span>휴대폰 번호</span>s
             <span>010-1234-1234</span>
         </div>
         
