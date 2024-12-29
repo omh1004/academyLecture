@@ -16,17 +16,17 @@
 		<div class="carousel-item active">
 			<img
 				src="${pageContext.request.contextPath}/resources/images/java-lecture.jpg"
-				class="d-block w-200" alt="...">
+				class="d-block w-10" alt="...">
 		</div>
 		<div class="carousel-item">
 			<img
 				src="${pageContext.request.contextPath}/resources/images/GitHub-lecture.jpg"
-				class="d-block w-100" alt="...">
+				class="d-block w-10" alt="...">
 		</div>
 		<div class="carousel-item">
 			<img
 				src="${pageContext.request.contextPath}/resources/images/jspservlet-lecture.png"
-				class="d-block w-100" alt="...">
+				class="d-block w-10" alt="...">
 		</div>
 	</div>
 	<button class="carousel-control-prev" type="button"

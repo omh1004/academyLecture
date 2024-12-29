@@ -57,33 +57,49 @@
 /* 강의 목록 */
 .course-list {
     display: flex;
-    justify-content: space-around; /* 강의 목록 사이의 공간 동등하게 분배 */
-    flex-wrap: wrap; /* 내용이 많을 경우 다음 줄로 넘어감 */
-    margin-top: 20px;
+    justify-content: space-between; /* 카드 간 균등 간격 */
+    flex-wrap: wrap; /* 화면 크기에 따라 줄바꿈 */
+    gap: 20px; /* 카드 사이 간격 */
+    margin-top: 20px; /* 전체 여백 */
+    padding: 0 20px; /* 양옆 여백 */
 }
 
 .course-card {
-    flex-basis: 30%; /* 각 카드가 차지하는 공간의 기본값 */
-    margin: 10px;
-    text-align: center; /* 카드 내용 중앙 정렬 */
-    padding: 20px;
+    flex: 1 1 calc(33.333% - 20px); /* 3개의 카드가 한 줄에 배치되도록 */
+    max-width: 300px; /* 카드의 최대 너비 */
+    min-height: 400px; /* 카드의 최소 높이 */
+    text-align: center;
     border: 1px solid #ddd;
     border-radius: 8px;
+    background-color: #fff;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .course-image {
-    width: 100%; /* 이미지가 컨테이너의 전체 너비를 차지하도록 설정 */
-    height: auto; /* 이미지의 원래 비율을 유지하면서 높이가 자동으로 조정되도록 설정 */
+    width: 100%;
+    height: 200px; /* 고정된 높이 */
+    object-fit: cover; /* 이미지 비율 유지 */
+    border-radius: 8px;
 }
 
-/* 추가 조정이 필요한 스타일 */
 .course-info {
-    margin-top: 10px; /* 정보와 이미지 사이의 간격 */
+    margin-top: 10px;
 }
 
-.course-title, .course-instructor, .course-price {
-    margin: 10px 0; /* 요소 간 일관된 마진 적용 */
+.course-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin: 10px 0;
 }
+
+.course-instructor, .course-price {
+    font-size: 14px;
+    color: #666;
+    margin: 5px 0;
+}
+
 
 /* Carousel 컨테이너 크기 조정 */
 .carousel {
@@ -94,9 +110,13 @@
 
 /* 이미지 크기 조정 */
 .carousel-item img {
-    width: 100%; /* 컨테이너 너비에 맞추어 조정 */
-    height: auto; /* 이미지 비율 유지 */
+
+    width: 100%; /* 컨테이너 너비에 맞게 */
+    height: 300px; /* 고정된 높이 설정 */
+    object-fit: cover; /* 비율 유지하면서 컨테이너에 맞게 자르기 */
 }
+
+
 
 .carousel-item {
     transition: transform 0.5s ease; /* transform 속성에 대해 0.5초 동안 부드럽게 전환 */
