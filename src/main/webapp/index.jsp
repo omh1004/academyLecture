@@ -11,6 +11,7 @@
 <body style="background-image: url('${pageContext.request.contextPath}/resources/images/space.jpg');">
 
 
+<<<<<<< HEAD
 <body>
     <div class="login-container">
         <div class="logo">
