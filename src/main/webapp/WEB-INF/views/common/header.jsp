@@ -19,7 +19,7 @@
 <body>
     <!-- Header -->
     <header class="header">
-        <a href="${path }/login/login.do">
+        <a href="${path }/">
             <img src="${pageContext.request.contextPath}/resources/images/header-logo.png" alt="univora" class="logo-img">
         </a>
         <div class="nav-items">
