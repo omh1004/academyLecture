@@ -1,4 +1,4 @@
-package com.sk.lecture.controller;
+package com.lecture.mypage.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class RegistrationClassMainServlet
+ * Servlet implementation class MypageMainServlet
  */
-@WebServlet("/lecture/registrationClassMain.do")
-public class RegistrationClassMainServlet extends HttpServlet {
+@WebServlet("/mypage/main.do")
+public class MypageMainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RegistrationClassMainServlet() {
+    public MypageMainServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +26,11 @@ public class RegistrationClassMainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-			request.getRequestDispatcher("/WEB-INF/views/lecture/registrationClassMain.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/mypage/mypageMain.jsp").forward(request, response);
+	
+		
+	
+	
 	}
 
 	/**

@@ -1,4 +1,4 @@
-package com.sk.mypage.controller;
+package com.lecture.mypage.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

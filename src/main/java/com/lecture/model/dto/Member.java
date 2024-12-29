@@ -1,4 +1,4 @@
-package com.sk.model.dto;
+package com.lecture.model.dto;
 
 import java.sql.Date;
 import java.sql.Timestamp;
