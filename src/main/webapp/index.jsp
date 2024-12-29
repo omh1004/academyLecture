@@ -7,7 +7,9 @@
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 
 <link rel="stylesheet" href="${path}/resources/css/index.css">	
+
 <body style="background-image: url('${pageContext.request.contextPath}/resources/images/space.jpg');">
+
 
 <section>
 

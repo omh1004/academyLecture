@@ -1,3 +1,4 @@
+
 /* Main Content Styles */
 .main-content {
     flex: 1;
@@ -100,4 +101,3 @@
 .carousel-item {
     transition: transform 0.5s ease; /* transform 속성에 대해 0.5초 동안 부드럽게 전환 */
 }
-
