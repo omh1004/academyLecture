@@ -26,6 +26,7 @@
             <span>강의</span>
             <input type="text" class="search-box" placeholder="배우고 싶은 것들을 이야기해주세요">
             <button class="login-btn">Login</button>
+          	<a href="${pageContext.request.contextPath}/mypage/main.do">임시 마이페이지 이동</a>
         </div>
     </header>
 
