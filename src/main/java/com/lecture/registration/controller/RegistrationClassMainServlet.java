@@ -1,4 +1,4 @@
-package com.lecture.lectures.controller;
+package com.lecture.registration.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
