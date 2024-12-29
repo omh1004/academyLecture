@@ -1,0 +1,127 @@
+@charset "UTF-8";
+
+/* 메인컨테이너 */
+#main-container{
+	padding: 0px 50px;
+	display: flex;
+	flex-direction: row;
+}
+
+/* 서브컨테이너 */
+#sub-container{
+	display : flex;
+	flex-direction: column;
+	flex : 1;
+}
+
+/* 게시글리스트 */
+#boardlist-container{
+	flex : 3;
+}
+
+/* 테이블 */
+table {
+    table-layout: fixed; /* 테이블 레이아웃 고정 */
+    width: 100%; /* 테이블 전체 너비 */
+}
+
+table>tbody *, .list-title *{
+	background-color: #F6F2ED !important;
+}
+
+
+/* 게시글 tr 클릭 */
+.boardlist tr{
+	cursor: pointer; 
+}
+
+/* 게시판 제목 */
+.list-title{
+	justify-content: space-between;
+	display: flex;
+	flex-direction: row;
+	padding: 0px 10px;
+}
+
+.nav-link{
+	color:black;
+	font-weight: bold;
+}
+
+.nav-link:hover{
+	color : #5A8B63 !important; 
+}
+
+.nav-link.active{
+	color : #5A8B63 !important; 
+}
+
+
+/* 게시글 제목 */
+.boardtitle{
+	overflow: hidden !important;
+	white-space: nowrap !important;
+	text-overflow: ellipsis !important;
+}
+
+.boardlist tr{
+	width: 100%;
+}
+
+/* 좋아요수, 조회수 */
+.likecount, .viewcount{
+	padding-left: 0 !important;
+}
+
+/* 아이콘 크기 설정 */
+.likecount svg, .viewcount svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+    flex-shrink: 0;
+}
+
+/* 로그인 박스 */
+.login-container{
+	border: 1px solid #ADB5BD;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.login-button{
+	border-radius: 10px;
+	background-color: #5A8B63 !important;
+	color: white;
+	width: 100%;
+	height: 50px;
+	font-weight: bold;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.login-button:hover{
+	background-color: #3D6A47 !important;
+	cursor: pointer;
+	
+}
+
+.login-container .login-menu{
+	display: flex;
+  	justify-content: center;
+}
+
+.table-hover td, .table td {
+    vertical-align: middle;
+    text-align: center;
+    padding: 10px;
+    white-space: nowrap;
+	font-size: 15px;
+
+}
+
+
+
