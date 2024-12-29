@@ -113,7 +113,6 @@ body {
 	background-color: white;
 	cursor: pointer;
 }
-
 </style>
 </head>
 <body>
@@ -132,7 +131,7 @@ body {
 				<div class="menu-item">내 학습</div>
 				<div class="menu-item">작성한 댓글</div>
 				<div class="menu-item">수강신청 관리</div>
-				<div class="menu-item">수강바구니</div>
+				<div class="menu-item"><a href="${pageContext.request.contextPath}/mypage/lectureBasket.do">수강바구니</a></div>
 				<div class="menu-item">구매내역</div>
 			</div>
 		</aside>

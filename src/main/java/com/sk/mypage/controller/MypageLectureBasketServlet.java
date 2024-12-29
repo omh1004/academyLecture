@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MypageMainServlet
+ * Servlet implementation class MypageLectureBasketServlet
  */
-@WebServlet("/mypage/main.do")
-public class MypageMainServlet extends HttpServlet {
+@WebServlet("/mypage/lectureBasket.do")
+public class MypageLectureBasketServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MypageMainServlet() {
+    public MypageLectureBasketServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,11 +26,7 @@ public class MypageMainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/mypage/mypageMain.jsp").forward(request, response);
-	
-		
-	
-	
+		request.getRequestDispatcher("/WEB-INF/views/mypage/mypageLectureBasket.jsp").forward(request, response);
 	}
 
 	/**
