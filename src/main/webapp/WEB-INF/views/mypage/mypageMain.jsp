@@ -128,7 +128,7 @@ body {
 		<aside class="sidebar">
 			<div class="sidebar-menu">
 				<div class="menu-item">학습관리</div>
-				<div class="menu-item">내 학습</div>
+				<div class="menu-item"><a href="${pageContext.request.contextPath}/mypage/myLectureMain.do">내 학습</a></div>
 				<div class="menu-item">작성한 댓글</div>
 				<div class="menu-item">수강신청 관리</div>
 				<div class="menu-item"><a href="${pageContext.request.contextPath}/mypage/lectureBasket.do">수강바구니</a></div>
