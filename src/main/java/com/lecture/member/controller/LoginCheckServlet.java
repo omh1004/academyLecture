@@ -32,7 +32,7 @@ public class LoginCheckServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String memberId = request.getParameter("memberId");
-		
+		System.out.println("memberId::: "+memberId);
 
 		// request로 넘어온 비밀번호평문 암호화시켜서 db에 로그인 데이터와 비교
 
