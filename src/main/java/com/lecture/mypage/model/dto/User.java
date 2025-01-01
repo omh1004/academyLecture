@@ -22,5 +22,7 @@ public class User {
 	private Timestamp deletedAt;
 	private boolean isDeleted;
 	private String role;
+	private String nickName;
+	private String introduction;
 	
 }

@@ -46,19 +46,12 @@ public class LoginCheckServlet extends HttpServlet {
         // 강의 정보를 JSP로 전달(sk)
         request.setAttribute("lectureList", lectureList);
         
-        
-       
-        
-        
 		String memberId = request.getParameter("memberId");
-		System.out.println("memberId::: "+memberId);
-
 		// request로 넘어온 비밀번호평문 암호화시켜서 db에 로그인 데이터와 비교
 		PasswordEncoding pe = new PasswordEncoding(request);
 		MemberService service = new MemberService();
 		Member checkMember = Member.builder().memberId(memberId).memberPwd(pe.getParameter("password")).build();
 		
-
 		// 로그인 유효검사 하기  
 		Member invalidMember =  new MemberService().loginCheckById(checkMember);
 		
