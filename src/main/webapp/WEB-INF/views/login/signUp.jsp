@@ -120,6 +120,21 @@
             </select>
         </div>
       </div>
+	      <div class="form-group">
+  <div class="input-label">
+    <label for="role">회원 유형</label>
+    <span style="color: red;">*</span>
+  </div>
+  <div class="input-group role-group">
+    <label>
+      <input type="radio" name="role" value="S" required> 수강생
+    </label>
+    <label>
+      <input type="radio" name="role" value="T"> 강사
+    </label>
+  </div>
+</div>
+
 
       <button type="submit" class="signup-btn my-3">회원 가입</button>
     </form>

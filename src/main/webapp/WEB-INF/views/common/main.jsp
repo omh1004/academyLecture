@@ -62,7 +62,24 @@
 
 
 <!-- 강의 목록 -->
+
+
 <div class="course-list">
+	<c:forEach var="lecture" items="${lectureList}">
+	    <div class="course-card">
+	        <img src="${pageContext.request.contextPath}/resources/images/${lecture.lecPic}" alt="${lecture.className}" class="course-image">
+	        <div class="course-info">
+	        	<h3 class="course-title">
+	            	<a href="${pageContext.request.contextPath}/lecture/registrationClassMain.do?lectureNo=${lecture.lectureNo}">
+           			 ${lecture.className}
+      		  		</a>
+      		  	</h3>
+	            <p class="course-instructor">${lecture.userId}</p>
+	            <p class="course-price">₩${lecture.price}</p>
+	        </div>
+	    </div>
+	</c:forEach>
+
 	<div class="course-card">
 		<img
 			src="${pageContext.request.contextPath}/resources/images/java-lecture.jpg"

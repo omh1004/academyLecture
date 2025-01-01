@@ -55,30 +55,31 @@
 }
 
 /* 강의 목록 */
+
 .course-list {
     display: flex;
-    justify-content: space-between; /* 카드 간 균등 간격 */
     flex-wrap: wrap; /* 화면 크기에 따라 줄바꿈 */
-    gap: 20px; /* 카드 사이 간격 */
-    margin-top: 20px; /* 전체 여백 */
-    padding: 0 20px; /* 양옆 여백 */
+    gap: 40px; /* 카드 간격 */
+    justify-content: space-evenly; /* 균등 간격 배치 */
+    padding: 20px; /* 컨테이너 양쪽 여백 */
 }
 
 .course-card {
-    flex: 1 1 calc(33.333% - 20px); /* 3개의 카드가 한 줄에 배치되도록 */
-    max-width: 300px; /* 카드의 최대 너비 */
-    min-height: 400px; /* 카드의 최소 높이 */
+    flex: 1 1 calc(25% - 40px); /* 한 줄에 4개의 카드 배치 */
+    max-width: 250px; /* 카드의 최대 너비 */
+    min-height: 300px; /* 카드의 최소 높이 */
     text-align: center;
     border: 1px solid #ddd;
     border-radius: 8px;
     background-color: #fff;
     padding: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 10px 0; /* 세로 간격 */
 }
 
 .course-image {
     width: 100%;
-    height: 200px; /* 고정된 높이 */
+    height: 150px; /* 고정된 높이 */
     object-fit: cover; /* 이미지 비율 유지 */
     border-radius: 8px;
 }
@@ -88,17 +89,19 @@
 }
 
 .course-title {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     color: #333;
     margin: 10px 0;
 }
 
-.course-instructor, .course-price {
+.course-instructor,
+.course-price {
     font-size: 14px;
     color: #666;
     margin: 5px 0;
 }
+
 
 
 /* Carousel 컨테이너 크기 조정 */
@@ -121,3 +124,15 @@
 .carousel-item {
     transition: transform 0.5s ease; /* transform 속성에 대해 0.5초 동안 부드럽게 전환 */
 }
+
+
+.course-title a {
+    color: #333; /* 검은색 */
+    text-decoration: none; /* 밑줄 제거 */
+}
+
+.course-title a:hover {
+    color: #000; /* 마우스 오버 시 좀 더 진한 검은색 */
+    text-decoration: underline; /* 마우스 오버 시 밑줄 추가 (선택 사항) */
+}
+

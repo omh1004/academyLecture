@@ -1,6 +1,7 @@
 package com.lecture.member.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.lecture.lectures.model.service.LectureService;
+import com.lecture.model.dto.Lectures;
 import com.lecture.model.dto.Member;
 
 /**
@@ -31,6 +34,17 @@ public class LoginCheckServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
+		// Service를 통해 강의 정보 가져오기(sk)
+        LectureService lectureService = new LectureService();
+        List<Lectures> lectureList = lectureService.getAllLectures();
+
+
+        System.out.println(lectureList);
+        // 강의 정보를 JSP로 전달(sk)
+        request.setAttribute("lectureList", lectureList);
+        
+        
 		String memberId = request.getParameter("memberId");
 		System.out.println("memberId::: "+memberId);
 
