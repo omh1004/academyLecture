@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.lecture.common.PasswordEncoding;
 import com.lecture.lectures.model.service.LectureService;
+import com.lecture.member.model.service.MemberService;
 import com.lecture.model.dto.Lectures;
 import com.lecture.model.dto.Member;
 
@@ -45,17 +47,25 @@ public class LoginCheckServlet extends HttpServlet {
         request.setAttribute("lectureList", lectureList);
         
         
+       
+        
+        
 		String memberId = request.getParameter("memberId");
 		System.out.println("memberId::: "+memberId);
 
 		// request로 넘어온 비밀번호평문 암호화시켜서 db에 로그인 데이터와 비교
+		PasswordEncoding pe = new PasswordEncoding(request);
+		MemberService service = new MemberService();
+		Member checkMember = Member.builder().memberId(memberId).memberPwd(pe.getParameter("password")).build();
+		
 
+		// 로그인 유효검사 하기  
+		Member invalidMember =  new MemberService().loginCheckById(checkMember);
 		
-		
+		System.out.println("invalidmember::: "+ invalidMember);
 
 		// request로 요청된 정보가 있을 경우,
-		if (memberId!=null) {
-			
+		if (invalidMember != null) {
 			
 			Member invlidMember = Member.builder().memberId(memberId).build();
 			// 아이디가 일치하는 회원이 있음 -> 로그인 성공
@@ -81,6 +91,7 @@ public class LoginCheckServlet extends HttpServlet {
 			// 로그인 실패
 			request.setAttribute("msg", "아이디와 패스워드가 일치하지 않습니다.");
 			request.setAttribute("loc", "/");
+			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 		}
 	// 메인 페이지로 포워딩
         //request.getRequestDispatcher("/WEB-INF/views/common/main.jsp").forward(request, response);
