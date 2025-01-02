@@ -9,5 +9,9 @@ public class MemberDao {
 	public int signupMember(SqlSession session, Member m) throws RuntimeException {
 		return session.insert("member.signupMember" , m);
 	}
+
+	public Member loginCheckById(SqlSession session, Member checkMember) {
+		return session.selectOne("member.loginCheckById",checkMember);
+	}
 	
 }

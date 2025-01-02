@@ -24,6 +24,15 @@ private MemberDao dao = new MemberDao();
 
 		return result;
 	}
+
+	public Member loginCheckById(Member checkMember) {
+		SqlSession session= getSession();
+		
+		Member invalidMember = dao.loginCheckById(session, checkMember);
+		
+		
+		return invalidMember;
+	}
 	
 	
 }

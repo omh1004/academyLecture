@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
+<c:set var="path" value="${pageContext.request.contextPath }"/>	
 <html>
 <head>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
@@ -135,7 +139,6 @@ body {
 				<div class="menu-item">구매내역</div>
 			</div>
 		</aside>
-
 		<section class="profile-section">
 			<div class="profile-card">
 				<h2 class="profile-header">내 프로필</h2>
@@ -143,11 +146,11 @@ body {
 					<span style="font-size: 2rem;">K</span>
 				</div>
 				<div class="profile-field">
-					<span>닉네임</span> <span>상균</span>
+					<span>닉네임</span> <span>${userProfile.nickName}</span>
 					<button class="edit-button">설정</button>
 				</div>
 				<div class="profile-field">
-					<span>자기소개</span> <span>안녕하세요</span>
+					<span>자기소개</span> <span>${userProfile.introduction} </span>
 					<button class="edit-button">설정</button>
 				</div>
 			</div>
@@ -155,7 +158,7 @@ body {
 			<div class="profile-card">
 				<h2 class="profile-header">기본 정보</h2>
 				<div class="profile-field">
-					<span>이메일</span> <span>user01@user01.com</span>
+					<span>이메일</span> <span>${userProfile.email}</span>
 					<button class="edit-button">설정</button>
 				</div>
 				<div class="profile-field">
@@ -163,7 +166,7 @@ body {
 					<button class="edit-button">설정</button>
 				</div>
 				<div class="profile-field">
-					<span>휴대폰 번호</span> <span>010-1234-1242</span>
+					<span>휴대폰 번호</span> <span>${userProfile.phone} </span>
 					<button class="edit-button">설정</button>
 				</div>
 			</div>
