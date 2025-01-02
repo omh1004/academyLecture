@@ -43,7 +43,7 @@ public class MypagemyOpenLectureRenderServlet extends HttpServlet {
         String month = request.getParameter("month");
         
 
-        Map<String, List<Schedule>> scheduleMap = new HashMap<>();
+        Map<String, List<HashMap<String, String>>> scheduleMap = new HashMap<>();
         
         if(month.length()==1) {
         	month= "0"+month;
@@ -51,23 +51,19 @@ public class MypagemyOpenLectureRenderServlet extends HttpServlet {
         
         System.out.println("year:::month"+year+month);
         
-        
-        
         Map<String,String> daily = new HashMap<>();
         daily.put("year", year);
         daily.put("month", month);
         
-        List<Schedule> schedules = new MyPageService().selectMyopenLectureByCalender(daily);
+        scheduleMap = new MyPageService().selectMyopenLectureByCalender(daily);
         
-        scheduleMap.put("2025-01-01",schedules);
+        System.out.println("scheduleMap:::"+scheduleMap);
         
         
         try (PrintWriter out = response.getWriter()) {
             Gson gson = new Gson();
             out.print(gson.toJson(scheduleMap));
         }
-        
-	
 	}
 
 	/**

@@ -3,6 +3,7 @@ package com.lecture.mypage.model.service;
 
 import static com.lecture.common.SqlSessionTemplate.getSession;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,19 +30,10 @@ public class MyPageService {
 		
 	}
 
-	public List<Schedule> selectMyopenLectureByCalender(Map<String, String> daily) {
+	public HashMap<String, List<HashMap<String, String>>> selectMyopenLectureByCalender(Map<String, String> daily) {
 		SqlSession session = getSession();
+		return mypageDao.selectMyopenLectureByCalender(session, daily);
 		
-		System.out.println("ads::"+daily);
-		
-		List<Schedule> schedules = mypageDao.selectMyopenLectureByCalender(session, daily);
-		
-		
-		
-		System.out.println("schedules::::::::"+schedules);
-		
-		
-		return schedules;
 	}
 	
 }
