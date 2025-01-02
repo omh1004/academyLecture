@@ -1,25 +1,30 @@
 package com.lecture.mypage.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.lecture.mypage.model.service.MyPageService;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
- * Servlet implementation class MypageLectureBasketServlet
+ * Servlet implementation class MypagemyopenLectureServlet
  */
-@WebServlet("/mypage/lectureBasket.do")
-public class MypageLectureBasketServlet extends HttpServlet {
+@WebServlet("/mypage/myopenlecture.do")
+public class MypagemyopenLectureServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MypageLectureBasketServlet() {
+    public MypagemyopenLectureServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,11 +33,10 @@ public class MypageLectureBasketServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			
+		request.getRequestDispatcher("/WEB-INF/views/mypage/myopenLecture.jsp").forward(request, response);
 		
-//		new MyPageService()
-		
-		
-		request.getRequestDispatcher("/WEB-INF/views/mypage/mypageLectureBasket.jsp").forward(request, response);
+	
 	}
 
 	/**
