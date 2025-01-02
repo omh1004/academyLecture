@@ -62,6 +62,7 @@ public class MypagemyOpenLectureRenderServlet extends HttpServlet {
         scheduleMap.put("2025-01-01",schedules);
         
         
+        
         try (PrintWriter out = response.getWriter()) {
             Gson gson = new Gson();
             out.print(gson.toJson(scheduleMap));

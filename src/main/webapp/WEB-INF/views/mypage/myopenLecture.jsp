@@ -215,8 +215,6 @@
         const daysInMonth = new Date(year, month + 1, 0).getDate();
 
         const fetchedSchedules = await fetchSchedules(year, month + 1);
-        console.log("asdfasdfasd:::"+fetchedSchedules);
-        
         Object.assign(schedules, fetchedSchedules);
 
         for (let i = 0; i < firstDayOfMonth; i++) {
