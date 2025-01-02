@@ -27,5 +27,22 @@ public class LectureService {
 
 	        return lectureList;
 	    }
+	 
+	 
+	// 강좌 상세 조회
+    public Lectures getLectureDetail(String lectureNo) throws RuntimeException {
+	        SqlSession session = getSession();
+	        Lectures lectureDetail;
+
+	        try {
+	            // DAO 호출 및 강좌 상세 정보 조회
+	            lectureDetail = dao.selectLectureDetail(session, lectureNo);
+	        } finally {
+	            session.close(); // 세션 닫기
+	        }
+
+	        return lectureDetail;
+	    }
+	    
     
 }
