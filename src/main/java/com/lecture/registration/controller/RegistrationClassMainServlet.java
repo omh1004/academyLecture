@@ -1,11 +1,15 @@
 package com.lecture.registration.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.lecture.lectures.model.service.LectureService;
+import com.lecture.model.dto.Lectures;
 
 /**
  * Servlet implementation class RegistrationClassMainServlet
@@ -21,12 +25,24 @@ public class RegistrationClassMainServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
+    
+    private LectureService lectureService = new LectureService();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		  	String lectureNo = request.getParameter("lectureNo");
+		  	
+		    
+	        // 강좌 상세 정보 가져오기
+	       // Lectures lecture = lectureService.getLectureById(lectureNo);
+
+	        // JSP로 데이터 전달
+	        //request.setAttribute("lecture", lecture);
+		
+		
 			request.getRequestDispatcher("/WEB-INF/views/lecture/registrationClassMain.jsp").forward(request, response);
 	}
 
