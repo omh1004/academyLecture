@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.lecture.model.dto.Enrollment;
 import com.lecture.model.dto.Lectures;
 
 public class LectureDao {
@@ -19,5 +20,11 @@ public class LectureDao {
 	        // MyBatis Mapper 호출
 	        return session.selectOne("lecture.selectLectureDetail", lectureNo);
 	    }
-	    
+	
+    
+    public List<Enrollment> selectLectureReviews(SqlSession session, String lectureNo) {
+        return session.selectList("lecture.selectLectureReviews", lectureNo);
+    }
+
+    
 }
