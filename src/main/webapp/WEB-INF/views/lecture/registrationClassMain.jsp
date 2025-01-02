@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="path" value="${pageContext.request.contextPath }"/>	
+	
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -232,37 +235,22 @@
             font-size: 0.9rem;
         }
 
-        .footer {
-            background-color: #2d2b38;
-            color: white;
-            padding: 2rem;
-            margin-top: 4rem;
-        }
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="logo">univora</div>
-        <div class="search-bar">
-            <input type="text" placeholder="배우고 싶은 지식을 이야기해주세요">
-        </div>
-        <div style="width: 40px; height: 40px; background: #2d2b38; border-radius: 50%;"></div>
-    </header>
 
     <main class="main-content">
         <div class="course-header">
             <div class="course-image">
-                ☕
+                 <img src="${pageContext.request.contextPath}/resources/images/${lecture.lecPic}" alt="${lecture.className}" />
             </div>
             <div class="course-info">
-                <h1 class="course-title">유병승의 자바입문 - 코드로 시작하는 자바 첫걸음</h1>
+                <h1 class="course-title">${lecture.className}</h1>
                 <div class="course-meta">
-                    <span>난이도 입문</span>
-                    <span>초급</span>
-                    <span>중급자</span>
+                     <span>${lecture.difficulty}</span>
                 </div>
-                <div>bs</div>
-                <div class="course-price">₩17,000,000</div>
+                <div>${lecture.userId}</div>
+                <div class="course-price">₩${lecture.price}</div>
                 <div class="action-buttons">
                     <button class="btn btn-primary">수강신청 하기</button>
                     <button class="btn btn-secondary">장바구니 담기</button>
@@ -275,14 +263,13 @@
             <div class="instructor-profile">
                 <img src="/api/placeholder/120/120" alt="유병승 선생님" class="instructor-image">
                 <div class="instructor-info">
-                    <div class="instructor-name">유병승 선생님</div>
+                    <div class="instructor-name">${lecture.shortIntro}</div>
                     <div class="instructor-bio">
-                        "느리더라도 절대 베이스적인 않는다. 노력하는 인생 실천한다."<br><br>
-                        내버려두면 무너질 없는다는, 사내가로 천만 되고 되고 - 사회를 줄이기 우테코에, 소셜이 하였습니다. - ... 누워볼 하면 보여주는 것을 오늘도 누워 무작정하다.<br><br>
+                        ${lecture.instructorIntro}<br><br>
                     </div>
                 </div>
             </div>
-            <p style="margin-top: 2rem;">노력은 절대 배신하지 않는다. 노력하는 만큼 성장한다.</p>
+            <p style="margin-top: 2rem;">${lecture.detailedIntro}</p>
         </section>
 
         <section class="reviews-section">
@@ -293,7 +280,30 @@
             </div>
 
             <div class="review-list">
-                <div class="review-item">
+            
+            
+       <section class="reviews-section">
+	    <c:forEach var="review" items="${reviews}">
+	        <div class="review-item">
+	            <div class="review-avatar"></div>
+	            <div class="review-content">
+	                <div class="review-meta">
+	                    <span>${review.studentId}</span>
+	                    <span>${review.rating}</span>
+	                    <span>${review.reviewCreatedDate}</span>
+	                </div>
+	                <div>${review.review}</div>
+	                 <div class="review-buttons">
+                            <button class="review-btn">👍 5</button>
+                            <button class="review-btn">답글</button>
+                     </div>
+	            </div>
+	        </div>
+	    </c:forEach>
+            
+            
+            
+               <!--  <div class="review-item">
                     <div class="review-avatar"></div>
                     <div class="review-content">
                         <div class="review-meta">
@@ -307,7 +317,7 @@
                             <button class="review-btn">답글</button>
                         </div>
                     </div>
-                </div>
+                </div> 
 
                 <div class="review-item">
                     <div class="review-avatar"></div>
@@ -324,17 +334,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </section>
     </main>
-
-    <footer class="footer">
-        <div class="logo">univora</div>
-        <div style="margin-top: 1rem; font-size: 0.9rem;">
-            (주) 유니보라 | 대표자: 상균 | 사업자번호: 123-12-123456<br>
-            전화번호: 1577 - 1533 | 주소: 서울시 금천구 가산동 마리오아울렛 2관 11층
-        </div>
-    </footer>
 
     <script>
         // Add event listeners for buttons
