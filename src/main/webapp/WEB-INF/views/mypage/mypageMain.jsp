@@ -4,10 +4,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
-<c:set var="path" value="${pageContext.request.contextPath }"/>	
+<c:set var="path" value="${pageContext.request.contextPath }" />
 <html>
 <head>
-<jsp:include page="/WEB-INF/views/common/header.jsp"/>
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
 <meta charset="UTF-8">
 <style>
 * {
@@ -88,6 +88,9 @@ body {
 	font-weight: bold;
 	margin-bottom: 1rem;
 	color: #2d2b38;
+	display: flex;
+	align-items: center; /* 세로 정렬 중앙 */
+	gap: 10px; /* 요소 간 간격 */
 }
 
 .profile-image {
@@ -132,46 +135,55 @@ body {
 		<aside class="sidebar">
 			<div class="sidebar-menu">
 				<div class="menu-item">학습관리</div>
-				<div class="menu-item"><a href="${pageContext.request.contextPath}/mypage/myLectureMain.do">내 학습</a></div>
+				<div class="menu-item">
+					<a href="${pageContext.request.contextPath}/mypage/myLectureMain.do">내 학습</a>
+				</div>
 				<div class="menu-item">작성한 댓글</div>
 				<div class="menu-item">수강신청 관리</div>
-				<div class="menu-item"><a href="${pageContext.request.contextPath}/mypage/lectureBasket.do">수강바구니</a></div>
+				<div class="menu-item">
+					<a href="${pageContext.request.contextPath}/mypage/lectureBasket.do">수강바구니</a>
+				</div>
 				<div class="menu-item">구매내역</div>
+				<div class="menu-item">
+					<a href="${pageContext.request.contextPath}/mypage/myopenlecture.do">강의 스케줄(강사전용)-강사에게만보이도록구현예정</a>
+				</div>
 			</div>
 		</aside>
 		<section class="profile-section">
 			<div class="profile-card">
-				<h2 class="profile-header">내 프로필</h2>
+				<div class="profile-header">
+					<h2>내 프로필</h2>
+					<button class="edit-button">설정</button>
+				</div>
 				<div class="profile-image">
 					<span style="font-size: 2rem;">K</span>
 				</div>
 				<div class="profile-field">
-					<span>닉네임</span> <span>${userProfile.nickName}</span>
-					<button class="edit-button">설정</button>
+					<span>닉네임&nbsp;&nbsp;&nbsp;&nbsp; ${userProfile.nickName}</span>
 				</div>
 				<div class="profile-field">
-					<span>자기소개</span> <span>${userProfile.introduction} </span>
-					<button class="edit-button">설정</button>
+					<span>자기소개&nbsp;&nbsp;&nbsp;&nbsp;${userProfile.introduction}
+					</span>
 				</div>
 			</div>
 
 			<div class="profile-card">
-				<h2 class="profile-header">기본 정보</h2>
+				<div class="profile-header">
+					<h4>기본 정보</h4>
+					<button class="edit-button">설정</button>
+				</div>
 				<div class="profile-field">
 					<span>이메일</span> <span>${userProfile.email}</span>
-					<button class="edit-button">설정</button>
 				</div>
 				<div class="profile-field">
 					<span>비밀번호</span> <span>••••••••</span>
-					<button class="edit-button">설정</button>
 				</div>
 				<div class="profile-field">
-					<span>휴대폰 번호</span> <span>${userProfile.phone} </span>
-					<button class="edit-button">설정</button>
+					<span>휴대폰 번호</span> <span>${userProfile.phone}</span>
 				</div>
 			</div>
 		</section>
 	</main>
-<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
