@@ -14,7 +14,7 @@
         body {
             font-family: Arial, sans-serif;
             background-color: #2c2c2e;
-            color: #ffffff;
+            /* color: #ffffff; */
         }
         .calendar {
             display: flex;
@@ -186,8 +186,6 @@
     const schedules = {}; // To store schedules for each date
 
     async function fetchSchedules(year, month) {
-
-    	
         try {
             const response = await fetch(`${pageContext.request.contextPath}/mypage/myopenRenderSchedule.do?year=\${year}&month=\${month}`);
             if (!response.ok) {
@@ -232,11 +230,11 @@
                 schedules[dateKey].forEach(schedule => {
                     const scheduleItem = document.createElement('div');
                     scheduleItem.classList.add('schedule-item');
-  					
-                    scheduleItem.textContent = `\${schedule.className} (\${schedule.openDate})`;
+                    scheduleItem.textContent = `\${schedule.name} (\${schedule.time})`;
                     dayCell.appendChild(scheduleItem);
                 });
             }
+
 
             dayCell.addEventListener('click', () => {
                 document.querySelectorAll('.day').forEach(day => day.classList.remove('selected'));
