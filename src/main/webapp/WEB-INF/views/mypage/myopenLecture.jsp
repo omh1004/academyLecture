@@ -13,8 +13,6 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #2c2c2e;
-            /* color: #ffffff; */
         }
         .calendar {
             display: flex;
@@ -170,6 +168,7 @@
     <button id="saveLecture">저장</button>
     <button id="closePopup">닫기</button>
 </div>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 <script>
     const calendarDates = document.getElementById('calendarDates');
@@ -308,6 +307,6 @@
 
     renderCalendar();
 </script>
-	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+	
 </body>
 </html>
