@@ -41,4 +41,9 @@ public class mypageDao {
 		return scheduleMap;
 	}
 
+
+	public int saveLecture(SqlSession session, HashMap<String, Object> lectureData) {
+		return session.insert(NAMESPACE + ".insertLecture", lectureData);
+	}
+
 }

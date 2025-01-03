@@ -35,5 +35,26 @@ public class MyPageService {
 		return mypageDao.selectMyopenLectureByCalender(session, daily);
 		
 	}
+
+    public boolean saveLecture(String name, String content, String date, String time, String userId) {
+    	SqlSession session = getSession();
+    	
+    	HashMap<String, Object> lectureData = new HashMap<>();
+        lectureData.put("name", name);
+        lectureData.put("content", content);
+        lectureData.put("dateTime", date + " " + time);
+        lectureData.put("time", time);
+        lectureData.put("userId", userId);
+        
+        System.out.println("lectureData::"+lectureData);
+        
+        
+        int result = mypageDao.saveLecture(session,lectureData);
+        
+    	if(result>0) session.commit();
+		else session.rollback();
+
+        return result>0;
+    }
 	
 }

@@ -7,171 +7,205 @@
 <html lang="en">
 <head>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Schedule Calendar</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            /* background-color: #2c2c2e; */
-            /* color: #ffffff; */
-        }
-        .calendar {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 20px;
-        }
-        .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 800px;
-            margin-bottom: 20px;
-        }
-        .calendar-header button {
-            padding: 10px 15px;
-            background-color: #444;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .calendar-header button:hover {
-            background-color: #555;
-        }
-        .calendar-days {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            width: 800px;
-            text-align: center;
-            gap: 10px;
-        }
-        .calendar-days div {
-            color: #888;
-        }
-        .day {
-            border: 1px solid #444;
-            padding: 10px;
-            cursor: pointer;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            background-color: #3a3a3c;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        .day:hover {
-            background-color: #4a4a4c;
-        }
-        .day.selected {
-            background-color: #636366;
-        }
-        .schedule-item {
-            font-size: 12px;
-            color: #fff;
-            margin-top: 5px;
-            background-color: #007aff;
-            padding: 5px;
-            border-radius: 3px;
-            width: 100%;
-            text-align: center;
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
-        .popup {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #1c1c1e;
-            padding: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            width: 400px;
-            border-radius: 8px;
-        }
-        .popup-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            z-index: 999;
-        }
-        .popup label {
-            display: block;
-            margin-top: 10px;
-            color: #fff;
-        }
-        .popup input, .popup textarea {
-            width: 100%;
-            margin-top: 5px;
-            padding: 5px;
-            background-color: #2c2c2e;
-            color: #fff;
-            border: 1px solid #444;
-            border-radius: 4px;
-        }
-        .popup button {
-            margin-top: 10px;
-            padding: 10px 20px;
-            background-color: #007aff;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .popup button:hover {
-            background-color: #005bb5;
-        }
-    </style>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schedule Calendar</title>
+<style>
+body {
+	font-family: Arial, sans-serif;
+}
+
+.calendar {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 20px;
+}
+
+.calendar-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 800px;
+	margin-bottom: 20px;
+}
+
+.calendar-header button {
+	padding: 10px 15px;
+	background-color: #444;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.calendar-header button:hover {
+	background-color: #555;
+}
+
+.calendar-days {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	width: 800px;
+	text-align: center;
+	gap: 10px;
+}
+
+.calendar-days div {
+	color: #888;
+}
+
+.day {
+	border: 1px solid #444;
+	padding: 10px;
+	cursor: pointer;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	background-color: #3a3a3c;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.day:hover {
+	background-color: #4a4a4c;
+}
+
+.day.selected {
+	background-color: #636366;
+}
+
+.schedule-item {
+	font-size: 12px;
+	color: #fff;
+	margin-top: 5px;
+	background-color: #007aff;
+	padding: 5px;
+	border-radius: 3px;
+	width: 100%;
+	text-align: center;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.schedule-item a {
+	color: #fff;
+	text-decoration: none;
+}
+
+.schedule-item a:hover {
+	text-decoration: underline;
+}
+
+.popup {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #1c1c1e;
+	padding: 20px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+	z-index: 1000;
+	width: 400px;
+	border-radius: 8px;
+}
+
+.popup-overlay {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	z-index: 999;
+}
+
+.popup label {
+	display: block;
+	margin-top: 10px;
+	color: #fff;
+}
+
+.popup input, .popup textarea {
+	width: 100%;
+	margin-top: 5px;
+	padding: 5px;
+	background-color: #2c2c2e;
+	color: #fff;
+	border: 1px solid #444;
+	border-radius: 4px;
+}
+
+.popup button {
+	margin-top: 10px;
+	padding: 10px 20px;
+	background-color: #007aff;
+	color: #fff;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.popup button:hover {
+	background-color: #005bb5;
+}
+</style>
+
 </head>
 <body>
-<div class="calendar">
-    <div class="calendar-header">
-        <button id="prevMonth">&#9664;</button>
-        <div id="currentMonth">January 2025</div>
-        <button id="nextMonth">&#9654;</button>
-    </div>
-    <div class="calendar-days">
-        <div>Sun</div>
-        <div>Mon</div>
-        <div>Tue</div>
-        <div>Wed</div>
-        <div>Thu</div>
-        <div>Fri</div>
-        <div>Sat</div>
-    </div>
-    <div id="calendarDates" class="calendar-days"></div>
-</div>
+	<div class="calendar">
+		<div class="calendar-header">
+			<button id="prevMonth">&#9664;</button>
+			<div id="currentMonth">January 2025</div>
+			<button id="nextMonth">&#9654;</button>
+		</div>
+		<div class="calendar-days">
+			<div>Sun</div>
+			<div>Mon</div>
+			<div>Tue</div>
+			<div>Wed</div>
+			<div>Thu</div>
+			<div>Fri</div>
+			<div>Sat</div>
+		</div>
+		<div id="calendarDates" class="calendar-days"></div>
+	</div>
 
-<div class="popup-overlay" id="popupOverlay"></div>
-<div class="popup" id="popup">
-    <h2 style="color: #fff;">강의 일정</h2>
-    <div id="scheduleList">
-        <ul></ul>
-    </div>
-    <h3 style="color: #fff;">새 강의 추가</h3>
-    <label for="lectureName">강의명:</label>
-    <input type="text" id="lectureName" placeholder="강의명을 입력하세요">
+	<div class="popup-overlay" id="popupOverlay"></div>
+	<div class="popup" id="popup">
+		<h2 style="color: #fff;">강의 일정</h2>
+		<div id="scheduleList">
+			<ul></ul>
+		</div>
+		<h3 style="color: #fff;">새 강의 추가</h3>
+		<label for="lectureName">강의명:</label> <input type="text"
+			id="lectureName" placeholder="강의명을 입력하세요"> <label
+			for="lectureContent">강의내용:</label>
+		<textarea id="lectureContent" rows="4" placeholder="강의내용을 입력하세요"></textarea>
 
-    <label for="lectureContent">강의내용:</label>
-    <textarea id="lectureContent" rows="4" placeholder="강의내용을 입력하세요"></textarea>
+		<label for="lectureDate">날짜 선택:</label> <input type="date"
+			id="lectureDate"> <label for="lectureTime">시간 선택:</label>
+		<div style="display: flex; gap: 5px;">
+			<input type="time" id="lectureTime"> <select id="timePeriod">
+				<option value="AM">AM</option>
+				<option value="PM">PM</option>
+			</select>
+		</div>
 
-    <label for="lectureVideo">동영상 업로드:</label>
-    <input type="file" id="lectureVideo">
+		<label for="lectureVideo">동영상 업로드:</label> <input type="file"
+			id="lectureVideo">
 
-    <button id="saveLecture">저장</button>
-    <button id="closePopup">닫기</button>
-</div>
+		<button id="saveLecture">저장</button>
+		<button id="closePopup">닫기</button>
+	</div>
+	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
-<script>
+	<script>
     const calendarDates = document.getElementById('calendarDates');
     const currentMonth = document.getElementById('currentMonth');
     const prevMonth = document.getElementById('prevMonth');
@@ -230,11 +264,10 @@
                 schedules[dateKey].forEach(schedule => {
                     const scheduleItem = document.createElement('div');
                     scheduleItem.classList.add('schedule-item');
-                    scheduleItem.textContent = `\${schedule.name} (\${schedule.time})`;
+                    scheduleItem.innerHTML = `<a href="/lectureDetail?id=\${schedule.id}" target="_blank">\${schedule.name} (\${schedule.time})</a>`;
                     dayCell.appendChild(scheduleItem);
                 });
             }
-
 
             dayCell.addEventListener('click', () => {
                 document.querySelectorAll('.day').forEach(day => day.classList.remove('selected'));
@@ -248,66 +281,80 @@
 
             calendarDates.appendChild(dayCell);
         }
-    }
+        }
 
-    function renderSchedule(dateKey) {
+        function renderSchedule(dateKey) {
         scheduleList.innerHTML = '';
         if (schedules[dateKey]) {
             schedules[dateKey].forEach(schedule => {
                 const li = document.createElement('li');
-                li.textContent = schedule.name;
+                li.innerHTML = `<a href="${pageContext.request.contextPath}/mypage/myopenPagelectureDetail.do?id=\${schedule.id}" target="_blank">\${schedule.name} (\${schedule.time})</a>`;
                 scheduleList.appendChild(li);
             });
         }
-    }
+        }
 
-    prevMonth.addEventListener('click', () => {
+        prevMonth.addEventListener('click', () => {
         date.setMonth(date.getMonth() - 1);
         renderCalendar();
-    });
+        });
 
-    nextMonth.addEventListener('click', () => {
+        nextMonth.addEventListener('click', () => {
         date.setMonth(date.getMonth() + 1);
         renderCalendar();
-    });
+        });
 
-    closePopup.addEventListener('click', () => {
+        closePopup.addEventListener('click', () => {
         popup.style.display = 'none';
         popupOverlay.style.display = 'none';
-    });
+        });
 
-    saveLecture.addEventListener('click', () => {
+        saveLecture.addEventListener('click', async () => {
         const lectureName = document.getElementById('lectureName').value;
         const lectureContent = document.getElementById('lectureContent').value;
-        const lectureVideo = document.getElementById('lectureVideo').files[0];
+        const lectureDate = document.getElementById('lectureDate').value;
+        const lectureTime = document.getElementById('lectureTime').value;
 
-        const selectedDate = document.querySelector('.day.selected');
-        if (!selectedDate) {
-            alert('날짜를 선택해주세요.');
+        
+        if (!lectureDate || !lectureTime) {
+            alert('날짜와 시간을 선택해주세요.');
             return;
         }
 
-        const dateKey = `${date.getFullYear()}-${date.getMonth() + 1}-${selectedDate.textContent}`;
-        if (!schedules[dateKey]) {
-            schedules[dateKey] = [];
-        }
+        const timePeriod = document.getElementById('timePeriod').value; // AM or PM
 
-        schedules[dateKey].push({
+        const lectureData = {
             name: lectureName,
-            time: "시간 미정", // Placeholder for now
             content: lectureContent,
-            video: lectureVideo
+            date: lectureDate,
+            time: `${lectureTime} ${timePeriod}` // Combine time and period
+        };
+
+        try {
+            const response = await fetch(`${pageContext.request.contextPath}/mypage/myopenLectureAdd.do`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(lectureData)
+            });
+
+            if (response.ok) {
+                alert('강의가 저장되었습니다!');
+                renderCalendar();
+                popup.style.display = 'none';
+                popupOverlay.style.display = 'none';
+            } else {
+                alert('강의 저장에 실패했습니다.');
+            }
+        } catch (error) {
+            console.error('Error saving lecture:', error);
+            alert('강의 저장 중 오류가 발생했습니다.');
+        }
         });
 
         renderCalendar();
-
-        alert('강의가 저장되었습니다!');
-        popup.style.display = 'none';
-        popupOverlay.style.display = 'none';
-    });
-
-    renderCalendar();
-</script>
+        </script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
