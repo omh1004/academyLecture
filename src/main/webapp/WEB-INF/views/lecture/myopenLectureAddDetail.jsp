@@ -62,7 +62,7 @@
 			
 			<div class="section tags-input">
 			    <div class="form-group">
-			        <label for="tags">#태그를 입력해 주세요.</label>
+			        <label for="tags">동영상 등록 </label>
 			        <input 
 			            type="text" 
 			            id="tags" 

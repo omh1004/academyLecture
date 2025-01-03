@@ -289,7 +289,7 @@ body {
         if (schedules[dateKey]) {
             schedules[dateKey].forEach(schedule => {
                 const li = document.createElement('li');
-                li.innerHTML = `<a href="${pageContext.request.contextPath}/mypage/myopenPagelectureDetail.do?id=\${schedule.lectureNo}" target="_blank">\${schedule.name} (\${schedule.time})</a>`;
+                li.innerHTML = `<a href="${pageContext.request.contextPath}/mypage/addLectureDetail.do?id=\${schedule.lectureNo}" target="_blank">\${schedule.name} (\${schedule.time})</a>`;
                 scheduleList.appendChild(li);
             });
         }
