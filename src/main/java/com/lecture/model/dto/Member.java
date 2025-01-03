@@ -27,6 +27,7 @@ public class Member {
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
 	private Timestamp deletedAt;
-	private boolean isDeleted;
+	private String isDeleted;
 	private String role;
+	private String introduction; 
 }

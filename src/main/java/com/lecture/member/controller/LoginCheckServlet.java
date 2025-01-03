@@ -41,8 +41,6 @@ public class LoginCheckServlet extends HttpServlet {
         LectureService lectureService = new LectureService();
         List<Lectures> lectureList = lectureService.getAllLectures();
 
-
-        System.out.println(lectureList);
         // 강의 정보를 JSP로 전달(sk)
         request.setAttribute("lectureList", lectureList);
         
@@ -60,7 +58,25 @@ public class LoginCheckServlet extends HttpServlet {
 		// request로 요청된 정보가 있을 경우,
 		if (invalidMember != null) {
 			
-			Member invlidMember = Member.builder().memberId(memberId).build();
+			// 세션 넣기!~
+			Member invlidMember = Member.builder()
+	                .memberNo(invalidMember.getMemberNo())
+	                .memberId(invalidMember.getMemberId())
+	                .memberPwd(invalidMember.getMemberPwd())
+	                .memberName(invalidMember.getMemberName())
+	                .email(invalidMember.getEmail())
+	                .phone(invalidMember.getPhone())
+	                .address(invalidMember.getAddress())
+	                .birthday(invalidMember.getBirthday())
+	                .nickName(invalidMember.getNickName())
+	                .createdAt(invalidMember.getCreatedAt())
+	                .updatedAt(invalidMember.getUpdatedAt())
+	                .deletedAt(invalidMember.getDeletedAt())
+	                .isDeleted(invalidMember.getIsDeleted())
+	                .role(invalidMember.getRole())
+	                .introduction(invalidMember.getIntroduction())
+	                .build();
+			
 			// 아이디가 일치하는 회원이 있음 -> 로그인 성공
 			// 세션에 저장해줘야 함
 			// 세션으로 받은 Member 객체의 정보는 아래와 같다.
