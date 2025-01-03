@@ -85,6 +85,8 @@ public class LoginCheckServlet extends HttpServlet {
 			System.out.println("로그인성공 !!!!!!");
 			HttpSession session = request.getSession();
 			session.setAttribute("loginMember", invlidMember);
+			
+			System.out.println("session집어넣음!!!!!세션값 loginMember"+invlidMember);
 
 			if (memberId.equals("admin123")) {
 				request.getRequestDispatcher("/admin/main.do").forward(request, response);
