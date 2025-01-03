@@ -13,7 +13,7 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #2c2c2e;
+            /* background-color: #2c2c2e; */
             /* color: #ffffff; */
         }
         .calendar {

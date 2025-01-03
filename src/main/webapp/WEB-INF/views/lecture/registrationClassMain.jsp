@@ -281,25 +281,26 @@
 
             <div class="review-list">
             
-            
+            ${reviews }
        <section class="reviews-section">
 	    <c:forEach var="review" items="${reviews}">
-	        <div class="review-item">
-	            <div class="review-avatar"></div>
-	            <div class="review-content">
-	                <div class="review-meta">
-	                    <span>${review.studentId}</span>
-	                    <span>${review.rating}</span>
-	                    <span>${review.reviewCreatedDate}</span>
-	                </div>
-	                <div>${review.review}</div>
-	                 <div class="review-buttons">
-                            <button class="review-btn">👍 5</button>
-                            <button class="review-btn">답글</button>
-                     </div>
-	            </div>
-	        </div>
-	    </c:forEach>
+    <div class="review-item">
+        <div class="review-avatar"></div>
+        <div class="review-content">
+            <div class="review-meta">
+                <span>${review.studentNo}</span> <!-- 학생 번호 -->
+                <span>${review.reviewRating != null ? review.reviewRating : "⭐ 없음"}</span> <!-- 평점 -->
+                <span>${review.createdDate}</span> <!-- 작성 날짜 -->
+            </div>
+            <div>${review.reviewContent}</div> <!-- 리뷰 내용 -->
+            <div class="review-buttons">
+                <button class="review-btn">👍 ${review.reviewLikeCount}</button> <!-- 좋아요 -->
+                <button class="review-btn">답글</button>
+            </div>
+        </div>
+    </div>
+</c:forEach>
+
             
             
             

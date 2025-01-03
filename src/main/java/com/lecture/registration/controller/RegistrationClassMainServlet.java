@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.lecture.lectures.model.service.LectureService;
-import com.lecture.model.dto.Enrollment;
 import com.lecture.model.dto.Lectures;
+import com.lecture.model.dto.Review;
 
 /**
  * Servlet implementation class RegistrationClassMainServlet
@@ -34,20 +34,25 @@ public class RegistrationClassMainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		  	String lectureNo = request.getParameter("lectureNo");
-
+		  	
+		  	System.out.println("전달받은 lectureNo: " + lectureNo);
+		  	
 		  	LectureService lectureService = new LectureService();
 		  	
 	        // 강좌 상세 정보 가져오기 
 	        Lectures lecture = lectureService.getLectureDetail(lectureNo);      
 	  
 	        // 리뷰 리스트 가져오기
-	        List<Enrollment> reviews = lectureService.getLectureReviews(lectureNo);
+	        List<Review> reviews = lectureService.getLectureReviews(lectureNo);
 	        
 	        // JSP로 데이터 전달
 	        request.setAttribute("lecture", lecture);
 	        request.setAttribute("reviews", reviews);
 	        
-	        System.out.println(reviews);
+	        System.out.println("리뷰 데이터:");
+	        for (Review review : reviews) {
+	            System.out.println(review);
+	        }
 	        
 			request.getRequestDispatcher("/WEB-INF/views/lecture/registrationClassMain.jsp").forward(request, response);
 	}
