@@ -8,8 +8,8 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import com.lecture.lectures.model.dao.LectureDao;
-import com.lecture.model.dto.Enrollment;
 import com.lecture.model.dto.Lectures;
+import com.lecture.model.dto.Review;
 
 public class LectureService {
 
@@ -46,18 +46,19 @@ public class LectureService {
 	    }
 	   
     
-    public List<Enrollment> getLectureReviews(String lectureNo) {
-        SqlSession session = getSession();
-        List<Enrollment> reviews;
+    public List<Review> getLectureReviews(String lectureNo) {
+        SqlSession session = getSession(); // 세션 시작
+        List<Review> reviews;
 
         try {
             // DAO를 통해 리뷰 데이터 가져오기
             reviews = dao.selectLectureReviews(session, lectureNo);
+            System.out.println("Service에서 가져온 리뷰: " + reviews);
         } finally {
             session.close(); // 세션 닫기
         }
 
-        return reviews;
+        return reviews; // 가져온 리뷰 반환
     }
 
     

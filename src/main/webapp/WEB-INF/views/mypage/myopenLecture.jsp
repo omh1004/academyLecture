@@ -7,6 +7,7 @@
 <html lang="en">
 <head>
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Schedule Calendar</title>
@@ -154,6 +155,7 @@ body {
 	background-color: #005bb5;
 }
 </style>
+
 </head>
 <body>
 	<div class="calendar">

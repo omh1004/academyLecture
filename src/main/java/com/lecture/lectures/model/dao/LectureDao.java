@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.lecture.model.dto.Enrollment;
 import com.lecture.model.dto.Lectures;
+import com.lecture.model.dto.Review;
 
 public class LectureDao {
 
@@ -22,9 +22,14 @@ public class LectureDao {
 	    }
 	
     
-    public List<Enrollment> selectLectureReviews(SqlSession session, String lectureNo) {
-        return session.selectList("lecture.selectLectureReviews", lectureNo);
+    public List<Review> selectLectureReviews(SqlSession session, String lectureNo) {
+        // MyBatis 매퍼 쿼리를 통해 데이터 가져오기
+    		System.out.println("lectureNo에서 가져온 리뷰: " + lectureNo);
+    	 List<Review> reviews = session.selectList("lecture.selectLectureReviews", lectureNo);
+    	    System.out.println("DAO에서 가져온 리뷰: " + reviews);
+    	    return reviews;
     }
+
 
     
 }
