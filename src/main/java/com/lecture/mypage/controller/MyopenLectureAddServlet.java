@@ -42,7 +42,8 @@ public class MyopenLectureAddServlet extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 
-
+		System.out.println("저장중이다.");
+		
         // JSON 데이터 읽기
         StringBuilder jsonBuffer = new StringBuilder();
         try (BufferedReader reader = request.getReader()) {
@@ -73,6 +74,8 @@ public class MyopenLectureAddServlet extends HttpServlet {
         }
 
 		boolean isSuccess = new MyPageService().saveLecture(name, content, date, convertedTime,"user444");
+		
+		System.out.println("isSuccess::::"+isSuccess);
 
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");

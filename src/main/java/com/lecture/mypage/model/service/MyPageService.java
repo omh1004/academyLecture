@@ -46,9 +46,6 @@ public class MyPageService {
         lectureData.put("time", time);
         lectureData.put("userId", userId);
         
-        System.out.println("lectureData::"+lectureData);
-        
-        
         int result = mypageDao.saveLecture(session,lectureData);
         
     	if(result>0) session.commit();

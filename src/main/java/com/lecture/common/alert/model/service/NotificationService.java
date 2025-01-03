@@ -19,7 +19,7 @@ public class NotificationService {
     	
     	// 알림 데이터 생성
         Notification notification = new Notification();
-        notification.setUserId(userId);
+        notification.setUserId("duatkdrbs12@gmail.com");
         notification.setType("action_triggered");
         notification.setContent(content);
 
