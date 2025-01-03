@@ -36,5 +36,9 @@
 				href="${path }/login/signupagreement.do">CREATE ACCOUNT</a>
 		</div>
 	</div>
+	
+	<script>
+
+	</script>
 </body>
 </html>

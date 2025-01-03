@@ -7,6 +7,14 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/
 		<param-name>viewpath</param-name>
 		<param-value>/WEB-INF/views</param-value>
 	</context-param>
+	    <servlet>
+        <servlet-name>WebSocketServlet</servlet-name>
+        <servlet-class>org.apache.tomcat.websocket.server.WsServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>WebSocketServlet</servlet-name>
+        <url-pattern>/websocket/*</url-pattern>
+    </servlet-mapping>
 			
 
 </web-app> 	
