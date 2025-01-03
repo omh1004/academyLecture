@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.lecture.mypage.model.dto.Schedule;
+import com.lecture.mypage.model.dto.OpenLecture;
 import com.lecture.mypage.model.dto.User;
 
 public class mypageDao {
@@ -33,6 +33,7 @@ public class mypageDao {
 			schedule.put("name", (String) rawSchedule.get("NAME"));
 			schedule.put("time", (String) rawSchedule.get("TIME"));
 			schedule.put("description", (String) rawSchedule.get("DESCRIPTION"));
+			schedule.put("lectureNo", (String) rawSchedule.get("LECTURENO"));
 			
 			System.out.println("schedule::"+schedule);
 
@@ -44,6 +45,10 @@ public class mypageDao {
 
 	public int saveLecture(SqlSession session, HashMap<String, Object> lectureData) {
 		return session.insert(NAMESPACE + ".insertLecture", lectureData);
+	}
+
+	public OpenLecture openLectureByLectureNo(SqlSession session, String lectureNo) {
+		return session.selectOne("mypage.openLectureByLectureNo", lectureNo);
 	}
 
 }

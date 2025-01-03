@@ -1,17 +1,17 @@
 /target/
 /src/main/resources/
 /src/main/webapp/WEB-INF/lib/
+/src/main/webapp/WEB-INF/
+/src/main/webapp/WEB-INF/config/
 /.settings/
 .DS_Store
 ._.DS_Store
 **/.DS_Store
 **/._.DS_Store
 /src/test/
-<<<<<<< HEAD
-/src/main/webapp/WEB-INF/META-INF/
-=======
 /src/main/webapp/WEB-INF/META-INF/
 
+emailConfig.properties
 ### Java ###
 # Compiled class file
 *.class

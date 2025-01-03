@@ -1,0 +1,160 @@
+	@charset "UTF-8";
+	
+	.board-container{
+		background-color: #F0E0D9;
+		border-radius: 10px;
+		border: 2px solid #5A8B63;
+		margin: 5px 30px;
+	}
+	
+	.board-container div{
+		padding: 0;
+	}
+	
+	/* 아이콘 색상 */
+	.dropdown-icon {
+	    color: black;
+	    transition: color 0.3s ease;
+	}
+	
+	/* 아이콘 hover 색상 */
+	.dropdown-icon:hover {
+	    color: #5A8B63;
+	}
+	
+	/* 드롭다운 메뉴 항목 hover 색상 */
+	.dropdown-item:hover {
+	    background-color: #f0f0f0; /* 배경색 변경 */
+	    color: #5A8B63; /* 글자색 변경 */
+	}
+	
+	/* 게시글 정보 */
+	.board-meta, .comment-meta{
+		border-bottom: 1px solid #ADB5BD;
+		font-size: 12px;
+		display: flex;
+		justify-content: space-between;
+	}
+	
+	
+	/* 첨부파일 */
+	.file-attachment{
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		font-size: 10px;
+	}
+	
+	/* 해시태그 24.12.28 조금 수정.*/
+	.hashtag-container div a{
+		color: black;
+		text-decoration: none; 
+		margin: 2px;
+		border-radius: 10px;
+		background-color: #D9D9D9;
+		font-size: 12px;
+		font-weight: bold;
+		padding: 5px;
+	}
+	
+	.hashtag-container div a:hover{
+		cursor: pointer;
+		color: #5A8B63;
+	}
+	
+	.board-stats *{
+		font-size: 12px;
+		padding: 2px;
+	}
+	
+	
+	.icons {
+	    cursor: pointer;
+	    transition: transform 0.2s ease; /* 클릭 시 애니메이션 효과 */
+	}
+	
+	.icons:active {
+	    transform: scale(1.2); /* 클릭 시 살짝 커짐 */
+	}
+	
+
+	
+	.comment-btn{
+		background-color: #5A8B63;
+	    border-radius: 10px; 
+	    color: white;
+	    width: 75px !important;
+	    height: 30px !important;
+	    display: flex;
+	    align-items: center !important; /* 수직 중앙 정렬 */
+	    justify-content: center !important; /* 수평 중앙 정렬 */
+	    text-align: center !important; /* 텍스트 가운데 정렬 */
+	    
+	   
+	}
+	
+	.comment-btn:hover{
+		cursor: pointer;
+		background-color: #4A7354;
+	}
+	
+/* 	.comment-form{
+		border-bottom: 1px solid #ADB5BD;
+	} */
+	
+	.comment-input>textarea{
+		flex:1;
+		border: 2px solid #5A8B63;
+		border-radius: 10px;
+		background-color: #F0E0D9;
+		resize: none;
+	}
+	
+	/* 댓글 정렬 버튼 */
+	.comment-sort{
+		padding: 2px 5px;
+		margin: 2px;
+		border: 2px solid #5A8B63;
+		border-radius: 10px;
+		width: 8%;
+		background-color : #F0E0D9;
+	}
+	
+	.comment>div{
+		padding: 0px 5px;
+	}
+	
+	.sub-comment-btn:hover{
+		cursor: pointer;
+	}
+	
+	.subcomment comment{
+		padding: 0 !important;
+	}
+	.sub-comment{
+		padding-right: 0 !important;
+	}
+	
+	.sub-comment, .comment-form{
+	    width: 100%;
+	}
+	
+	.comment, .subcomment{
+		margin-top: 5px;
+		border-top: 1px solid #ADB5BD;
+	}
+	
+	.modal-content {
+		padding: 20px !important;
+	}
+	
+
+	.commentspagebox {
+	justify-content: center !important;
+	}
+	
+	
+
+	
+
+	

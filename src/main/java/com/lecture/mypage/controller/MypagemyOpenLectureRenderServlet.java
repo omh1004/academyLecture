@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
-import com.lecture.mypage.model.dto.Schedule;
+import com.lecture.mypage.model.dto.OpenLecture;
 import com.lecture.mypage.model.service.MyPageService;
 
 /**

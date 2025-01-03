@@ -262,7 +262,7 @@ body {
                 schedules[dateKey].forEach(schedule => {
                     const scheduleItem = document.createElement('div');
                     scheduleItem.classList.add('schedule-item');
-                    scheduleItem.innerHTML = `<a href="/lectureDetail?id=\${schedule.id}" target="_blank">\${schedule.name} (\${schedule.time})</a>`;
+                    scheduleItem.innerHTML = `<a href="${pageContext.request.contextPath}/mypage/addLectureDetail.do?id=\${schedule.lectureNo}" target="_blank">\${schedule.name} (\${schedule.time})</a>`;
                     dayCell.appendChild(scheduleItem);
                 });
             }
@@ -286,7 +286,7 @@ body {
         if (schedules[dateKey]) {
             schedules[dateKey].forEach(schedule => {
                 const li = document.createElement('li');
-                li.innerHTML = `<a href="${pageContext.request.contextPath}/mypage/myopenPagelectureDetail.do?id=\${schedule.id}" target="_blank">\${schedule.name} (\${schedule.time})</a>`;
+                li.innerHTML = `<a href="${pageContext.request.contextPath}/mypage/myopenPagelectureDetail.do?id=\${schedule.lectureNo}" target="_blank">\${schedule.name} (\${schedule.time})</a>`;
                 scheduleList.appendChild(li);
             });
         }

@@ -10,7 +10,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.lecture.mypage.model.dao.mypageDao;
-import com.lecture.mypage.model.dto.Schedule;
+import com.lecture.mypage.model.dto.OpenLecture;
 import com.lecture.mypage.model.dto.User;
 
 
@@ -56,5 +56,13 @@ public class MyPageService {
 
         return result>0;
     }
+
+	public OpenLecture openLectureByLectureNo(String scheduleId) {
+		SqlSession session = getSession();
+		
+		OpenLecture openLecture = mypageDao.openLectureByLectureNo(session, scheduleId);
+		
+		return openLecture;
+	}
 	
 }
