@@ -89,6 +89,45 @@ public class ReviewService {
 	    }
 	    
 	    
+	    public int toggleLike(String lectureNo, String memberNo) {
+	        SqlSession session = getSession();
+	        try {
+	            boolean isLiked = dao.isLiked(session, lectureNo, memberNo);
+	            if (isLiked) {
+	                int result2=dao.removeLike(session, lectureNo, memberNo);
+	                if(result2>0) {
+	                	result2=dao.decreseLike(session, lectureNo);
+	                	if(result2>0) {
+	                		session.commit();
+	                		return 0;
+	                	}
+	                	else session.rollback();
+	                }else {
+	                	session.rollback();
+	                }
+	            } else {
+	                int result2=dao.addLike(session, lectureNo, memberNo);
+	                if(result2>0) {
+	                	result2=dao.increaseLikeCount(session, lectureNo);
+	                	if(result2>0) {
+	                		session.commit();
+	                		return 1;
+	                	}
+	                	else session.rollback();
+	                }else {
+	                	session.rollback();
+	                }
+	            }
+	            return 2;
+	        } catch (Exception e) {
+	        	e.printStackTrace();
+	            session.rollback();
+	            return 2;
+	        } finally {
+	            session.close();
+	        }
+	    }
+	    
 	}
 
 

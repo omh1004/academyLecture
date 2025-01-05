@@ -691,7 +691,7 @@ heartIcon.addEventListener("click", () => {
 <!-- AJAX 하트 기능 추가 -->
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-    fetch(`${path}/board/isLiked.do?lectureNo=${lectures.lectureNo}&memberNo=${sessionScope.loginMember.memberNo}`)
+    fetch(`${path}/lecture/isLiked.do?lectureNo=${lectures.lectureNo}&memberNo=${sessionScope.loginMember.memberNo}`)
     .then(response => {
         if (!response.ok) {
             throw new Error('서버 상태 이상'); // 서버에서 200 OK가 아닌 경우 에러 처리
@@ -722,7 +722,8 @@ heartIcon1.addEventListener("click", () => {
 });
 
 function updateLikeStatus() {
-    fetch(`${path}/levture/toggleLike.do`, {
+	debugger;
+    fetch(`${path}/lecture/toggleLike.do`, {
         method: 'POST', // 메소드를 명시적으로 POST로 설정
         headers: {
             'Content-Type': 'application/json'
