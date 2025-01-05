@@ -21,9 +21,6 @@
 <script>
 </script>
     <div class="main-container">
-    
-    	${openLecture}
-    
         <h1 class="page-title">커뮤니티 글 수정하기</h1>
 		<form action='${path }/lecture/myopenLecturedetail.do' 
 		method="post" enctype="multipart/form-data">
