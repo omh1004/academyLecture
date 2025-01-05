@@ -753,7 +753,7 @@ function updateLikeStatus() {
     });
 }
 
-
+z
 
 // 하트 아이콘 업데이트 함수
 function updateHeartIcon(isLikeStatus) {
@@ -766,7 +766,4 @@ function updateHeartIcon(isLikeStatus) {
     </svg>`;
 }
 </script>
-
-     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>   
-</body>
-</html>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>   

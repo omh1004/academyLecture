@@ -1,0 +1,17 @@
+package com.lecture.mypage.model.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class AttachFile {
+	private String lectureNo;
+	private String originalFileName;
+	private String renamedFileName;
+	private String path;
+}

@@ -19,4 +19,5 @@ public class OpenLecture {
 	private String openDate;
 	private String openTime;
 	private User member;
+	private String category;
 }

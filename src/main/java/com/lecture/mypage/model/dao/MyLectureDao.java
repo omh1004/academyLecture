@@ -2,18 +2,20 @@ package com.lecture.mypage.model.dao;
 
 import org.apache.ibatis.session.SqlSession;
 
-public class MyLectureDao {
+import com.lecture.mypage.model.dto.AttachFile;
+import com.lecture.mypage.model.dto.OpenLecture;
 
-	public class LectureDAO {
-//	    public String registerDetailLecture(SqlSession session, String category, String title, String content, String tags) {
-//	        return session.selectOne("LectureMapper.insertLecture", new LectureDTO(category, title, content, tags));
-//	    }
+public class MyLectureDao {
+	
+	private static final String NAMESPACE = "lecture";
+
+	public int updateMyLectureDetail(SqlSession session, OpenLecture lecture) {
+		return session.update(NAMESPACE + ".updateLecture", lecture);
 	}
 
-//	public void registerDetailLecture(SqlSession session, String lectureNo, String category, String title,
-//			String instructorintro) {
-//		
-//		
-//	}
+	public void uploadFile(SqlSession session, AttachFile uploadFile) {
+		 session.insert(NAMESPACE + ".insertUpload", uploadFile);
+		
+	}
 
 }
