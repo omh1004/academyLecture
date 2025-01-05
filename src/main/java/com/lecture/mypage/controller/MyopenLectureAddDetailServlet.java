@@ -58,7 +58,7 @@ public class MyopenLectureAddDetailServlet extends HttpServlet {
 
 		MyLectureService lectureService = new MyLectureService();
 
-		String path = getServletContext().getRealPath("/resources/upload/lecture");
+		String path = request.getServletContext().getRealPath("/resources/upload/lecture");
 		System.out.println(path);
 		// multipartrequest객체가 생성되면서 바이너리로 전달된 데이터를 해당경로에
 		// 저장!
