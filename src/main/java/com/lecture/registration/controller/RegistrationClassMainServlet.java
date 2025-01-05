@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.lecture.lectures.model.service.LectureService;
 import com.lecture.model.dto.Lectures;
 import com.lecture.model.dto.Review;
+import com.lecture.review.model.service.ReviewService;
 
 /**
  * Servlet implementation class RegistrationClassMainServlet
@@ -39,12 +40,18 @@ public class RegistrationClassMainServlet extends HttpServlet {
 		  	
 		  	LectureService lectureService = new LectureService();
 		  	
+		  	ReviewService reviewService = new ReviewService();
+		  	
 	        // 강좌 상세 정보 가져오기 
 	        Lectures lecture = lectureService.getLectureDetail(lectureNo);      
 	  
 	        // 리뷰 리스트 가져오기
 	        List<Review> reviews = lectureService.getLectureReviews(lectureNo);
 	        
+	        // 강의에 평균 점수를 가져와보자!!!!!!!!!!!!@@  review 테이블에서 가져와야함.
+	        double averageRating = reviewService.getAverageRating(lectureNo);
+	        request.setAttribute("averageRating", averageRating);
+
 	        // JSP로 데이터 전달
 	        request.setAttribute("lecture", lecture);
 	        request.setAttribute("reviews", reviews);
