@@ -235,6 +235,31 @@
             font-size: 0.9rem;
         }
 
+
+.sub-comment {
+    margin-left: 2rem;
+    border-left: 2px solid #ddd;
+    padding-left: 1rem;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+}
+
+.sub-comment .d-flex {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.review-date {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+.dropdown {
+    margin-left: 10px;
+}
+
+
+
     </style>
 </head>
 <body>
@@ -298,23 +323,47 @@
     </div>
     
             <div class="rating-summary">
-                <div class="rating-number">4.5</div>
+                <div class="rating-number">${averageRating}</div>
                 <button class="btn btn-secondary" style="padding: 0.3rem 0.8rem;">추천순 ▾</button>
             </div>
 
+
 <div class="review-list">
     <section class="reviews-section">
-        <!-- 댓글 반복 -->
-        <c:forEach var="review" items="${reviews}">
-            <c:if test="${review.reviewLevel == 1}">
-                <div class="comment">
-                    <!-- 댓글 작성자 정보 -->
-                    <div class="d-flex justify-content-between">
-                        <span class="fw-bold">${review.studentNo == null ? "익명" : review.studentNo}</span>
-                        <div class="dropdown">
+    <!-- 댓글 반복 -->
+    <c:forEach var="review" items="${reviews}">
+        <!-- 부모 댓글 (레벨 1) -->
+        <c:if test="${review.reviewLevel == 1}">
+            <div class="comment" style=" border-bottom: 2px solid #362D4B; padding-bottom: 15px; margin-bottom: 50px;">
+                <div class="d-flex align-items-center" style="justify-content: space-between; margin-bottom: 10px;">
+                    <!-- 닉네임 -->
+                    <span class="fw-bold">${review.studentNo == null ? "익명" : review.studentNo}</span>
+                    <!-- 별점 및 날짜 -->
+                    <div class="d-flex align-items-center" style="gap: 150px; margin-left: 40px;">
+                        <span class="rating-stars">
+                            <c:forEach var="star" begin="1" end="5">
+                                <i class="fas fa-star" style="color: ${star <= review.reviewRating ? '#FFD700' : '#ddd'};"></i>
+                            </c:forEach>
+                        </span>
+                        
+                         <!-- 작성일과 드롭다운 -->
+        				<div class="d-flex align-items-center" style="gap: 10px;">
+        
+        
+                        <span class="review-date" style="font-size: 0.8rem; color: #666;">
+                            <c:choose>
+                                <c:when test="${review.updatedDate != null}">
+                                    수정됨: ${review.updatedDate}
+                                </c:when>
+                                <c:otherwise>
+                                    작성일: ${review.createdDate}
+                                </c:otherwise>
+                            </c:choose>
+                        </span>
+                        <div class="dropdown" style="margin-left: 5px;">
                             <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-three-dots">
-                                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3"/>
+                                    <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a.5.5 0 1 1 0-3 1.5.5.5 0 0 1 0 3"/>
                                 </svg>
                             </a>
                             <ul class="dropdown-menu">
@@ -323,42 +372,140 @@
                             </ul>
                         </div>
                     </div>
-                    
-                    <!-- 댓글 내용 -->
-                    <div>${review.reviewContent}</div>
-
-                    <!-- 답글 버튼 -->
-                    <button class="btn btn-reply" onclick="toggleReplyForm('${review.reviewNo}')">
-                        답글
-                    </button>
-
-                    <!-- 대댓글 작성 폼 -->
-                    <div class="reply-form" id="reply-form-${review.reviewNo}" style="display: none; margin-top: 1rem;">
-                        <form onsubmit="submitReply('${review.reviewNo}'); return false;">
-                            <input type="hidden" name="parentReviewNo" value="${review.reviewNo}" />
-                            <textarea name="content" class="reply-content" placeholder="답글을 입력하세요..." style="width: 100%; height: 80px;"></textarea>
-                            <button type="submit" class="btn btn-primary">답글 작성</button>
-                        </form>
-                    </div>
                 </div>
-            </c:if>
+               </div>
+                <div>${review.reviewContent}</div>
+                
+                
+                <!-- 좋아요 및 댓글 입력 -->
+            <div class="board-stats my-3 d-flex align-items-center">
+           		<div class="d-flex justify-content-center align-items-center px-1">	
+	            	<div id="heart-icon" class="icons">
+		            	<!-- 빈하트 -->
+	           			<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-heart mx-1" viewBox="0 0 16 16">
+							<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+						</svg>
+						<!-- 빨간 하트 
+						<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#dc3545" class="bi bi-heart-fill mx-1" viewBox="0 0 16 16">
+						  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+						</svg>  -->
+					</div>
+	                <span class="fw-bold"> 좋아요 1 </span>
+           		</div>
+                <div class="d-flex justify-content-center align-items-center px-1">
+                	<div class="icons">
+	                	<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-chat-left-dots mx-1" viewBox="0 0 16 16">
+						  <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
+						  <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
+						</svg>
+                	</div>
+	                <span class="fw-bold"> 댓글 1</span>
+                </div>
+            </div>
+            
+                
+                
+                
+                
+                <button class="btn btn-reply" onclick="toggleReplyForm('${review.reviewNo}')">답글</button>
+                
+                <!-- 답글 작성 폼 -->
+				<div class="reply-form" id="reply-form-${review.reviewNo}" style="display: none; margin-top: 1rem;">
+				    <form action="/univora/lecture/insertReply.do" method="post">
+				        <input type="hidden" name="parentReviewNo" value="${review.reviewNo}" />
+				        <input type="hidden" name="lectureNo" value="${lecture.lectureNo}" />
+				        <textarea name="content" class="reply-content" placeholder="답글을 입력하세요..." style="width: 100%; height: 80px;" required></textarea>
+				        <button type="submit" class="btn btn-primary" style="margin-top: 0.5rem;">답글 작성</button>
+				    </form>
+				</div>
 
-            <!-- 대댓글 (레벨 2) -->
-            <c:if test="${review.reviewLevel == 2}">
-                <div class="sub-comment d-flex flex-row" style="margin-left: 2rem; border-left: 2px solid #ddd; padding-left: 1rem;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right">
-                        <path d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5"/>
+                
+                
+                
+                
+                <!-- 대댓글 작성 폼 
+				<div class="reply-form">
+				    <form action="/univora/lecture/insertReply.do" method="post">
+				        <input type="hidden" name="parentReviewNo" value="${review.reviewNo}" />
+				        <textarea name="replyContent" placeholder="답글을 입력하세요..." style="width: 100%; height: 80px;" required></textarea>
+				        <button type="submit" class="btn btn-primary">답글 작성</button>
+				    </form>
+				</div>-->
+                
+               <!-- <div class="reply-form" style="margin-top: 1rem;">
+				    <form action="/univora/lecture/insertReply.do" method="post">
+				        <input type="hidden" name="parentReviewNo" value="${review.reviewNo}" />
+				        <input type="hidden" name="lectureNo" value="${lecture.lectureNo}" />
+				        <textarea name="content" class="reply-content" placeholder="답글을 입력하세요..." style="width: 100%; height: 80px;" required></textarea>
+				        <button type="submit" class="btn btn-primary" style="margin-top: 0.5rem;">답글 작성</button>
+				    </form>
+				</div> -->
+                
+               <!--<div class="reply-form" id="reply-form-${review.reviewNo}" style="display: none; margin-top: 1rem;">
+                    <form onsubmit="submitReply('${review.reviewNo}'); return false;">
+                        <input type="hidden" name="parentReviewNo" value="${review.reviewNo}" />
+                        <textarea name="content" class="reply-content" placeholder="답글을 입력하세요..." style="width: 100%; height: 80px;"></textarea>
+                        <button type="submit" class="btn btn-primary">답글 작성</button>
+                    </form>
+                </div>  --> 
+
+                <!-- 대댓글 (레벨 2) -->
+                <c:forEach var="reply" items="${reviews}">
+                    <c:if test="${reply.reviewLevel == 2 && reply.parentReviewNo == review.reviewNo}">
+<div class="sub-comment" style="margin-left: 2rem; padding: 10px 15px; border-left: 2px solid #ddd; margin-bottom: 10px; background-color: #f9f9f9; border-radius: 5px;">
+    <!-- 닉네임, 작성일, 드롭다운 -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+        <!-- 닉네임 -->
+        <span class="fw-bold">${reply.studentNo == null ? "익명" : reply.studentNo}</span>
+        <!-- 작성일 및 드롭다운 -->
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <!-- 작성일 -->
+            <span class="review-date" style="font-size: 0.8rem; color: #666;">
+                <c:choose>
+                    <c:when test="${reply.updatedDate != null}">
+                        수정됨: ${reply.updatedDate}
+                    </c:when>
+                    <c:otherwise>
+                        작성일: ${reply.createdDate}
+                    </c:otherwise>
+                </c:choose>
+            </span>
+            <!-- 드롭다운 -->
+            <div class="dropdown">
+                <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-three-dots">
+                        <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5.5.5 0 0 1 0 3"/>
                     </svg>
-                    <div>
-                        <div class="fw-bold">${review.studentNo == null ? "익명" : review.studentNo}</div>
-                        <div>${review.reviewContent}</div>
-                    </div>
-                </div>
-            </c:if>
-        </c:forEach>
-    </section>
+                </a>
+                <ul class="dropdown-menu">
+				    <li>
+				        <a class="dropdown-item" href="/lecture/editReply.do?reviewNo=${reply.reviewNo}" 
+				           onclick="return confirm('이 답글을 수정하시겠습니까?');">
+				            수정
+				        </a>
+				    </li>
+				    <li>
+				        <a class="dropdown-item" href="/lecture/deleteReply.do?reviewNo=${reply.reviewNo}" 
+				           onclick="return confirm('이 답글을 삭제하시겠습니까?');">
+				            삭제
+				        </a>
+				    </li>
+				</ul>
+            </div>
+        </div>
+    </div>
+    <!-- 댓글 내용 -->
+    <div>${reply.reviewContent}</div>
 </div>
 
+            </c:if>
+                </c:forEach>
+            </div>
+        </c:if>
+    </c:forEach>
+</section>
+
+
 
 
 
@@ -367,11 +514,7 @@
     
     
     
-            <!--<div class="review-buttons">
-                <button class="review-btn">👍 ${review.reviewLikeCount}</button> <!-- 좋아요 
-                <button class="review-btn">답글</button>
-            </div> -->
-
+     
 
 
             
@@ -449,26 +592,35 @@
     }
 
     function submitReply(parentReviewNo) {
-        const form = document.querySelector(`#reply-form-${parentReviewNo} textarea`);
-        const content = form.value.trim();
+        const content = document.querySelector(`#reply-form-\${parentReviewNo} textarea`).value.trim();
+        debugger;
         if (!content) {
-            alert("내용을 입력해주세요.");
+            alert("내용을 입력하세요.");
             return;
         }
+
         fetch('/univora/lecture/insertReply.do', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ parentReviewNo, content }),
+            body: JSON.stringify({
+                parentReviewNo: parentReviewNo,
+                content: content,
+            }),
         })
             .then(response => response.json())
             .then(data => {
-                alert('댓글이 등록되었습니다.');
-                location.reload();
+                if (data.success) {
+                    alert("답글이 등록되었습니다.");
+                    location.reload();
+                } else {
+                    alert("답글 등록 실패");
+                }
             })
-            .catch(error => console.error('댓글 등록 실패:', error));
+            .catch(error => console.error("답글 등록 실패:", error));
     }
+
 
     function editComment(reviewNo) {
         // 수정 로직
@@ -503,6 +655,116 @@
             console.error('Form with ID add-review-form not found');
         }
     }
+</script>
+
+<script>
+
+// 현재 상태 (true: 좋아요, false: 좋아요 해제)
+let isLiked = false;
+
+// 클릭 이벤트 리스너 추가
+heartIcon.addEventListener("click", () => {
+    // 상태 토글
+    isLiked = !isLiked;
+
+    // 상태에 따라 아이콘 변경
+    if (isLiked) {
+        // 빨간 하트
+        heartIcon.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#dc3545" class="bi bi-heart-fill mx-1" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+            </svg>
+        `;
+    } else {
+        // 빈 하트
+        heartIcon.innerHTML = `
+            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-heart mx-1" viewBox="0 0 16 16">
+                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+            </svg>
+        `;
+    }
+});
+
+
+</script>
+
+<!-- AJAX 하트 기능 추가 -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    fetch(`${path}/board/isLiked.do?lectureNo=${lectures.lectureNo}&memberNo=${sessionScope.loginMember.memberNo}`)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('서버 상태 이상'); // 서버에서 200 OK가 아닌 경우 에러 처리
+        }
+        return response.json();
+    })
+    .then(data => {
+        isLikeStatus = data.isLiked; // 좋아요 상태 변수 업데이트
+        if(isLikeStatus==1||isLikeStatus==0){   
+        	updateHeartIcon(isLikeStatus); // 하트 아이콘 업데이트
+        	const count=data.newLikeCount;
+        	$("#heart-icon+span").text("좋아요 "+count);
+        }
+        else alert("좋아요 실패! :( , 관리자에게 문의하세요!");
+        
+        
+    })
+    .catch(error => console.error('좋아요 상태 로드 실패:', error));
+});
+
+const heartIcon1 = document.getElementById("heart-icon"); // 아이디 중복 문제 해결
+const likeCount = document.getElementById("likeCount");
+
+// 하트 클릭 시 좋아요 상태 토글
+heartIcon1.addEventListener("click", () => {
+    //isLikeStatus = !isLikeStatus; // 상태 토글
+    updateLikeStatus(); // 서버로 요청 보내기
+});
+
+function updateLikeStatus() {
+    fetch(`${path}/board/toggleLike.do`, {
+        method: 'POST', // 메소드를 명시적으로 POST로 설정
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            boardNo: "${board.boardNo}", // 실제 boardNo를 동적으로 전달
+            memberNo: "${sessionScope.loginMember.memberNo}" // 실제 memberNo를 동적으로 전달
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('좋아요 상태 변경 실패'); // 서버 에러 처리
+        }
+        return response.json();
+    })
+    .then(data => {
+    	 isLikeStatus = data.success; // 좋아요 상태 변수 업데이트
+         if(isLikeStatus==1||isLikeStatus==0){   
+         	updateHeartIcon(isLikeStatus); // 하트 아이콘 업데이트
+         	const count=data.newLikeCount;
+         	$("#heart-icon+span").text("좋아요 "+count);
+         }
+         else alert("좋아요 실패! :( , 관리자에게 문의하세요!");
+    })
+    .catch(error => {
+        console.error('좋아요 상태 업데이트 중 오류:', error);
+        alert('네트워크 오류');
+    });
+}
+
+
+
+// 하트 아이콘 업데이트 함수
+function updateHeartIcon(isLikeStatus) {
+    heartIcon1.innerHTML = isLikeStatus==1 ? 
+    `<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#dc3545" class="bi bi-heart-fill mx-1" viewBox="0 0 16 16">
+        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
+    </svg>` : 
+    `<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-heart mx-1" viewBox="0 0 16 16">
+        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
+    </svg>`;
+}
 </script>
 
      <jsp:include page="/WEB-INF/views/common/footer.jsp"/>   
