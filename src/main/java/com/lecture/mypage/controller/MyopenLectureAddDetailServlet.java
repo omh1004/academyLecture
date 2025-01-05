@@ -70,7 +70,7 @@ public class MyopenLectureAddDetailServlet extends HttpServlet {
 			
 			
 			lectureService.registerDetailLecture(lectureNo,category, title, instructorintro);
-			lectureService.uploadFile(lectureNo, originalFileName, savedFileName, filePath);
+//			lectureService.uploadFile(lectureNo, originalFileName, savedFileName, filePath);
 
 		
 	}

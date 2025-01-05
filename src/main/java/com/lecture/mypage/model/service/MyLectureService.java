@@ -29,8 +29,8 @@ public class MyLectureService {
 
 	}
 
-	public void uploadFile(SqlSession session, String lectureNo, String originalName, String savedName, String path) {
-		uploadDAO.insertUpload(session, lectureNo, originalName, savedName, path);
-	}
+//	public void uploadFile(SqlSession session, String lectureNo, String originalName, String savedName, String path) {
+//		uploadDAO.insertUpload(session, lectureNo, originalName, savedName, path);
+//	}
 
 }
