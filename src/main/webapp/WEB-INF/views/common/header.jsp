@@ -35,20 +35,26 @@
           
           
         
-        	<c:if test="${sessionScope.loginMember!=null }">
-		     <!-- 프로필 버튼  차후에 쿼리스트링 방식으로 추가 필요. ?userId=${sessionScope.loginMember.memberNo}-->
-		    <div class="profile-container">
-		        <a href="${pageContext.request.contextPath}/mypage/main.do" class="profile-link">
-		            <div class="profile-circle">
-		                <!-- 프로필 이미지가 없다면 기본 아이콘 표시 
-		                <img src="${pageContext.request.contextPath}/resources/images/우주.jpg" alt="프로필 이미지" onerror="this.src='/path-to-default-icon.png';">-->
-		            </div>
-		        </a>
-		    </div>    
-          	<!--<a href="${pageContext.request.contextPath}/mypage/main.do">임시 마이페이지 이동</a> -->
-        </div>
+        	<c:if test="${sessionScope.loginMember != null}">
+            <!-- 알림 아이콘 및 프로필 -->
+            <div class="profile-container">
+                <!-- 알림 아이콘 -->
+                <div class="notification-icon">
+                    <a href="${pageContext.request.contextPath}/notifications.do" class="notification-link">
+                        <i class="fas fa-bell"></i>
+                        <!-- 새 알림 표시 배지 -->
+                        <span class="badge">3</span> <!-- 숫자는 동적으로 변경 -->
+                    </a>
+                </div>
+
+                <!-- 프로필 아이콘 -->
+                <a href="${pageContext.request.contextPath}/mypage/main.do" class="profile-link">
+                    <div class="profile-circle">
+                        <!-- 프로필 이미지가 없다면 기본 배경 표시 -->
+                    </div>
+                </a>
+            </div>
         </c:if>
-        
         
         
         
@@ -57,6 +63,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+         gap: 20px; /* 알림 아이콘과 프로필 간격을 20px로 설정 */
     }
 
     .profile-link {
@@ -85,6 +92,26 @@
         height: 100%;
         object-fit: cover;
     }
+    
+    .notification-icon {
+            position: relative;
+            font-size: 24px;
+            color: #362D4B;
+            cursor: pointer;
+        }
+
+    .notification-icon .badge {
+        position: absolute;
+        top: -5px;
+        right: -10px;
+        background-color: #362D4B;
+        color: white;
+        font-size: 12px;
+        border-radius: 50%;
+        padding: 2px 6px;
+        font-weight: bold;
+    }
+        
 </style>
         
         
