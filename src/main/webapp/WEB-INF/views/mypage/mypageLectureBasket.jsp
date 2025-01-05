@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
     <meta charset="UTF-8">
     <style>
@@ -178,11 +179,51 @@
         
         <button class="checkout-button">결제하기</button>
     </div>
-    <script>
-        document.querySelector('.checkout-button').addEventListener('click', function() {
-            alert('결제 프로세스가 시작됩니다.');
-        });
+
+  <script>
+  
+ 	IMP.init('imp23541524'); // PortOne에서 발급받은 가맹점 코드로 대체하세요
+ 	
+ 	  function requestPay() {
+/* 		debugger; */
+	      IMP.request_pay({
+	          pg: "inicis.INIBillTst",
+	          pay_method: "card",
+	          merchant_uid: "ORD2018012321-00003011", // 주문번호
+	          name: "노르웨이 회전 의자",
+	          amount: 100, // 숫자 타입
+	          buyer_email: "gildong@gmail.com",
+	          buyer_name: "홍길동",
+	          buyer_tel: "010-4242-4242",
+	          buyer_addr: "서울특별시 강남구 신사동",
+	          buyer_postcode: "01181"
+	      }, function(rsp) { // callback
+	          if (rsp.success) {
+	              // 결제 성공 시 로직
+	              fetch('/cart/complete-order')
+	                  .then(res => {
+	                      location.reload();
+	                  })
+	                  .catch(err => {
+	                      console.error(err);
+	                  })
+	          } else {
+	              // 결제 실패 시 로직
+	              console.log('실패', rsp);
+	          }
+	      });
+	  }
+  
+    document.querySelector('.checkout-button').addEventListener('click', function () {
+       requestPay();
+    });
+    
+    
+  
+    
+    
     </script>
+
  <jsp:include page="/WEB-INF/views/common/footer.jsp"/>   
 </body>
 </html>

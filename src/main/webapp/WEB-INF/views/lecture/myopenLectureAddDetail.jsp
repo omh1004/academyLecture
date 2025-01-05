@@ -8,8 +8,6 @@
 	<jsp:include page="/WEB-INF/views/common/header.jsp"/>
 <html>
 <head>
-
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>강의 상세등록</title>
@@ -22,7 +20,7 @@
 </script>
     <div class="main-container">
         <h1 class="page-title">커뮤니티 글 수정하기</h1>
-		<form action='${path }/lecture/myopenLecturedetail.do' 
+		<form action='${path}/lecture/myopenLecturedetail.do' 
 		method="post" enctype="multipart/form-data">
 			<input type="hidden" name="lectureNo" value="${openLecture.lectureNo}"/>
 			            <div class="section">

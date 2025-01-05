@@ -65,17 +65,17 @@
 			<artifactId>javax.mail</artifactId>
 			<version>1.6.2</version>
 		</dependency>
-		    <!-- WebSocket API -->
-	    <dependency>
-	        <groupId>javax.websocket</groupId>
-	        <artifactId>javax.websocket-api</artifactId>
-	        <version>1.1</version>
-	    </dependency>
-	<dependency>
-	    <groupId>com.servlets</groupId>
-	    <artifactId>cos</artifactId>
-	    <version>05Nov2002</version>
-	</dependency>
+		<!-- WebSocket API -->
+		<dependency>
+			<groupId>javax.websocket</groupId>
+			<artifactId>javax.websocket-api</artifactId>
+			<version>1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.servlets</groupId>
+			<artifactId>cos</artifactId>
+			<version>05Nov2002</version>
+		</dependency>
 
 
 		<dependency>
@@ -88,13 +88,12 @@
 			<artifactId>ical4j</artifactId>
 			<version>4.0.0-rc3</version>
 		</dependency>
-		  <dependency>
-        <groupId>com.fasterxml.jackson.core</groupId>
-        <artifactId>jackson-databind</artifactId>
-        <version>2.15.2</version>
-    </dependency>
-
-
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.15.2</version>
+		</dependency>
+	
 	</dependencies>
 	<!--프로젝트를 컴파일할때 적용하는 내용-->
 	<build>
