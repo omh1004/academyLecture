@@ -41,12 +41,9 @@ public class NotificationFilter extends HttpFilter implements Filter {
     public void doFilter(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws IOException, ServletException {
         String requestURI = request.getRequestURI();
-        
-        
-        System.out.println("request::: "+requestURI);
 
         // 알림 트리거 조건
-        if (requestURI.equals("/univora/login/login.do")) { // 특정 요청 경로
+        if (requestURI.equals("/univora/main/login.do")) { // 특정 요청 경로
         	
         	System.out.println("여기들어오냐!!!!");
         	
@@ -64,11 +61,10 @@ public class NotificationFilter extends HttpFilter implements Filter {
 			    userId,
 			    content
 			);
-
             // 이메일로 알림 전송
             String recipientEmail = "ohchef2020@gmail.com"; // 실제 사용자 이메일로 변경
             String emailSubject = "임시구글이메일전송";
-            String emailContent = "Univora에 로그인하셨습니다. :\n\n" + content;
+            String emailContent = "Univora 강사온라인프로젝트에 로그인하셨습니다. :\n\n" + content;
             EmailSender.sendEmail(recipientEmail, emailSubject, emailContent);
         }
 

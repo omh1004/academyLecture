@@ -145,7 +145,7 @@ body {
 				</div>
 				<div class="menu-item">구매내역</div>
 				<div class="menu-item">
-					<a href="${pageContext.request.contextPath}/mypage/myopenlecture.do">강의 스케줄(강사전용)-강사에게만보이도록구현예정</a>
+					<a href="${pageContext.request.contextPath}/mypage/myopenlecture.do">강의 스케줄</a>
 				</div>
 			</div>
 		</aside>

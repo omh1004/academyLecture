@@ -72,7 +72,6 @@ public class LoginCheckServlet extends HttpServlet {
 	                .createdAt(invalidMember.getCreatedAt())
 	                .updatedAt(invalidMember.getUpdatedAt())
 	                .deletedAt(invalidMember.getDeletedAt())
-	                .isDeleted(invalidMember.getIsDeleted())
 	                .role(invalidMember.getRole())
 	                .introduction(invalidMember.getIntroduction())
 	                .build();

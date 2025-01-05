@@ -39,10 +39,7 @@ public class MyopenLectureAddServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		request.setCharacterEncoding("UTF-8");
-
-
         // JSON 데이터 읽기
         StringBuilder jsonBuffer = new StringBuilder();
         try (BufferedReader reader = request.getReader()) {
@@ -73,7 +70,6 @@ public class MyopenLectureAddServlet extends HttpServlet {
         }
 
 		boolean isSuccess = new MyPageService().saveLecture(name, content, date, convertedTime,"user444");
-
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		if (isSuccess) {

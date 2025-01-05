@@ -20,14 +20,15 @@ body {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	margin: 20px;
+	 margin: 20px; 
+	 margin-bottom: 150px;
 }
 
 .calendar-header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	width: 800px;
+	width: 1200px;
 	margin-bottom: 20px;
 }
 
@@ -47,7 +48,7 @@ body {
 .calendar-days {
 	display: grid;
 	grid-template-columns: repeat(7, 1fr);
-	width: 800px;
+	width: 1200px;
 	text-align: center;
 	gap: 10px;
 }
@@ -191,7 +192,8 @@ body {
 		<label for="lectureDate">날짜 선택:</label> <input type="date"
 			id="lectureDate"> <label for="lectureTime">시간 선택:</label>
 		<div style="display: flex; gap: 5px;">
-			<input type="time" id="lectureTime"> <select id="timePeriod">
+			<input type="time" id="lectureTime">
+			 <select id="timePeriod">
 				<option value="AM">AM</option>
 				<option value="PM">PM</option>
 			</select>
@@ -203,7 +205,6 @@ body {
 		<button id="saveLecture">저장</button>
 		<button id="closePopup">닫기</button>
 	</div>
-	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 	<script>
     const calendarDates = document.getElementById('calendarDates');
@@ -288,7 +289,7 @@ body {
         if (schedules[dateKey]) {
             schedules[dateKey].forEach(schedule => {
                 const li = document.createElement('li');
-                li.innerHTML = `<a href="${pageContext.request.contextPath}/mypage/myopenPagelectureDetail.do?id=\${schedule.lectureNo}" target="_blank">\${schedule.name} (\${schedule.time})</a>`;
+                li.innerHTML = `<a href="${pageContext.request.contextPath}/mypage/addLectureDetail.do?id=\${schedule.lectureNo}" target="_blank">\${schedule.name} (\${schedule.time})</a>`;
                 scheduleList.appendChild(li);
             });
         }
@@ -322,12 +323,12 @@ body {
         }
 
         const timePeriod = document.getElementById('timePeriod').value; // AM or PM
-
+	
         const lectureData = {
             name: lectureName,
             content: lectureContent,
             date: lectureDate,
-            time: `${lectureTime} ${timePeriod}` // Combine time and period
+            time: `\${lectureTime} \${timePeriod}` // Combine time and period
         };
 
         try {
