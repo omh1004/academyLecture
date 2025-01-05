@@ -29,4 +29,9 @@ public class ReviewDao {
 	            Map.of("lectureNo", lectureNo, "memberNo", memberNo));
 	        return likeCount;
 	    }
+	    
+	    public int getLikeCount(SqlSession session, String lectureNo) {
+	        return session.selectOne("review.getLikeCount", lectureNo);
+	    }
+	    
 }

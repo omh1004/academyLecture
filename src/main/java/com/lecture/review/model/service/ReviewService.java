@@ -79,6 +79,15 @@ public class ReviewService {
 	    }
 	    
 	    
+	    public int getLikeCount(String lectureNo) {
+	        SqlSession session = getSession();
+	        try {
+	            return dao.getLikeCount(session, lectureNo);
+	        } finally {
+	            session.close();
+	        }
+	    }
+	    
 	    
 	}
 

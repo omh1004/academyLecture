@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import com.lecture.lectures.model.service.LectureService;
+import com.lecture.review.model.service.ReviewService;
 
 /**
  * Servlet implementation class BoardLikeStatusServlet
@@ -36,9 +36,9 @@ public class LectureLikeStatusServlet extends HttpServlet {
 		String lectureNo = request.getParameter("lectureNo");
         String memberNo = request.getParameter("memberNo"); // 현재 로그인한 사용자 ID (세션에서 가져올 수도 있음)
 
-        LectureService lectureService = new LectureService();
-       // int isLiked = lectureService.isLiked(lectureNo, memberNo);
-        //int newLikeCount = lectureService.getLikeCount(lectureNo);
+        ReviewService reviewService = new ReviewService();
+        int isLiked = reviewService.isLiked(lectureNo, memberNo);
+        int newLikeCount = reviewService.getLikeCount(lectureNo);
 
         // JSON 형식으로 응답 반환
         response.setContentType("application/json");
@@ -46,8 +46,8 @@ public class LectureLikeStatusServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         JSONObject jsonResponse = new JSONObject();
-//        jsonResponse.put("isLiked", isLiked);
-//        jsonResponse.put("newLikeCount", newLikeCount);
+        jsonResponse.put("isLiked", isLiked);
+        jsonResponse.put("newLikeCount", newLikeCount);
         out.print(jsonResponse.toString());
         out.flush();
     }

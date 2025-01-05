@@ -722,7 +722,7 @@ heartIcon1.addEventListener("click", () => {
 });
 
 function updateLikeStatus() {
-    fetch(`${path}/board/toggleLike.do`, {
+    fetch(`${path}/levture/toggleLike.do`, {
         method: 'POST', // 메소드를 명시적으로 POST로 설정
         headers: {
             'Content-Type': 'application/json'
