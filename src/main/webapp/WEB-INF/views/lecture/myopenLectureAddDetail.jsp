@@ -5,10 +5,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+<jsp:include page="/WEB-INF/views/common/header.jsp" />
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>강의 등록</title>
@@ -28,13 +28,15 @@
 				value="${openLecture.lectureNo}">
 			<div class="section">
 				<div class="form-group">
-					<label for="category">카테고리</label> <select id="category"
-						name="category" required>
-						<option value="LDF001">입문</option>
-						<option value="LDF002">초급</option>
-						<option value="LDF003">중급</option>
-						<option value="LDF004">고급</option>
-					</select>
+					<label for="category">카테고리를 선택해 주세요.</label>
+					<div class="select-container">
+						<select id="category" name="category" required>
+							<option value="LDF001">입문</option>
+							<option value="LDF002">초급</option>
+							<option value="LDF003">중급</option>
+							<option value="LDF004">고급</option>
+						</select>
+					</div>
 				</div>
 				<div class="form-group">
 					<label for="title">제목을 입력해 주세요.</label> <input type="text"
@@ -62,17 +64,37 @@
 
 		</form>
 	</div>
-
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 	<script>
+		// Quill.js 초기화
 		var quill = new Quill('#editor-container', {
-			theme : 'snow'
+			theme : 'snow',
+			placeholder : '내용을 입력해 주세요...',
+			modules : {
+				toolbar : [ [ 'bold', 'italic', 'underline' ], [ {
+					'header' : 1
+				}, {
+					'header' : 2
+				} ], [ {
+					'list' : 'ordered'
+				}, {
+					'list' : 'bullet'
+				} ], [ 'link', 'image' ] ]
+			}
 		});
-		document.querySelector('form').addEventListener('submit', function() {
-			document.getElementById('content').value = quill.root.innerHTML;
-		});
+/* 
+		// 기존 내용 로드
+		quill.root.innerHTML = `${board.content}`;
+
+		// 제출 버튼 클릭 시 Quill 내용 전송
+		document.getElementById('submit-btn').addEventListener('click',
+				function() {
+					var content = quill.root.innerHTML;
+					document.getElementById("content").value = content;
+				}); */
 	</script>
-	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+	
 </body>
 </html>
 

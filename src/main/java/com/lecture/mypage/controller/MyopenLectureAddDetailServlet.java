@@ -43,13 +43,16 @@ public class MyopenLectureAddDetailServlet extends HttpServlet {
 		
 			MyLectureService lectureService = new MyLectureService();
 
+			
+			System.out.println(request.getParameterMap().toString());
+			
 			// 강의 정보
 			String lectureNo = request.getParameter("lectureNo");
 			String category = request.getParameter("category");
 			String title = request.getParameter("title");
 			String instructorintro = request.getParameter("instructorintro");
 			
-			System.out.println("inputData:::" +lectureNo+category+title+instructorintro);
+			System.out.println("inputData:::넘어요냐고!!" +lectureNo+category+title+instructorintro);
 			
 
 			// 파일 업로드
@@ -69,10 +72,9 @@ public class MyopenLectureAddDetailServlet extends HttpServlet {
 			// DB 저장
 			
 			
-			lectureService.registerDetailLecture(lectureNo,category, title, instructorintro);
-			lectureService.uploadFile(lectureNo, originalFileName, savedFileName, filePath);
+//			lectureService.registerDetailLecture(lectureNo,category, title, instructorintro);
+			//lectureService.uploadFile(lectureNo, originalFileName, savedFileName, filePath);
 
-		
 	}
 
 	
