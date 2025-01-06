@@ -42,9 +42,12 @@ public class MyPageService {
     	HashMap<String, Object> lectureData = new HashMap<>();
         lectureData.put("name", name);
         lectureData.put("content", content);
-        lectureData.put("dateTime", date + " " + time);
+        lectureData.put("dateTime", date);
         lectureData.put("time", time);
         lectureData.put("userId", userId);
+        
+        
+        System.out.println("뭥미"+lectureData.get("dateTime"));
         
         int result = mypageDao.saveLecture(session,lectureData);
         

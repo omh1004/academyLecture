@@ -6,6 +6,7 @@
 
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <meta charset="UTF-8">
+
 <style>
 * {
 	margin: 0;
@@ -142,8 +143,7 @@ body {
 </style>
 </head>
 <body>
-<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
 	<header class="header">
 		<div class="logo">univora</div>
 		<div class="search-bar">
@@ -177,55 +177,84 @@ body {
 			<span>휴대폰 번호</span> <span>010-1234-1234</span>
 		</div>
 
-		<button class="checkout-button">결제하기</button>
-		<script type="text/javascript"
-			src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 		<!-- iamport.payment.js -->
-			<h2>IAMPORT 결제 데모</h2>
-			<li>
+		<h2>IAMPORT 결제 데모</h2>
+		<li>
 			<!-- 	<button id="iamportPayment" type="button">결제테스트</button> -->
-				 <button class="pay-button" onclick="requestPayment()">결제테스트</button>
-				     <button id="checkout-button">결제하기</button>
-			</li>
-		</div>
+			<button class="pay-button" onclick="requestPayment()">결제테스트</button>
+			<button class="checkout-button">결제하기</button>
+		</li>
+	</div>
+	<script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
+	<script>
+	
+    document.querySelector('.checkout-button').addEventListener('click', function () {
+        // PortOne SDK 초기화
+        
+        
+        
+        console.log(PortOne);
+        
+        async function requestPayment() {
+        	 const response = await 	PortOne.requestPayment({
+         	    storeId: "store-3bc36c78-6806-4618-9eb6-a4543ab8b481", // 고객사 storeId로 변경해주세요.
+         	    channelKey: "channel-key-9f12fe14-e2c6-4789-9a14-adbde33a2914", // 콘솔 결제 연동 화면에서 채널 연동 시 생성된 채널 키를 입력해주세요.
+         	    paymentId: `payment-${crypto.randomUUID()}`,
+         	    orderName: "나이키 와플 트레이너 2 SD",
+         	    totalAmount: 1000,
+         	    currency: "CURRENCY_KRW",
+         	    payMethod: "CARD",
+         	    customer: {
+         	      fullName: "포트원",
+         	      phoneNumber: "010-0000-1234",
+         	      email: "test@portone.io",
+         	    },
+         	  });
 
+        	  if (response.code !== undefined) {
+        	    // 오류 발생
+        	    return alert(response.message);
+        	  }
 
-
-    </div>
-    <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
-  <script>
-  // PortOne SDK 초기화
-  const portone = PortOne.init('imp23541524'); // PortOne에서 발급받은 가맹점 코드로 대체하세요
-  
-    document.querySelector('#checkout-button').addEventListener('click', function () {
+        	  // /payment/complete 엔드포인트를 구현해야 합니다. 다음 목차에서 설명합니다.
+        	  const notified = await fetch(`${SERVER_BASE_URL}/payment/complete`, {
+        	    method: "POST",
+        	    headers: { "Content-Type": "application/json" },
+        	    // paymentId와 주문 정보를 서버에 전달합니다
+        	    body: JSON.stringify({
+        	      paymentId: paymentId,
+        	      // 주문 정보...
+        	    }),
+        	  });
+        	}
+        
+        
+/*         
+        const portone = PortOne.init('imp23541524'); // PortOne에서 발급받은 가맹점 코드로 대체하세요 */
         // 결제 요청
-        portone.requestPayment({
-            amount: 17000000, // 결제 금액
-            orderId: 'order_' + new Date().getTime(), // 고유 주문 번호
-            orderName: '강좌 결제', // 주문 이름
-            customerName: '홍길동', // 고객 이름
-            customerEmail: 'user@example.com', // 고객 이메일
-            customerMobile: '010-1234-5678', // 고객 휴대폰 번호
-            returnUrl: 'http://yourserver.com/payment-complete', // 결제 완료 후 리다이렉트 URL
-        }, function (response) {
-            // 결제 완료 콜백 처리
-            if (response.status === 'PAID') {
-                alert('결제 성공: ' + response.transactionId);
-                // 결제 성공 시 서버로 결과 전달
-                sendPaymentToServer(response);
-            } else {
-                alert('결제 실패: ' + response.message);
-            }
-        });
+       
     });
     
-/*     const requestPayment= ()=>{
-			
-    
-    } */
-    
-    
-    </script>
+    // 서버로 결제 결과 전송
+    function sendPaymentToServer(response) {
+        fetch('/mypage/lecturebacket/paymentVerification.do', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(response),
+        })
+        .then((res) => res.json())
+        .then((result) => {
+            if (result.success) {
+                alert('결제 내역이 성공적으로 저장되었습니다.');
+            } else {
+                alert('결제 내역 저장 중 오류가 발생했습니다.');
+            }
+        })
+        .catch((error) => console.error('Error:', error));
+    }
+</script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
