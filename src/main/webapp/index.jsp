@@ -32,8 +32,8 @@
 		</div>
 
 		<div class="links">
-			<a href="#">FORGOT YOUR PASSWORD?</a> <a
-				href="${path }/login/signupagreement.do">CREATE ACCOUNT</a>
+			<a href="${path }/login/findingpasswords.do">FORGOT YOUR PASSWORD?</a> 
+			<a href="${path }/login/signupagreement.do">CREATE ACCOUNT</a>
 		</div>
 	</div>
 	
