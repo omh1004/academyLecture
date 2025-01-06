@@ -190,72 +190,98 @@ body {
 	
     document.querySelector('.checkout-button').addEventListener('click', function () {
         // PortOne SDK 초기화
-        
-        
-        
-        console.log(PortOne);
-        
+    	requestPayment();
+    });
+        async function requestPayment() {
+			const requestData={
+	         	    storeId: "store-3bc36c78-6806-4618-9eb6-a4543ab8b481", // 고객사 storeId로 변경해주세요.
+	         	    channelKey: "channel-key-9f12fe14-e2c6-4789-9a14-adbde33a2914", // 콘솔 결제 연동 화면에서 채널 연동 시 생성된 채널 키를 입력해주세요.
+	         	    paymentId: `payment-${crypto.randomUUID()}166664`,
+	         	    orderName: "나이키 와플 2222트레d이너 3",
+	         	    totalAmount: 1000,
+	         	    currency: "CURRENCY_KRW",
+	         	    payMethod: "CARD",
+	         	    customer: {
+	         	      fullName: "포트원",
+	         	      phoneNumber: "010-0000-1234",
+	         	      email: "test@portone.io",
+	         	    }};
+        	const response = PortOne.requestPayment(requestData).then(response => {
+	   			console.log(response)
+				fetch(`${pageContext.request.contextPath}/payment/complete`,{
+				//header에 대한 설정 -> method방식, 인증 관련 속성, contentType 등 설정
+				headers:{
+					/* "Content-type":"application/x-www-form-urlencoded" */
+					"Content-type":"application/json"
+				},
+				method:"POST",
+				/* body:"data=testdata&number=20" */
+				body:JSON.stringify(
+						{pamentId:response.paymentId
+						,transactionType:response.transactionType
+						,txId:response.txId
+						,customer:requestData.customer
+						,totalAmound: 1000
+						})
+				
+				}).then(response=>response.text())
+				.then(data=>{
+					console.log(data);
+				})
+	   		
+	   		});
+	   		
+         	    
+         	    
+	   	  if (response.code !== undefined) {
+	   	    // 오류 발생
+	   	    return alert(response.message);
+	   	  }
+	   	  
+	   	  
+	   	  
+	   	  console.log(response);
+	   	  console.log(response.paymentId);
 
-	   		const response = async PortOne.requestPayment({
-         	    storeId: "store-3bc36c78-6806-4618-9eb6-a4543ab8b481", // 고객사 storeId로 변경해주세요.
-         	    channelKey: "channel-key-9f12fe14-e2c6-4789-9a14-adbde33a2914", // 콘솔 결제 연동 화면에서 채널 연동 시 생성된 채널 키를 입력해주세요.
-         	    paymentId: `payment-${crypto.randomUUID()}`,
-         	    orderName: "나이키 와플 트레d이너 2 SD",
-         	    totalAmount: 1000,
-         	    currency: "CURRENCY_KRW",
-         	    payMethod: "CARD",
-         	    customer: {
-         	      fullName: "포트원",
-         	      phoneNumber: "010-0000-1234",
-         	      email: "test@portone.io",
-         	    },
-         	  });
-
-        	/*  console.log(response); */
-        	 
-        	  if (response.code !== undefined) {
-        	    // 오류 발생
-        	    return alert(response.message);
-        	  }
- 
-/*         	  console.log(response);
-    	      console.log(paymentId); */
-    	      
-    	      console.log("asdafds");
-  
-        	  // /payment/complete 엔드포인트를 구현해야 합니다. 다음 목차에서 설명합니다.
-        	  const notified = await fetch(`${SERVER_BASE_URL}/payment/complete`, {
-        	    method: "POST",
-        	    headers: { "Content-Type": "application/json" },
-        	    // paymentId와 주문 정보를 서버에 전달합니다
-        	    body: JSON.stringify({
-        	      paymentId: paymentId,
-        	      // 주문 정보...
-        	    }),
-        	  }); 
-        	}
-        
-        
+	   	  // /payment/complete 엔드포인트를 구현해야 합니다. 다음 목차에서 설명합니다.
+	   	  /* const notified = await fetch(`${pageContext.request.contextPath}/payment/complete`, {
+	   	    method: "POST",
+	   	    headers: { "Content-Type": "application/json" },
+	   	    // paymentId와 주문 정보를 서버에 전달합니다
+	   	    body: JSON.stringify({
+	   	    	paymentId: response.paymentId,
+	   	      // 주문 정보...
+	   	    }),
+	   	  }); */
+        }
+	   	
 /*         
         const portone = PortOne.init('imp23541524'); // PortOne에서 발급받은 가맹점 코드로 대체하세요 */
         // 결제 요청
        
-    });
     
-    // 서버로 결제 결과 전송
-  	 function sendPaymentToServer(response) {
-		debugger;
-    	console.log(response);
-  		fetch(`${SERVER_BASE_URL}/payment/complete`, {
-  		    method: "POST",
-  		    headers: { "Content-Type": "application/json" },
-  		    // paymentId와 주문 정보를 서버에 전달합니다
-  		    body: JSON.stringify({
-  		      paymentId: paymentId,
-  		      // 주문 정보...
-  		    }),
-  		  });
-    }
+ // 서버로 결제 결과 전송
+   // 결제 성공 데이터를 서버로 전달
+/*         function sendPaymentToServer(paymentResponse) {
+			consol.log(paymentResponse);
+			debugger;
+            fetch('${pageContext.request.contextPath}/mypage/lecturebacket/paymentVerification.do', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(paymentResponse)
+            })
+            .then(res => res.json())
+            .then(result => {
+                if (result.success) {
+                    alert('결제가 성공적으로 처리되었습니다.줄여서 결성');
+                } else {
+                    alert('서버 검증 실패: ' + result.message);
+                }
+            })
+            .catch(err => console.error('Error:', err));
+        } */
 </script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
