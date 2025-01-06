@@ -195,12 +195,12 @@ body {
         
         console.log(PortOne);
         
-        async function requestPayment() {
-        	 const response = await 	PortOne.requestPayment({
+
+	   		const response = async PortOne.requestPayment({
          	    storeId: "store-3bc36c78-6806-4618-9eb6-a4543ab8b481", // 고객사 storeId로 변경해주세요.
          	    channelKey: "channel-key-9f12fe14-e2c6-4789-9a14-adbde33a2914", // 콘솔 결제 연동 화면에서 채널 연동 시 생성된 채널 키를 입력해주세요.
          	    paymentId: `payment-${crypto.randomUUID()}`,
-         	    orderName: "나이키 와플 트레이너 2 SD",
+         	    orderName: "나이키 와플 트레d이너 2 SD",
          	    totalAmount: 1000,
          	    currency: "CURRENCY_KRW",
          	    payMethod: "CARD",
@@ -211,11 +211,18 @@ body {
          	    },
          	  });
 
+        	/*  console.log(response); */
+        	 
         	  if (response.code !== undefined) {
         	    // 오류 발생
         	    return alert(response.message);
         	  }
-
+ 
+/*         	  console.log(response);
+    	      console.log(paymentId); */
+    	      
+    	      console.log("asdafds");
+  
         	  // /payment/complete 엔드포인트를 구현해야 합니다. 다음 목차에서 설명합니다.
         	  const notified = await fetch(`${SERVER_BASE_URL}/payment/complete`, {
         	    method: "POST",
@@ -225,7 +232,7 @@ body {
         	      paymentId: paymentId,
         	      // 주문 정보...
         	    }),
-        	  });
+        	  }); 
         	}
         
         
@@ -236,23 +243,18 @@ body {
     });
     
     // 서버로 결제 결과 전송
-    function sendPaymentToServer(response) {
-        fetch('/mypage/lecturebacket/paymentVerification.do', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(response),
-        })
-        .then((res) => res.json())
-        .then((result) => {
-            if (result.success) {
-                alert('결제 내역이 성공적으로 저장되었습니다.');
-            } else {
-                alert('결제 내역 저장 중 오류가 발생했습니다.');
-            }
-        })
-        .catch((error) => console.error('Error:', error));
+  	 function sendPaymentToServer(response) {
+		debugger;
+    	console.log(response);
+  		fetch(`${SERVER_BASE_URL}/payment/complete`, {
+  		    method: "POST",
+  		    headers: { "Content-Type": "application/json" },
+  		    // paymentId와 주문 정보를 서버에 전달합니다
+  		    body: JSON.stringify({
+  		      paymentId: paymentId,
+  		      // 주문 정보...
+  		    }),
+  		  });
     }
 </script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
