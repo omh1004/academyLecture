@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+
 <jsp:include page="/WEB-INF/views/common/header.jsp" />
 <meta charset="UTF-8">
 <style>
@@ -142,6 +142,8 @@ body {
 </style>
 </head>
 <body>
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+<script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
 	<header class="header">
 		<div class="logo">univora</div>
 		<div class="search-bar">
@@ -179,90 +181,51 @@ body {
 		<script type="text/javascript"
 			src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 		<!-- iamport.payment.js -->
-		<script type="text/javascript"
-			src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script>
-		<div>
 			<h2>IAMPORT 결제 데모</h2>
 			<li>
-				<button id="iamportPayment" type="button">결제테스트</button>
+			<!-- 	<button id="iamportPayment" type="button">결제테스트</button> -->
+				 <button class="pay-button" onclick="requestPayment()">결제테스트</button>
+				     <button id="checkout-button">결제하기</button>
 			</li>
 		</div>
 
 
-	</div>
 
-	<script>
+    </div>
+    <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
+  <script>
+  // PortOne SDK 초기화
+  const portone = PortOne.init('imp23541524'); // PortOne에서 발급받은 가맹점 코드로 대체하세요
   
-	function proceedPay() {
-        $.ajax({
-            url: '/payment/proceed',
-            type: 'POST',
-            async: true,
-            dataType: "Json",
-            data:
-                $('#orderForm').serialize(),
-            success: function (data) {
-                if (data.cnt > 0) {
-                    requestPay(data)
-                } else {
-                    alert(data.msg)
-                }
-            },
-            error: function (e) {
-                alert("에러")
-            }
-        });
-
-    }
-
-    function requestPay(data) {
-        IMP.init("imp23541524"); // 예: imp00000000
-        //IMP.request_pay(param, callback) 결제창 호출
-
-        IMP.request_pay({ // param
-            pg: "inicis.INIBillTst", //결제대행사 설정에 따라 다르며 공식문서 참고
-            pay_method: "card", //결제방법 설정에 따라 다르며 공식문서 참고
-            merchant_uid: "asdfasdfasd", //주문(db에서 불러옴) 고유번호
-            name: "직거래",
-            amount: "1",
-            buyer_email: "ohchef2020@gmail.com",
-            buyer_name: "김두환",
-            //buyer_tel: "010-4242-4242",
-            buyer_addr: "경기도 수원시",
-            //buyer_postcode: "01181"
-        }, function (rsp) { // callback
-            if (rsp.success) {
-                // 결제 성공 시: 결제 승인 또는 가상계좌 발급에 성공한 경우
-                // jQuery로 HTTP 요청
-                jQuery.ajax({
-                    url: "/payment/verify/" + rsp.imp_uid,
-                    method: "POST",
-                }).done(function (data) {
-                    // 위의 rsp.paid_amount 와 data.response.amount를 비교한후 로직 실행 (iamport 서버검증)
-                    if (rsp.paid_amount == data.response.amount) {
-                        succeedPay(rsp.imp_uid, rsp.merchant_uid);
-                    } else {
-                        alert("결제 검증 실패");
-                    }
-                })
+    document.querySelector('#checkout-button').addEventListener('click', function () {
+        // 결제 요청
+        portone.requestPayment({
+            amount: 17000000, // 결제 금액
+            orderId: 'order_' + new Date().getTime(), // 고유 주문 번호
+            orderName: '강좌 결제', // 주문 이름
+            customerName: '홍길동', // 고객 이름
+            customerEmail: 'user@example.com', // 고객 이메일
+            customerMobile: '010-1234-5678', // 고객 휴대폰 번호
+            returnUrl: 'http://yourserver.com/payment-complete', // 결제 완료 후 리다이렉트 URL
+        }, function (response) {
+            // 결제 완료 콜백 처리
+            if (response.status === 'PAID') {
+                alert('결제 성공: ' + response.transactionId);
+                // 결제 성공 시 서버로 결과 전달
+                sendPaymentToServer(response);
             } else {
-                var msg = '결제에 실패하였습니다.';
-                msg += '에러내용 : ' + rsp.error_msg;
-                alert(msg);
+                alert('결제 실패: ' + response.message);
             }
         });
-    }
-  
-    document.querySelector('.checkout-button').addEventListener('click', function () {
-       requestPay();
     });
     
+/*     const requestPayment= ()=>{
+			
     
-  
+    } */
     
     
     </script>
-
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>
 </html>
