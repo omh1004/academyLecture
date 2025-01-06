@@ -27,7 +27,31 @@
         </a>
         <div class="nav-items">
             <span>강의</span>
-            <input type="text" class="search-box" placeholder="배우고 싶은 것들을 이야기해주세요">
+
+
+
+<form method="get" action="/univora/lecture/search.do" class="search-form">
+    <div class="search-container">
+        <input 
+            type="text" 
+            name="query" 
+            placeholder="배우고 싶은 것들을 이야기해주세요" 
+            class="search-input" 
+            value="${param.query}">
+        <button type="submit" class="search-button">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="search-icon">
+        <circle cx="11" cy="11" r="8" stroke="#666" stroke-width="2" fill="none"></circle>
+        <line x1="16" y1="16" x2="22" y2="22" stroke="#666" stroke-width="2"></line>
+    </svg>
+        </button>
+    </div>
+</form>
+
+            
+   
+            
+            
+            <!--  <input type="text" class="search-box" placeholder="배우고 싶은 것들을 이야기해주세요"> -->
 
           
             
@@ -113,7 +137,91 @@
         padding: 2px 6px;
         font-weight: bold;
     }
-        
+
+
+
+/* 검색창 컨테이너 */
+.search-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 400px; /* 넓이 조정 */
+    border: 1px solid #ddd;
+    border-radius: 20px; /* 둥근 모서리 */
+    padding: 5px 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 입력 필드 */
+.search-input {
+    flex-grow: 1;
+    border: none;
+    outline: none;
+    padding: 8px 10px; /* 높이 조정 */
+    border-radius: 20px;
+    font-size: 14px; /* 글자 크기 조정 */
+    background: transparent;
+    font-family: "Arial", sans-serif;
+}
+
+/* 검색 버튼 */
+.search-button {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-button:hover {
+    background-color: #eee; /* 호버 시 배경 */
+    border-radius: 50%; /* 아이콘 둥글게 */
+}
+
+.search-button svg {
+    fill: #666;
+    width: 16px; /* 돋보기 크기 */
+    height: 16px;
+    transition: fill 0.3s, transform 0.3s;
+}
+
+.search-button:hover svg {
+    fill: #333;
+    transform: scale(1.1); /* 호버 시 약간 확대 */
+}
+
+
+/* 겹치는데 일단 추가 */
+.search-button {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-icon {
+    width: 16px; /* 아이콘 너비 */
+    height: 16px; /* 아이콘 높이 */
+    stroke-width: 2px; /* 선 두께 */
+    stroke: #666; /* 아이콘 색상 */
+    transition: stroke 0.3s, transform 0.3s;
+}
+
+.search-button:hover .search-icon {
+    stroke: #333; /* 호버 시 색상 */
+    transform: scale(1.1); /* 호버 시 확대 */
+}
+
+
+
 </style>
         
         

@@ -30,6 +30,9 @@ public class LectureDao {
     	    return reviews;
     }
 
-
+    // 강좌 검색
+    public List<Lectures> searchLectures(SqlSession session, String query) {
+        return session.selectList("lecture.searchLectures", query);
+    }
     
 }
