@@ -89,6 +89,64 @@ public class ReviewService {
 	    }
 	    
 	    
+	    public int toggleLike(String lectureNo, String memberNo) {
+	        SqlSession session = getSession();
+	        try {
+	            boolean isLiked = dao.isLiked(session, lectureNo, memberNo);
+	            if (isLiked) {
+	                int result2=dao.removeLike(session, lectureNo, memberNo);
+	                if(result2>0) {
+	                	result2=dao.decreseLike(session, lectureNo);
+	                	if(result2>0) {
+	                		session.commit();
+	                		return 0;
+	                	}
+	                	else session.rollback();
+	                }else {
+	                	session.rollback();
+	                }
+	            } else {
+	                int result2=dao.addLike(session, lectureNo, memberNo);
+	                if(result2>0) {
+	                	result2=dao.increaseLikeCount(session, lectureNo);
+	                	if(result2>0) {
+	                		session.commit();
+	                		return 1;
+	                	}
+	                	else session.rollback();
+	                }else {
+	                	session.rollback();
+	                }
+	            }
+	            return 2;
+	        } catch (Exception e) {
+	        	e.printStackTrace();
+	            session.rollback();
+	            return 2;
+	        } finally {
+	            session.close();
+	        }
+	    }
+	    
+	    
+	    // 댓글 논리적 삭제
+	    
+	    public boolean deleteReview(String reviewNo) {
+	        SqlSession session = getSession();
+	        try {
+	            int result = dao.deleteReview(session, reviewNo);
+	            if (result > 0) { // 성공적으로 삭제되었는지 확인
+	                session.commit();
+	                return true;
+	            } else {
+	                session.rollback();
+	                return false;
+	            }
+	        } finally {
+	            session.close();
+	        }
+	    }
+	    
 	}
 
 

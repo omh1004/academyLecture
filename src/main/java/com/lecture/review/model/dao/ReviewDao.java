@@ -34,4 +34,41 @@ public class ReviewDao {
 	        return session.selectOne("review.getLikeCount", lectureNo);
 	    }
 	    
+	    
+	    public boolean isLiked(SqlSession session, String lectureNo, String memberNo) {
+	        // MyBatis를 사용하여 좋아요 여부 확인
+	        Integer count = session.selectOne("review.isLiked", Map.of("lectureNo", lectureNo, "memberNo", memberNo));
+	        return count != null && count > 0;
+	    }
+	    
+	    
+	    public int removeLike(SqlSession session, String lectureNo, String memberNo) {
+	        // 좋아요 삭제 로직
+	        return session.delete("review.removeLike", Map.of("lectureNo", lectureNo, "memberNo", memberNo));
+	        
+	    }
+	    
+	    public int decreseLike(SqlSession session, String lectureNo) {
+	    	return session.update("review.decreaseLikeCount", lectureNo);
+	    }
+	    
+	    
+	    public int addLike(SqlSession session, String lectureNo, String memberNo) {
+	        // 좋아요 추가 로직
+	        return session.insert("review.addLike", Map.of("lectureNo", lectureNo, "memberNo", memberNo));
+	        
+	    }
+	    
+	    
+	    public int increaseLikeCount(SqlSession session, String lectureNo) {
+	    	return session.update("review.increaseLikeCount", lectureNo);
+	    }
+	    
+	    
+	    public int deleteReview(SqlSession session, String reviewNo) {
+	        return session.update("review.deleteReview", reviewNo);
+	    }
+
+	    
+	    
 }
