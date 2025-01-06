@@ -60,6 +60,22 @@ public class LectureService {
 
         return reviews; // 가져온 리뷰 반환
     }
+    
+    
+    // 강좌 검색 서비스
+    
+    public List<Lectures> searchLectures(String query) throws RuntimeException {
+        SqlSession session = getSession(); // 세션 생성
+        List<Lectures> lectures;
 
+        try {
+            // DAO 호출 및 강좌 검색
+            lectures = dao.searchLectures(session, query);
+        } finally {
+            session.close(); // 세션 닫기
+        }
+
+        return lectures;
+    }
     
 }
