@@ -380,7 +380,7 @@
                 <!-- 좋아요 및 댓글 입력 -->
             <div class="board-stats my-3 d-flex align-items-center">
            		<div class="d-flex justify-content-center align-items-center px-1">	
-	            	<div id="heart-icon" class="icons">
+	            	<div id="heart-icon" class="icons" name="${review.reviewNo }">
 		            	<!-- 빈하트 -->
 	           			<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-heart mx-1" viewBox="0 0 16 16">
 							<path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
@@ -715,13 +715,18 @@ document.addEventListener("DOMContentLoaded", function() {
 const heartIcon1 = document.getElementById("heart-icon"); // 아이디 중복 문제 해결
 const likeCount = document.getElementById("likeCount");
 
+
+
 // 하트 클릭 시 좋아요 상태 토글
-heartIcon1.addEventListener("click", () => {
+heartIcon1.addEventListener("click", (e) => {
+	console.log(e.target,e.currentTarget);
+	const val=e.currentTarget.getAttribute("name");
+	console.log(val);
     //isLikeStatus = !isLikeStatus; // 상태 토글
-    updateLikeStatus(); // 서버로 요청 보내기
+     updateLikeStatus(val); // 서버로 요청 보내기
 });
 
-function updateLikeStatus() {
+function updateLikeStatus(val) {
 	debugger;
     fetch(`${path}/lecture/toggleLike.do`, {
         method: 'POST', // 메소드를 명시적으로 POST로 설정
@@ -729,7 +734,7 @@ function updateLikeStatus() {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            boardNo: "${board.boardNo}", // 실제 boardNo를 동적으로 전달
+        	reviewNo: val, // 실제 boardNo를 동적으로 전달
             memberNo: "${sessionScope.loginMember.memberNo}" // 실제 memberNo를 동적으로 전달
         })
     })

@@ -128,6 +128,25 @@ public class ReviewService {
 	        }
 	    }
 	    
+	    
+	    // 댓글 논리적 삭제
+	    
+	    public boolean deleteReview(String reviewNo) {
+	        SqlSession session = getSession();
+	        try {
+	            int result = dao.deleteReview(session, reviewNo);
+	            if (result > 0) { // 성공적으로 삭제되었는지 확인
+	                session.commit();
+	                return true;
+	            } else {
+	                session.rollback();
+	                return false;
+	            }
+	        } finally {
+	            session.close();
+	        }
+	    }
+	    
 	}
 
 

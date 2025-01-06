@@ -65,4 +65,10 @@ public class ReviewDao {
 	    }
 	    
 	    
+	    public int deleteReview(SqlSession session, String reviewNo) {
+	        return session.update("review.deleteReview", reviewNo);
+	    }
+
+	    
+	    
 }

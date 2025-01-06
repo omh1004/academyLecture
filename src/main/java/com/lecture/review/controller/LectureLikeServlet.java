@@ -17,7 +17,7 @@ import com.lecture.review.model.service.ReviewService;
 /**
  * Servlet implementation class LectureLikeServlet
  */
-@WebServlet("/levture/toggleLike.do")
+@WebServlet("/lecture/toggleLike.do")
 public class LectureLikeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
