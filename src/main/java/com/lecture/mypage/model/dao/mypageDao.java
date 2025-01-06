@@ -7,7 +7,9 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.lecture.mypage.model.dto.LectureBasket;
 import com.lecture.mypage.model.dto.OpenLecture;
+import com.lecture.mypage.model.dto.Payment;
 import com.lecture.mypage.model.dto.User;
 
 public class mypageDao {
@@ -49,6 +51,14 @@ public class mypageDao {
 
 	public OpenLecture openLectureByLectureNo(SqlSession session, String lectureNo) {
 		return session.selectOne("mypage.openLectureByLectureNo", lectureNo);
+	}
+
+	public List<LectureBasket> selectMyLectureBasket(SqlSession session, String memberNo) {
+		return session.selectList("mypage.selectMyLectureBasket", memberNo);
+	}
+
+	public int savePayment(SqlSession session, Payment payment) {
+		return session.insert(NAMESPACE + ".savePayment", payment);
 	}
 
 }

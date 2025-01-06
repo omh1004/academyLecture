@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.lecture.mypage.model.dto.Payment;
+import com.lecture.mypage.model.service.MyPageService;
 
 /**
  * Servlet implementation class PaymentCompleteServlet
@@ -32,29 +34,46 @@ public class PaymentCompleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		System.out.println(request);
-		
-		String pamentId = request.getParameter("pamentId");
-		
-		System.out.println("pamentId"+pamentId);
-		
 		BufferedReader reader = request.getReader();
 		StringBuilder requestBody = new StringBuilder();
 		
-		System.out.println("body값"+requestBody+"네네네");
-		
 		String line;
 		while ((line = reader.readLine()) != null) {
-			System.out.println(line);
 			requestBody.append(line);
 		}
-		
-		
 
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String, Object> paymentData = mapper.readValue(requestBody.toString(), Map.class);
 		
-		System.out.println("asdfadsf넘어오냐?:::"+paymentData);
+		System.out.println("넘어오냐?:::"+paymentData);
+		
+		String paymentId = (String) paymentData.get("paymentId");
+		String transactionType = (String) paymentData.get("transactionType");
+		String memberNo = (String) paymentData.get("customer");
+		int totalAmound = (Integer)paymentData.get("totalAmound");
+		
+		Payment payment = Payment.builder()
+				.paymentId(paymentId)
+				.paymentStatus(transactionType).studentId(memberNo).totalAmound(totalAmound).build();
+		
+		int result = new MyPageService().savePayment(payment);
+		
+		
+		String msg, loc = "/mypage/main.do";
+		if (result > 0) {
+
+			msg = "결재 처리 성공";
+		} else {
+			msg = "결재 처리 실패";
+		}
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
+
+		request.getRequestDispatcher(getServletContext().getInitParameter("viewpath") + "/common/msg.jsp")
+				.forward(request, response);
+		
+		
+		
 	}
 
 	/**
