@@ -177,13 +177,7 @@ body {
 			<span>휴대폰 번호</span> <span>010-1234-1234</span>
 		</div>
 
-		<!-- iamport.payment.js -->
-		<h2>IAMPORT 결제 데모</h2>
-		<li>
-			<!-- 	<button id="iamportPayment" type="button">결제테스트</button> -->
-			<button class="pay-button" onclick="requestPayment()">결제테스트</button>
 			<button class="checkout-button">결제하기</button>
-		</li>
 	</div>
 	<script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
 	<script>
@@ -196,7 +190,7 @@ body {
 			const requestData={
 	         	    storeId: "store-3bc36c78-6806-4618-9eb6-a4543ab8b481", // 고객사 storeId로 변경해주세요.
 	         	    channelKey: "channel-key-9f12fe14-e2c6-4789-9a14-adbde33a2914", // 콘솔 결제 연동 화면에서 채널 연동 시 생성된 채널 키를 입력해주세요.
-	         	    paymentId: `payment-${crypto.randomUUID()}166664`,
+	         	    paymentId: `pa-\${crypto.randomUUID()}`,
 	         	    orderName: "나이키 와플 2222트레d이너 3",
 	         	    totalAmount: 1000,
 	         	    currency: "CURRENCY_KRW",
@@ -238,10 +232,6 @@ body {
 	   	    return alert(response.message);
 	   	  }
 	   	  
-	   	  
-	   	  
-	   	  console.log(response);
-	   	  console.log(response.paymentId);
 
 	   	  // /payment/complete 엔드포인트를 구현해야 합니다. 다음 목차에서 설명합니다.
 	   	  /* const notified = await fetch(`${pageContext.request.contextPath}/payment/complete`, {
