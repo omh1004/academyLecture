@@ -2,7 +2,9 @@ package com.lecture.mypage.controller;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.text.ParseException;      // 시간/날짜 파싱 예외 처리
 import java.text.SimpleDateFormat;
+import java.util.Date;                // Date 클래스
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,10 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+import com.lecture.model.dto.Member;
 import com.lecture.mypage.model.service.MyPageService;
-import java.util.Date;                // Date 클래스
-import java.text.SimpleDateFormat;    // 시간/날짜 형식 파싱 및 포맷팅
-import java.text.ParseException;      // 시간/날짜 파싱 예외 처리
 
 
 /**
@@ -40,6 +40,10 @@ public class MyopenLectureAddServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
+		
+		 Member loginMember = (Member) request.getSession().getAttribute("loginMember");
+		
+		
         // JSON 데이터 읽기
         StringBuilder jsonBuffer = new StringBuilder();
         try (BufferedReader reader = request.getReader()) {
@@ -69,7 +73,9 @@ public class MyopenLectureAddServlet extends HttpServlet {
             return;
         }
 
-		boolean isSuccess = new MyPageService().saveLecture(name, content, date, convertedTime,"user444");
+        
+        
+		boolean isSuccess = new MyPageService().saveLecture(name, content, date, convertedTime,loginMember.getMemberId());
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		if (isSuccess) {

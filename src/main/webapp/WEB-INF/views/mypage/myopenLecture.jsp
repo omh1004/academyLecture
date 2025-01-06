@@ -189,8 +189,10 @@ body {
 			for="lectureContent">강의내용:</label>
 		<textarea id="lectureContent" rows="4" placeholder="강의내용을 입력하세요"></textarea>
 
-		<label for="lectureDate">날짜 선택:</label> <input type="date"
-			id="lectureDate"> <label for="lectureTime">시간 선택:</label>
+		<label for="lectureDate">선택날짜</label> 
+		<input type="date"
+			id="lectureDate" readonly> 
+		<label for="lectureTime">시간 선택:</label>
 		<div style="display: flex; gap: 5px;">
 			<input type="time" id="lectureTime">
 			 <select id="timePeriod">
@@ -199,8 +201,8 @@ body {
 			</select>
 		</div>
 
-		<label for="lectureVideo">동영상 업로드:</label> <input type="file"
-			id="lectureVideo">
+<!-- 		<label for="lectureVideo">동영상 업로드:</label> <input type="file"
+			id="lectureVideo"> -->
 
 		<button id="saveLecture">저장</button>
 		<button id="closePopup">닫기</button>
@@ -275,6 +277,20 @@ body {
                 dayCell.classList.add('selected');
 
                 renderSchedule(dateKey);
+                
+/*                 // 강의 입력 필드 초기화
+                document.getElementById('lectureName').value = '';
+                document.getElementById('lectureContent').value = '';
+                document.getElementById('lectureDate').value = '';
+                document.getElementById('lectureTime').value = '';
+                document.getElementById('timePeriod').value = 'AM'; */
+                
+                
+                // 클릭한 날짜를 날짜 입력 필드에 설정
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0'); // 0부터 시작하므로 1을 더함
+                const day = String(i).padStart(2, '0'); // 클릭한 날짜
+                document.getElementById('lectureDate').value = `\${year}-\${month}-\${day}`;
 
                 popup.style.display = 'block';
                 popupOverlay.style.display = 'block';
@@ -330,6 +346,20 @@ body {
             date: lectureDate,
             time: `\${lectureTime} \${timePeriod}` // Combine time and period
         };
+        
+
+        // 강의 등록 제한 확인
+        const dateKey = `\${lectureDate}`;
+        if (!schedules[dateKey]) {
+            schedules[dateKey] = []; // 날짜에 스케줄이 없는 경우 초기화
+        }
+
+        const maxLecturesPerDay = 3; // 하루에 등록 가능한 최대 강의 수
+        if (schedules[dateKey].length >= maxLecturesPerDay) {
+            alert(`한 날짜에는 최대 \${maxLecturesPerDay}개의 강의만 등록할 수 있습니다.`);
+            return;
+        }
+        
 
         try {
             const response = await fetch(`${pageContext.request.contextPath}/mypage/myopenLectureAdd.do`, {
