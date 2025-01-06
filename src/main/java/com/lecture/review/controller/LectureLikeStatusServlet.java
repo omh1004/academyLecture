@@ -33,12 +33,12 @@ public class LectureLikeStatusServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String lectureNo = request.getParameter("lectureNo");
+		String reviewNo = request.getParameter("reviewNo");
         String memberNo = request.getParameter("memberNo"); // 현재 로그인한 사용자 ID (세션에서 가져올 수도 있음)
 
         ReviewService reviewService = new ReviewService();
-        int isLiked = reviewService.isLiked(lectureNo, memberNo);
-        int newLikeCount = reviewService.getLikeCount(lectureNo);
+        int isLiked = reviewService.isLiked(reviewNo, memberNo);
+        int newLikeCount = reviewService.getLikeCount(reviewNo);
 
         // JSON 형식으로 응답 반환
         response.setContentType("application/json");

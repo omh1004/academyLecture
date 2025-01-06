@@ -24,27 +24,27 @@ public class ReviewDao {
 	    }
 	    
 	    // 좋아요 기능 구현
-	    public int checkIfLiked(SqlSession session, String lectureNo, String memberNo) {
+	    public int checkIfLiked(SqlSession session, String reviewNo, String memberNo) {
 	        int likeCount = session.selectOne("review.checkIfLiked", 
-	            Map.of("lectureNo", lectureNo, "memberNo", memberNo));
+	            Map.of("reviewNo", reviewNo, "memberNo", memberNo));
 	        return likeCount;
 	    }
 	    
-	    public int getLikeCount(SqlSession session, String lectureNo) {
-	        return session.selectOne("review.getLikeCount", lectureNo);
+	    public int getLikeCount(SqlSession session, String reviewNo) {
+	        return session.selectOne("review.getLikeCount", reviewNo);
 	    }
 	    
 	    
-	    public boolean isLiked(SqlSession session, String lectureNo, String memberNo) {
+	    public boolean isLiked(SqlSession session, String reviewNo, String memberNo) {
 	        // MyBatis를 사용하여 좋아요 여부 확인
-	        Integer count = session.selectOne("review.isLiked", Map.of("lectureNo", lectureNo, "memberNo", memberNo));
+	        Integer count = session.selectOne("review.isLiked", Map.of("reviewNo", reviewNo, "memberNo", memberNo));
 	        return count != null && count > 0;
 	    }
 	    
 	    
-	    public int removeLike(SqlSession session, String lectureNo, String memberNo) {
+	    public int removeLike(SqlSession session, String reviewNo, String memberNo) {
 	        // 좋아요 삭제 로직
-	        return session.delete("review.removeLike", Map.of("lectureNo", lectureNo, "memberNo", memberNo));
+	        return session.delete("review.removeLike", Map.of("reviewNo", reviewNo, "memberNo", memberNo));
 	        
 	    }
 	    
@@ -53,9 +53,9 @@ public class ReviewDao {
 	    }
 	    
 	    
-	    public int addLike(SqlSession session, String lectureNo, String memberNo) {
+	    public int addLike(SqlSession session, String reviewNo, String memberNo) {
 	        // 좋아요 추가 로직
-	        return session.insert("review.addLike", Map.of("lectureNo", lectureNo, "memberNo", memberNo));
+	        return session.insert("review.addLike", Map.of("reviewNo", reviewNo, "memberNo", memberNo));
 	        
 	    }
 	    

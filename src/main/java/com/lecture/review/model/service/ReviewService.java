@@ -67,11 +67,11 @@ public class ReviewService {
 	    
 	    // 좋아요 기능 구현!
 	    
-	    public int isLiked(String lectureNo, String memberNo) {
+	    public int isLiked(String reviewNo, String memberNo) {
 	        SqlSession session = getSession();
 	        int isLiked = 0;
 	        try {
-	           isLiked = dao.checkIfLiked(session, lectureNo, memberNo);
+	           isLiked = dao.checkIfLiked(session, reviewNo, memberNo);
 	        } finally {
 	            session.close();
 	        }
@@ -79,24 +79,24 @@ public class ReviewService {
 	    }
 	    
 	    
-	    public int getLikeCount(String lectureNo) {
+	    public int getLikeCount(String reviewNo) {
 	        SqlSession session = getSession();
 	        try {
-	            return dao.getLikeCount(session, lectureNo);
+	            return dao.getLikeCount(session, reviewNo);
 	        } finally {
 	            session.close();
 	        }
 	    }
 	    
 	    
-	    public int toggleLike(String lectureNo, String memberNo) {
+	    public int toggleLike(String reviewNo, String memberNo) {
 	        SqlSession session = getSession();
 	        try {
-	            boolean isLiked = dao.isLiked(session, lectureNo, memberNo);
+	            boolean isLiked = dao.isLiked(session, reviewNo, memberNo);
 	            if (isLiked) {
-	                int result2=dao.removeLike(session, lectureNo, memberNo);
+	                int result2=dao.removeLike(session, reviewNo, memberNo);
 	                if(result2>0) {
-	                	result2=dao.decreseLike(session, lectureNo);
+	                	result2=dao.decreseLike(session, reviewNo);
 	                	if(result2>0) {
 	                		session.commit();
 	                		return 0;
@@ -106,9 +106,9 @@ public class ReviewService {
 	                	session.rollback();
 	                }
 	            } else {
-	                int result2=dao.addLike(session, lectureNo, memberNo);
+	                int result2=dao.addLike(session, reviewNo, memberNo);
 	                if(result2>0) {
-	                	result2=dao.increaseLikeCount(session, lectureNo);
+	                	result2=dao.increaseLikeCount(session, reviewNo);
 	                	if(result2>0) {
 	                		session.commit();
 	                		return 1;
