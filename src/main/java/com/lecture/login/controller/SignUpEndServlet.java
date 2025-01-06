@@ -62,6 +62,10 @@ public class SignUpEndServlet extends HttpServlet {
 		String address = sido + " " + gugun;
 		String role = request.getParameter("role");
 		
+		
+		String introduction = request.getParameter("introduction");
+		
+		
 		Member insertMember = Member.builder()
 								.memberName(name)
 								.memberId(id)
@@ -72,6 +76,7 @@ public class SignUpEndServlet extends HttpServlet {
 								.phone(phone)
 								.address(address.equals("시/도 선택 구/군 선택")? null : address)
 								.role(role)
+								.introduction(introduction)
 								.build();
 		
 		MemberService service = new MemberService();

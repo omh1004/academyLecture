@@ -135,6 +135,15 @@
   </div>
 </div>
 
+<div class="form-group">
+    <div class="input-label">
+        <label for="introduction">한줄 소개</label>
+    </div>
+    <div class="input-group">
+        <textarea id="introduction" name="introduction" placeholder="한 줄로 본인을 소개해주세요." rows="3" style="width: 100%;"></textarea>
+    </div>
+</div>
+
 
       <button type="submit" class="signup-btn my-3">회원 가입</button>
     </form>

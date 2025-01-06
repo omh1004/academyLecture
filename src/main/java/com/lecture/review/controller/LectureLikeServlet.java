@@ -60,13 +60,13 @@ public class LectureLikeServlet extends HttpServlet {
 
 	    // JSON 파싱 및 유효성 검사
 	    JSONObject jsonRequest;
-	    String lectureNo, memberNo;
+	    String reviewNo, memberNo;
 	    try {
 	        jsonRequest = new JSONObject(jsonBuffer.toString());
-	        lectureNo = jsonRequest.getString("lectureNo");
+	        reviewNo = jsonRequest.getString("reviewNo");
 	        memberNo = jsonRequest.getString("memberNo");
 
-	        if (lectureNo == null || lectureNo.isEmpty() || memberNo == null || memberNo.isEmpty()) {
+	        if (reviewNo == null || reviewNo.isEmpty() || memberNo == null || memberNo.isEmpty()) {
 	            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 	            JSONObject errorResponse = new JSONObject();
 	            errorResponse.put("error", "Missing or invalid parameters");
@@ -86,8 +86,8 @@ public class LectureLikeServlet extends HttpServlet {
 	    JSONObject jsonResponse = new JSONObject();
 	 // 실패한 경우 응답에 error 메시지 포함
 	    try {
-	        int isSuccess = reviewService.toggleLike(lectureNo, memberNo);
-	        int newLikeCount = reviewService.getLikeCount(lectureNo);
+	        int isSuccess = reviewService.toggleLike(reviewNo, memberNo);
+	        int newLikeCount = reviewService.getLikeCount(reviewNo);
 	        jsonResponse.put("success", isSuccess);
 	        jsonResponse.put("newLikeCount", newLikeCount);
 	        out.print(jsonResponse.toString());
