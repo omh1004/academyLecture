@@ -13,4 +13,5 @@ public class LectureBasket {
 	private String lectureNo;
 	private String className;
 	private String nickname;
+	private String memberId;
 }

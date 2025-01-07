@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -151,20 +154,19 @@ body {
 		</div>
 		<div class="profile-icon"></div>
 	</header>
-
 	<div class="cart-title">수강바구니</div>
-
-	<div class="course-item">
-		<div class="course-image">
-			<div class="java-logo">☕</div>
+	<c:forEach var="baskect" items="${basketList}">
+		<div class="course-item">
+			<div class="course-image">
+				<div class="java-logo">☕</div>
+			</div>
+			<div class="course-info">
+				<div class="course-title">${baskect.className}</div>
+				<div class="course-instructor">${baskect.memberId}</div>
+			</div>
+			<div class="course-price">₩ 17,000,000</div>
 		</div>
-		<div class="course-info">
-			<div class="course-title">유병승의 자바입문 - 코드로 시작하는 자바 첫걸음</div>
-			<div class="course-instructor">bs</div>
-		</div>
-		<div class="course-price">₩ 17,000,000</div>
-	</div>
-
+	</c:forEach>
 	<div class="buyer-info">
 		<h2>구매자 정보</h2>
 		<div class="info-field">
@@ -186,11 +188,13 @@ body {
 	    	requestPayment();
 	    });
         async function requestPayment() {
+	
+        	
 			const requestData={
 	         	    storeId: "store-3bc36c78-6806-4618-9eb6-a4543ab8b481", // 고객사 storeId로 변경해주세요.
 	         	    channelKey: "channel-key-9f12fe14-e2c6-4789-9a14-adbde33a2914", // 콘솔 결제 연동 화면에서 채널 연동 시 생성된 채널 키를 입력해주세요.
 	         	    paymentId: `pa-\${crypto.randomUUID()}`,
-	         	    orderName: "나이키 와플 2222트레d이너 3",
+	         	    orderName: `[${basketList[0]['className']}] 외 ${basketList.size()-1} 건` ,
 	         	    totalAmount: 1000,
 	         	    currency: "CURRENCY_KRW",
 	         	    payMethod: "CARD",
@@ -198,6 +202,7 @@ body {
 	         	      fullName: "${loginMember.memberNo}",
 	         	      phoneNumber: "${loginMember.phone}",
 	         	      email: "${loginMember.email}",
+	         	      lectureNo : "${lectureNodes}"
 	         	    }};
         	const response = PortOne.requestPayment(requestData).then(response => {
 	   			console.log(response)
@@ -215,6 +220,7 @@ body {
 						,txId:response.txId
 						,customer:requestData.customer.fullName
 						,totalAmound: 1000
+						,lectureNo: requestData.customer.lectureNo
 						})
 				
 				}).then(response=>response.text())

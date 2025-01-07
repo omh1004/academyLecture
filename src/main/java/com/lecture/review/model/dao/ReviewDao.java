@@ -20,7 +20,6 @@ public class ReviewDao {
 	    
 	    // 강의 점수 가져오기
 	    public double getAverageRating(SqlSession session, String lectureNo) {
-	    	System.out.println(lectureNo);
 	        return session.selectOne("review.getAverageRating", lectureNo);
 	    }
 	    

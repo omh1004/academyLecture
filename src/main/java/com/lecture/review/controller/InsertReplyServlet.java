@@ -50,8 +50,6 @@ public class InsertReplyServlet extends HttpServlet {
 	        response.sendRedirect("/"); // 로그인 페이지로 리다이렉트
 	        return;
 	    }
-	    
-	    System.out.println("세션에 저장된 사용자 정보: " + loginMember);
 	    // 학생 번호 추출
 	    String studentNo = loginMember.getMemberNo();
 	    

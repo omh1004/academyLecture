@@ -51,10 +51,11 @@ public class PaymentCompleteServlet extends HttpServlet {
 		String transactionType = (String) paymentData.get("transactionType");
 		String memberNo = (String) paymentData.get("customer");
 		int totalAmound = (Integer)paymentData.get("totalAmound");
+		String lectureNo = (String)paymentData.get("lectureNo");
 		
 		Payment payment = Payment.builder()
 				.paymentId(paymentId)
-				.paymentStatus(transactionType).studentId(memberNo).totalAmound(totalAmound).build();
+				.paymentStatus(transactionType).studentId(memberNo).totalAmound(totalAmound).lectureId(lectureNo).build();
 		
 		int result = new MyPageService().savePayment(payment);
 		

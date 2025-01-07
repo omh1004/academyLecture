@@ -43,8 +43,27 @@ public class MypageLectureBasketServlet extends HttpServlet {
 		
 		List<LectureBasket> basketList = new MyPageService().selectMyLectureBasket(loginMember.getMemberNo());
 		
+		String lectureNodes = "";
+		
+		
+		
+		for(int i = 0 ; i < basketList.size();i++) {
+			
+			if(i!=(basketList.size()-1)) {
+				lectureNodes += ((LectureBasket)basketList.get(i)).getLectureNo()+",";
+			}else {
+				lectureNodes += ((LectureBasket)basketList.get(i)).getLectureNo();
+			}
+			
+		}
+		
+		
+		request.setAttribute("lectureNodes", lectureNodes);
 		request.setAttribute("basketList", basketList);
 		request.setAttribute("loginMember", loginMember);
+		
+		
+		
 		
 		request.getRequestDispatcher("/WEB-INF/views/mypage/mypageLectureBasket.jsp").forward(request, response);
 	}

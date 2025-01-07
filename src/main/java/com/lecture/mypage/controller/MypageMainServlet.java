@@ -34,20 +34,10 @@ public class MypageMainServlet extends HttpServlet {
 		
 		MyPageService service = new MyPageService();
 		
-		System.out.println(request.getSession().getAttribute("loginMember"));
-		
-		
-		
 		String loginId = ((Member)request.getSession().getAttribute("loginMember")).getMemberId();
 		
 		User userProfile = service.getUserProfile(loginId);
-		
-		System.out.println("userProfile::::"+ userProfile.toString());
-		
-		
 		request.setAttribute("userProfile", userProfile);
-		
-		
 		request.getRequestDispatcher("/WEB-INF/views/mypage/mypageMain.jsp").forward(request, response);
 	
 	}
