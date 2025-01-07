@@ -15,6 +15,8 @@ public class LectureService {
 
 	private LectureDao dao = new LectureDao();
 
+	// 메인페이지에서 전체 강의들 출력!!!!
+	
 	 public List<Lectures> getAllLectures() throws RuntimeException {
 	        SqlSession session = getSession();
 	        List<Lectures> lectureList;
@@ -78,4 +80,10 @@ public class LectureService {
         return lectures;
     }
     
+	 
+	 // 강의 타이틀 클릭시 상세정보 (수정필요))
+	 
+	// public Lectures getLectureById(String lectureNo) {
+	  //      return dao.getLectureById(lectureNo);
+	    //}
 }

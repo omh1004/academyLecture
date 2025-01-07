@@ -123,13 +123,6 @@ body {
 </style>
 </head>
 <body>
-	<header class="header">
-		<div class="logo">univora</div>
-		<div class="search-bar">
-			<input type="text" placeholder="배우고 싶은 지식을 이야기해주세요">
-		</div>
-		<div class="profile-icon">👤</div>
-	</header>
 
 	<main class="main-content">
 		<aside class="sidebar">
@@ -138,7 +131,9 @@ body {
 				<div class="menu-item">
 					<a href="${pageContext.request.contextPath}/mypage/myLectureMain.do">내 학습</a>
 				</div>
-				<div class="menu-item">작성한 댓글</div>
+				<div class="menu-item">
+				<a href="${pageContext.request.contextPath}/mypage/userReviews.do">작성한 수강평</a>
+				</div>
 				<div class="menu-item">수강신청 관리</div>
 				<div class="menu-item">
 					<a href="${pageContext.request.contextPath}/mypage/lectureBasket.do">수강바구니</a>
@@ -153,7 +148,9 @@ body {
 			<div class="profile-card">
 				<div class="profile-header">
 					<h2>내 프로필</h2>
-					<button class="edit-button">설정</button>
+					<button class="edit-button">
+					 <a href="${pageContext.request.contextPath}/mypage/editProfile.do" style="text-decoration: none; color: inherit;">설정</a>
+					</button>
 				</div>
 				<div class="profile-image">
 					<span style="font-size: 2rem;">K</span>
@@ -170,13 +167,12 @@ body {
 			<div class="profile-card">
 				<div class="profile-header">
 					<h4>기본 정보</h4>
-					<button class="edit-button">설정</button>
 				</div>
 				<div class="profile-field">
 					<span>이메일</span> <span>${userProfile.email}</span>
 				</div>
 				<div class="profile-field">
-					<span>비밀번호</span> <span>••••••••</span>
+					<span>주소</span> <span>${userProfile.address}</span>
 				</div>
 				<div class="profile-field">
 					<span>휴대폰 번호</span> <span>${userProfile.phone}</span>
