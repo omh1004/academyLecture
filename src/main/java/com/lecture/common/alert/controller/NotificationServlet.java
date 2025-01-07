@@ -34,7 +34,6 @@ public class NotificationServlet extends HttpServlet {
         String userId = request.getParameter("userId");
         String content = request.getParameter("content");
         
-        System.out.println("asdfasd::: "+userId);
 
         // 알림 생성 및 처리 요청
         notificationService.processNotification(userId, content);
