@@ -49,8 +49,6 @@ public class MypagemyOpenLectureRenderServlet extends HttpServlet {
         	month= "0"+month;
         }
         
-        System.out.println("year:::month"+year+month);
-        
         Map<String,String> daily = new HashMap<>();
         daily.put("year", year);
         daily.put("month", month);

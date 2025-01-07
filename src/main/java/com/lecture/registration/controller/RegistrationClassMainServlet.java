@@ -43,7 +43,9 @@ public class RegistrationClassMainServlet extends HttpServlet {
 		  	String lectureNo = request.getParameter("lectureNo");
 		  	
 
+
 		  	System.out.println("전달받은 lectureNo: " + lectureNo);
+
 		  	
 		  	LectureService lectureService = new LectureService();
 		  	
@@ -63,7 +65,6 @@ public class RegistrationClassMainServlet extends HttpServlet {
 	        request.setAttribute("lecture", lecture);
 	        request.setAttribute("reviews", reviews);
 	        
-	        System.out.println("리뷰 데이터:");
 	        for (Review review : reviews) {
 	            System.out.println(review);
 	        }

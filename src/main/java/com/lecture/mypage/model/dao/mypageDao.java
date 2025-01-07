@@ -7,8 +7,13 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+<<<<<<< HEAD
 import com.lecture.model.dto.Member;
+=======
+import com.lecture.mypage.model.dto.LectureBasket;
+>>>>>>> branch 'dev' of https://github.com/omh1004/univora.git
 import com.lecture.mypage.model.dto.OpenLecture;
+import com.lecture.mypage.model.dto.Payment;
 import com.lecture.mypage.model.dto.User;
 
 public class mypageDao {
@@ -20,9 +25,6 @@ public class mypageDao {
 	}
 
 	public HashMap<String, List<HashMap<String, String>>> selectMyopenLectureByCalender(SqlSession session, Map<String, String> daily) {
-
-		System.out.println("tdate::"+daily);
-		
 		List<HashMap<String, Object>> rawSchedules = session.selectList(NAMESPACE + ".selectMyopenLectureByCalender",
 				daily);
 		System.out.println("rawSchedules::"+rawSchedules);
@@ -35,8 +37,6 @@ public class mypageDao {
 			schedule.put("time", (String) rawSchedule.get("TIME"));
 			schedule.put("description", (String) rawSchedule.get("DESCRIPTION"));
 			schedule.put("lectureNo", (String) rawSchedule.get("LECTURENO"));
-			
-			System.out.println("schedule::"+schedule);
 
 			scheduleMap.computeIfAbsent(date, k -> new ArrayList<>()).add(schedule);
 		}
@@ -52,10 +52,21 @@ public class mypageDao {
 		return session.selectOne("mypage.openLectureByLectureNo", lectureNo);
 	}
 
+
 	// sk_마이페이지 수정 후 업데이트 처리
 	
 	 public int updateUserProfile(SqlSession session, Member user) {
 	        return session.update("mypage.updateUserProfile", user);
 	 }
 	
+
+	public List<LectureBasket> selectMyLectureBasket(SqlSession session, String memberNo) {
+		return session.selectList("mypage.selectMyLectureBasket", memberNo);
+	}
+
+	public int savePayment(SqlSession session, Payment payment) {
+		return session.insert(NAMESPACE + ".savePayment", payment);
+	}
+
+
 }

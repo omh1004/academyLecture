@@ -263,7 +263,7 @@ button {
     }
 
     $.ajax({
-      url: `\${pageContext.request.contextPath}/login/verifycode.do`,
+      url: `\${pagecontext.request.contextPath}/login/verifycode.do`,
       type: "POST",
       data: { email: email, checkNum: checkNum },
       success: function (response) {

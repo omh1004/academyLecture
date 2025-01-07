@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -151,54 +154,55 @@ body {
 		</div>
 		<div class="profile-icon"></div>
 	</header>
-
 	<div class="cart-title">수강바구니</div>
-
-	<div class="course-item">
-		<div class="course-image">
-			<div class="java-logo">☕</div>
+	<c:forEach var="baskect" items="${basketList}">
+		<div class="course-item">
+			<div class="course-image">
+				<div class="java-logo">☕</div>
+			</div>
+			<div class="course-info">
+				<div class="course-title">${baskect.className}</div>
+				<div class="course-instructor">${baskect.memberId}</div>
+			</div>
+			<div class="course-price">₩ 17,000,000</div>
 		</div>
-		<div class="course-info">
-			<div class="course-title">유병승의 자바입문 - 코드로 시작하는 자바 첫걸음</div>
-			<div class="course-instructor">bs</div>
-		</div>
-		<div class="course-price">₩ 17,000,000</div>
-	</div>
-
+	</c:forEach>
 	<div class="buyer-info">
 		<h2>구매자 정보</h2>
 		<div class="info-field">
-			<span>이름</span> <span>상균</span>
+			<span>이름</span> <span>${loginMember.memberId}</span>
 		</div>
 		<div class="info-field">
-			<span>이메일</span> <span>user01234@user01234.com</span>
+			<span>이메일</span> <span>${loginMember.email}</span>
 		</div>
 		<div class="info-field">
-			<span>휴대폰 번호</span> <span>010-1234-1234</span>
+			<span>휴대폰 번호</span> <span>${loginMember.phone}</span>
 		</div>
 
-			<button class="checkout-button">결제하기</button>
+		<button class="checkout-button">결제하기</button>
 	</div>
 	<script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
 	<script>
-	
-    document.querySelector('.checkout-button').addEventListener('click', function () {
-        // PortOne SDK 초기화
-    	requestPayment();
-    });
+	    document.querySelector('.checkout-button').addEventListener('click', function () {
+	        // PortOne SDK 초기화
+	    	requestPayment();
+	    });
         async function requestPayment() {
+	
+        	
 			const requestData={
 	         	    storeId: "store-3bc36c78-6806-4618-9eb6-a4543ab8b481", // 고객사 storeId로 변경해주세요.
 	         	    channelKey: "channel-key-9f12fe14-e2c6-4789-9a14-adbde33a2914", // 콘솔 결제 연동 화면에서 채널 연동 시 생성된 채널 키를 입력해주세요.
 	         	    paymentId: `pa-\${crypto.randomUUID()}`,
-	         	    orderName: "나이키 와플 2222트레d이너 3",
+	         	    orderName: `[${basketList[0]['className']}] 외 ${basketList.size()-1} 건` ,
 	         	    totalAmount: 1000,
 	         	    currency: "CURRENCY_KRW",
 	         	    payMethod: "CARD",
 	         	    customer: {
-	         	      fullName: "포트원",
-	         	      phoneNumber: "010-0000-1234",
-	         	      email: "test@portone.io",
+	         	      fullName: "${loginMember.memberNo}",
+	         	      phoneNumber: "${loginMember.phone}",
+	         	      email: "${loginMember.email}",
+	         	      lectureNo : "${lectureNodes}"
 	         	    }};
         	const response = PortOne.requestPayment(requestData).then(response => {
 	   			console.log(response)
@@ -211,11 +215,12 @@ body {
 				method:"POST",
 				/* body:"data=testdata&number=20" */
 				body:JSON.stringify(
-						{pamentId:response.paymentId
+						{paymentId:response.paymentId
 						,transactionType:response.transactionType
 						,txId:response.txId
-						,customer:requestData.customer
+						,customer:requestData.customer.fullName
 						,totalAmound: 1000
+						,lectureNo: requestData.customer.lectureNo
 						})
 				
 				}).then(response=>response.text())
@@ -224,54 +229,11 @@ body {
 				})
 	   		
 	   		});
-	   		
-         	    
-         	    
 	   	  if (response.code !== undefined) {
 	   	    // 오류 발생
 	   	    return alert(response.message);
 	   	  }
-	   	  
-
-	   	  // /payment/complete 엔드포인트를 구현해야 합니다. 다음 목차에서 설명합니다.
-	   	  /* const notified = await fetch(`${pageContext.request.contextPath}/payment/complete`, {
-	   	    method: "POST",
-	   	    headers: { "Content-Type": "application/json" },
-	   	    // paymentId와 주문 정보를 서버에 전달합니다
-	   	    body: JSON.stringify({
-	   	    	paymentId: response.paymentId,
-	   	      // 주문 정보...
-	   	    }),
-	   	  }); */
         }
-	   	
-/*         
-        const portone = PortOne.init('imp23541524'); // PortOne에서 발급받은 가맹점 코드로 대체하세요 */
-        // 결제 요청
-       
-    
- // 서버로 결제 결과 전송
-   // 결제 성공 데이터를 서버로 전달
-/*         function sendPaymentToServer(paymentResponse) {
-			consol.log(paymentResponse);
-			debugger;
-            fetch('${pageContext.request.contextPath}/mypage/lecturebacket/paymentVerification.do', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(paymentResponse)
-            })
-            .then(res => res.json())
-            .then(result => {
-                if (result.success) {
-                    alert('결제가 성공적으로 처리되었습니다.줄여서 결성');
-                } else {
-                    alert('서버 검증 실패: ' + result.message);
-                }
-            })
-            .catch(err => console.error('Error:', err));
-        } */
 </script>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 </body>

@@ -71,7 +71,7 @@ public class SessionFilter extends HttpFilter implements Filter {
 	        HttpSession session = httpRequest.getSession(false);
 	        if (session == null || session.getAttribute("loginMember") == null) {
 	            // 세션이 없으면 로그인 페이지로 리다이렉트
-	            httpResponse.sendRedirect(httpRequest.getContextPath() + "/index.jsp");
+	            httpResponse.sendRedirect(httpRequest.getContextPath() + "/main/index.jsp");
 	            return;
 	        }
 

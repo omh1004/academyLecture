@@ -41,7 +41,6 @@ public class InsertReviewServlet extends HttpServlet {
 	        response.sendRedirect("/"); // 로그인 페이지로 리다이렉트
 	        return;
 	    }
-	    System.out.println("세션에 저장된 사용자 정보: " + loginMember);
 	    // 학생 번호 추출
 	    String studentNo = loginMember.getMemberNo();
 	    
@@ -64,9 +63,6 @@ public class InsertReviewServlet extends HttpServlet {
         // 리뷰 등록 서비스 호출
         ReviewService reviewService = new ReviewService();
         int result = reviewService.insertReview(review);
-        
-        System.out.println("Updated Date: " + review.getUpdatedDate());
-
         
         // 결과에 따른 페이지 이동
         if (result > 0) {

@@ -11,7 +11,9 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.lecture.model.dto.Member;
 import com.lecture.mypage.model.dao.mypageDao;
+import com.lecture.mypage.model.dto.LectureBasket;
 import com.lecture.mypage.model.dto.OpenLecture;
+import com.lecture.mypage.model.dto.Payment;
 import com.lecture.mypage.model.dto.User;
 
 
@@ -64,6 +66,22 @@ public class MyPageService {
 		OpenLecture openLecture = mypageDao.openLectureByLectureNo(session, scheduleId);
 		
 		return openLecture;
+	}
+
+	public List<LectureBasket> selectMyLectureBasket(String memberNo) {
+		SqlSession session = getSession();
+		
+		return mypageDao.selectMyLectureBasket(session, memberNo);
+	}
+
+	public int savePayment(Payment payment) {
+		SqlSession session = getSession();
+		int result = mypageDao.savePayment(session, payment);
+		
+    	if(result>0) session.commit();
+		else session.rollback();
+
+        return result;
 	}
 	
 	
