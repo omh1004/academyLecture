@@ -10,7 +10,8 @@ public class NotificationDAO {
 	
 
     public int insertNotification(SqlSession session, String memberId, String type, String content) {
-        return session.insert("NotificationMapper.insertNotification", Map.of(
+    	System.out.println("durlemfdjdhsl??");
+        return session.insert("notification.insertNotification", Map.of(
             "memberId", memberId,
             "type", type,
             "content", content
@@ -18,14 +19,14 @@ public class NotificationDAO {
     }
 
     public int countUnreadNotifications(SqlSession session, String memberId) {
-        return session.selectOne("NotificationMapper.countUnreadNotifications", memberId);
+        return session.selectOne("notification.countUnreadNotifications", memberId);
     }
 
     public void markNotificationsAsRead(SqlSession session, String memberId) {
-        session.update("NotificationMapper.markNotificationsAsRead", memberId);
+        session.update("notification.markNotificationsAsRead", memberId);
     }
 
     public List<Map<String, Object>> selectNotificationsByMemberId(SqlSession session, String memberId) {
-        return session.selectList("NotificationMapper.selectNotificationsByMemberId", memberId);
+        return session.selectList("notification.selectNotificationsByMemberId", memberId);
     }
 }
