@@ -13,10 +13,10 @@ import com.lecture.common.alert.model.service.NotificationService;
 /**
  * Servlet implementation class NotificationServlet
  */
-@WebServlet("/send-notification")
+@WebServlet("/notifications")
 public class NotificationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private NotificationService notificationService = new NotificationService();
+	private final NotificationService notificationService = new NotificationService();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -26,28 +26,27 @@ public class NotificationServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		  // 사용자 요청 데이터 가져오기
-        String userId = request.getParameter("userId");
-        String content = request.getParameter("content");
-        
 
-        // 알림 생성 및 처리 요청
-        notificationService.processNotification(userId, content);
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String memberId = (String) request.getSession().getAttribute("memberId");
 
-        // 응답 반환
-        response.getWriter().write("Notification processed successfully.");
-	}
+        if (memberId != null) {
+            int unreadCount = notificationService.getUnreadNotificationCount(memberId);
+            response.getWriter().write(String.valueOf(unreadCount));
+        } else {
+            response.getWriter().write("0");
+        }
+    }
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String memberId = (String) request.getSession().getAttribute("memberId");
+
+        if (memberId != null) {
+            notificationService.markNotificationsAsRead(memberId);
+            response.getWriter().write("Notifications marked as read.");
+        }
+    }
 
 }

@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.lecture.common.alert.utils.EmailSender;
-import com.lecture.common.alert.websocket.WebSocketEndpoint;
+import com.lecture.common.alert.websocket.NotificationWebSocket;
 import com.lecture.model.dao.NotificationDao;
 import com.lecture.model.dto.Notification;
 
@@ -55,7 +55,7 @@ public class NotificationFilter extends HttpFilter implements Filter {
             notification.setContent(content);
             NotificationDao.saveNotification(notification);
 
-            WebSocketEndpoint.sendNotification(
+            NotificationWebSocket.sendNotification(
 			    userId,
 			    content
 			);

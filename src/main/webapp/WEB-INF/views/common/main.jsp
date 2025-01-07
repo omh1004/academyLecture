@@ -42,8 +42,8 @@
 </div>
 
 <script>
-const userId = 'user444';
-const socket = new WebSocket(`ws://localhost:8080/websocket/\${userId}`);
+/* const userId = 'user444';
+const socket = new WebSocket(`ws://localhost:8080/notification-websocket/user444`);
 
 socket.onopen = () => {
     console.log("WebSocket connected.");
@@ -56,10 +56,10 @@ socket.onmessage = (event) => {
 
 socket.onclose = () => {
     console.log("WebSocket disconnected.");
-};
+}; */
 
-
-	$('.carousel').carousel({
+/* 
+	 $('.carousel').carousel({
 		interval : 2000, // 슬라이드가 자동으로 전환되는 시간 간격 (밀리초)
 		wrap : true, // 마지막 슬라이드에서 첫 번째 슬라이드로 자동 전환
 		touch : true
@@ -72,7 +72,7 @@ socket.onclose = () => {
 		$(this).find('.active.item').parent().animate({
 			height : nextH
 		}, 500);
-	});
+	});  */
 </script>
 
 

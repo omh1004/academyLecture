@@ -1,26 +1,31 @@
 package com.lecture.common.alert.model.dao;
 
-import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-
-import com.lecture.model.dto.Notification;
 
 public class NotificationDAO {
 
 	
-	public void insertNotification(SqlSession session, Notification notification) {
-			session.insert("NotificationMapper.insertNotification", notification);
-	}
 
-	public List<Notification> getUnreadNotifications(SqlSession session, String userId) {
-			return session.selectList("NotificationMapper.getUnreadNotifications", userId);
-	}
+    public int insertNotification(SqlSession session, String memberId, String type, String content) {
+        return session.insert("NotificationMapper.insertNotification", Map.of(
+            "memberId", memberId,
+            "type", type,
+            "content", content
+        ));
+    }
 
-	public void markAsRead(SqlSession session, String id) {
-			session.update("NotificationMapper.markAsRead", id);
-	}
+    public int countUnreadNotifications(SqlSession session, String memberId) {
+        return session.selectOne("NotificationMapper.countUnreadNotifications", memberId);
+    }
+
+    public void markNotificationsAsRead(SqlSession session, String memberId) {
+        session.update("NotificationMapper.markNotificationsAsRead", memberId);
+    }
+
+    public List<Map<String, Object>> selectNotificationsByMemberId(SqlSession session, String memberId) {
+        return session.selectList("NotificationMapper.selectNotificationsByMemberId", memberId);
+    }
 }
