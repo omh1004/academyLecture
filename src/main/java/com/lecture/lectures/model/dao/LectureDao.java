@@ -14,7 +14,7 @@ public class LectureDao {
 	        return session.selectList("lecture.selectAllLectures");
 	    }
 
-	
+
 	  // 강좌 상세 조회
     public Lectures selectLectureDetail(SqlSession session, String lectureNo) {
 	        // MyBatis Mapper 호출
@@ -35,4 +35,5 @@ public class LectureDao {
         return session.selectList("lecture.searchLectures", query);
     }
     
+
 }

@@ -2,6 +2,8 @@ package com.lecture.review.model.service;
 
 import static com.lecture.common.SqlSessionTemplate.getSession;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.lecture.model.dto.Review;
@@ -146,6 +148,23 @@ public class ReviewService {
 	            session.close();
 	        }
 	    }
+	    
+	    
+	    
+	    public List<Review> getUserReviews(String studentNo) {
+	        SqlSession session = getSession();
+	        List<Review> reviews = null;
+	        try {
+	            reviews = dao.getUserReviews(session, studentNo);
+	        } finally {
+	            session.close();
+	        }
+	        return reviews;
+	    }
+
+
+	    
+	    
 	    
 	}
 

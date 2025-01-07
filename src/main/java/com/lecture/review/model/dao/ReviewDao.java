@@ -1,5 +1,6 @@
 package com.lecture.review.model.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -68,6 +69,13 @@ public class ReviewDao {
 	    public int deleteReview(SqlSession session, String reviewNo) {
 	        return session.update("review.deleteReview", reviewNo);
 	    }
+
+	    
+	    // 작성한 수강평을 가져오자!
+	    public List<Review> getUserReviews(SqlSession session, String studentNo) {
+	        return session.selectList("review.getUserReviews", studentNo);
+	    }
+
 
 	    
 	    
