@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.lecture.model.dto.Member;
+import com.lecture.mypage.model.service.MyPageService;
 
 /**
  * Servlet implementation class UpdateProfileServlet
@@ -48,11 +49,17 @@ public class UpdateProfileServlet extends HttpServlet {
 	        
 		
         HttpSession session = request.getSession();
-        Member user = (Member) session.getAttribute("loginMember");
+        Member loginMember  = (Member) session.getAttribute("loginMember");
         
-		
+        if (loginMember == null) {
+            response.sendRedirect(request.getContextPath() + "/");
+            return;
+        }
+        
  
-		Member users = Member.builder()
+        // 사용자 정보 업데이트
+        Member updatedUser = Member.builder()
+                .memberId(loginMember.getMemberId())
                 .nickName(nickName)
                 .introduction(introduction)
                 .email(email)
@@ -60,10 +67,22 @@ public class UpdateProfileServlet extends HttpServlet {
                 .phone(phone)
                 .build();
 		
+        MyPageService service = new MyPageService();
 		
+        int result = service.updateUserProfile(updatedUser);
+
+        if (result > 0) {
+            session.setAttribute("loginMember", updatedUser); // 세션 업데이트
+            response.sendRedirect(request.getContextPath() + "/mypage/main.do?success=true");
+        } else {
+            request.setAttribute("errorMsg", "프로필 수정에 실패했습니다.");
+            request.getRequestDispatcher("/WEB-INF/views/common/errorPage.jsp").forward(request, response);
+        }
+    }
+	
 		
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-	}
+	
 
 }

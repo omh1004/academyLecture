@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.lecture.model.dto.Member;
 import com.lecture.mypage.model.dao.mypageDao;
 import com.lecture.mypage.model.dto.OpenLecture;
 import com.lecture.mypage.model.dto.User;
@@ -64,5 +65,26 @@ public class MyPageService {
 		
 		return openLecture;
 	}
+	
+	
+	// sk_마이페이지 수정 후 업데이트 
+	
+	public int updateUserProfile(Member user) {
+        SqlSession session = getSession();
+        int result = 0;
+
+        try {
+            result = new mypageDao().updateUserProfile(session, user);
+            if (result > 0) {
+                session.commit();
+            } else {
+                session.rollback();
+            }
+        } finally {
+            session.close();
+        }
+
+        return result;
+    }
 	
 }
