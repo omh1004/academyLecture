@@ -21,9 +21,6 @@ public class mypageDao {
 	}
 
 	public HashMap<String, List<HashMap<String, String>>> selectMyopenLectureByCalender(SqlSession session, Map<String, String> daily) {
-
-		System.out.println("tdate::"+daily);
-		
 		List<HashMap<String, Object>> rawSchedules = session.selectList(NAMESPACE + ".selectMyopenLectureByCalender",
 				daily);
 		System.out.println("rawSchedules::"+rawSchedules);
@@ -36,8 +33,6 @@ public class mypageDao {
 			schedule.put("time", (String) rawSchedule.get("TIME"));
 			schedule.put("description", (String) rawSchedule.get("DESCRIPTION"));
 			schedule.put("lectureNo", (String) rawSchedule.get("LECTURENO"));
-			
-			System.out.println("schedule::"+schedule);
 
 			scheduleMap.computeIfAbsent(date, k -> new ArrayList<>()).add(schedule);
 		}

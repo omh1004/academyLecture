@@ -52,8 +52,6 @@ public class LoginCheckServlet extends HttpServlet {
 		
 		// 로그인 유효검사 하기  
 		Member invalidMember =  new MemberService().loginCheckById(checkMember);
-		
-		System.out.println("invalidmember::: "+ invalidMember);
 
 		// request로 요청된 정보가 있을 경우,
 		if (invalidMember != null) {
@@ -81,12 +79,8 @@ public class LoginCheckServlet extends HttpServlet {
 			// 세션으로 받은 Member 객체의 정보는 아래와 같다.
 			// 혹시나 형변환시 아래의 객체로 형변환하기 바란다.오바!
 			// com.gamjabat.model.dto.member
-			System.out.println("로그인성공 !!!!!!");
 			HttpSession session = request.getSession();
 			session.setAttribute("loginMember", invlidMember);
-			
-			System.out.println("session집어넣음!!!!!세션값 loginMember"+invlidMember);
-
 			if (memberId.equals("admin123")) {
 				request.getRequestDispatcher("/admin/main.do").forward(request, response);
 			} else {
@@ -96,8 +90,6 @@ public class LoginCheckServlet extends HttpServlet {
 		} else {
 			//로그인 실패시, 아이디와 패스워드가 일치하지 않습니다. 메세지 팝업후, 
 			//요청한 페이지, 즉!  로그인 페이지로 다시 넘어간다. 
-			System.out.println("로그인실패 !!!!!!");
-
 			// 로그인 실패
 			request.setAttribute("msg", "아이디와 패스워드가 일치하지 않습니다.");
 			request.setAttribute("loc", "/");
