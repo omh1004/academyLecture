@@ -45,8 +45,6 @@ public class NotificationFilter extends HttpFilter implements Filter {
         // 알림 트리거 조건
         if (requestURI.equals("/univora/main/login.do")) { // 특정 요청 경로
         	
-        	System.out.println("여기들어오냐!!!!");
-        	
             String userId = "user444";
             String content = "You have a new notification triggered by your action.";
 
