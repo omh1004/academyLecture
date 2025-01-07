@@ -7,11 +7,11 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
-<<<<<<< HEAD
+
 import com.lecture.model.dto.Member;
-=======
+
 import com.lecture.mypage.model.dto.LectureBasket;
->>>>>>> branch 'dev' of https://github.com/omh1004/univora.git
+
 import com.lecture.mypage.model.dto.OpenLecture;
 import com.lecture.mypage.model.dto.Payment;
 import com.lecture.mypage.model.dto.User;
