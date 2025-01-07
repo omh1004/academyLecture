@@ -54,9 +54,10 @@ function markAsRead() {
 }
 </script>
 <title>univora</title>
-{sessionScope.loginMember}
+
 </head>
-<body onload="updateNotificationCount(); connectWebSocket('user123');">
+<body onload="updateNotificationCount(); connectWebSocket('${sessionScope.loginMember.memberId}');">
+${sessionScope.loginMember.memberId}
 	<!-- Header -->
 	<header class="header">
 		<a href="${path }/main/login.do"> <img
