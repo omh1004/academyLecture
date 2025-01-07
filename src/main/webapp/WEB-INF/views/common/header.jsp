@@ -57,7 +57,6 @@ function markAsRead() {
 
 </head>
 <body onload="updateNotificationCount(); connectWebSocket('${sessionScope.loginMember.memberId}');">
-${sessionScope.loginMember.memberId}
 	<!-- Header -->
 	<header class="header">
 		<a href="${path }/main/login.do"> <img
