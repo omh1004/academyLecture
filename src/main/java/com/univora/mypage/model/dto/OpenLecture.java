@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class OpenLecture {
 	private String lectureNo;
-	private Member author;
+	private com.univora.login.model.dto.Member author;
 	private String className;
 	private String description;
 	private String openDate;
