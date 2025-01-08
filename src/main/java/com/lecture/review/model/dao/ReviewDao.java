@@ -71,12 +71,40 @@ public class ReviewDao {
 	    }
 
 	    
+	    public String getLectureNoByReviewNo(SqlSession session, String reviewNo) {
+	        return session.selectOne("review.getLectureNoByReviewNo", reviewNo);
+	    }
+
+	    
 	    // 작성한 수강평을 가져오자!
 	    public List<Review> getUserReviews(SqlSession session, String studentNo) {
 	        return session.selectList("review.getUserReviews", studentNo);
 	    }
 
 
+	 // 부모 댓글 삭제 (is_deleted = 'Y')
+	    public int updateIsDeletedFlag(SqlSession session, String reviewNo) {
+	        return session.update("review.updateIsDeletedFlag", reviewNo);
+	    }
+
+	    // 자식 댓글 삭제 (is_deleted = 'Y')
+	    public int updateChildReviewsFlag(SqlSession session, String parentReviewNo) {
+	        return session.update("review.updateChildReviewsFlag", parentReviewNo);
+	    }
+	    
+	    public Review getReviewById(SqlSession session, String reviewNo) {
+	        return session.selectOne("review.getReviewById", reviewNo);
+	    }
+
+	    public int updateReview(SqlSession session, String reviewNo, String reviewContent) {
+	        
+	  		Review review = Review.builder()
+	  	            .reviewNo(reviewNo)
+	  	            .reviewContent(reviewContent)
+	  	            .build();
+	  		
+	        return session.update("review.updateReview", review);
+	    }
 	    
 	    
 }

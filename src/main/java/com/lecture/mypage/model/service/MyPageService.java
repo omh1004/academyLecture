@@ -9,7 +9,9 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.lecture.common.SqlSessionTemplate;
 import com.lecture.model.dto.Member;
+import com.lecture.model.dto.PurchaseHistory;
 import com.lecture.mypage.model.dao.mypageDao;
 import com.lecture.mypage.model.dto.LectureBasket;
 import com.lecture.mypage.model.dto.OpenLecture;
@@ -105,4 +107,29 @@ public class MyPageService {
         return result;
     }
 	
+	
+	// sk_구매내역 리스트 구현
+	public List<PurchaseHistory> getPurchaseHistory(String studentId) {
+        SqlSession session = getSession();
+        List<PurchaseHistory> historyList = mypageDao.getPurchaseHistory(session, studentId);
+        session.close();
+        return historyList;
+    }
+	
+	// sk_내강의 리스트 가져오기
+	public List<Map<String, Object>> getLectureDetails(String studentId) {
+	    SqlSession session = getSession();
+	    List<Map<String, Object>> lectureDetails = null;
+
+	    try {
+	        // DAO 호출
+	        lectureDetails = new mypageDao().getLectureDetails(session, studentId);
+	    } finally {
+	        // 세션 닫기
+	        session.close();
+	    }
+
+	    return lectureDetails;
+	}
+
 }

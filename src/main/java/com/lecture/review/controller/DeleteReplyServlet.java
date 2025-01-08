@@ -36,11 +36,14 @@ public class DeleteReplyServlet extends HttpServlet {
 		    ReviewService reviewService = new ReviewService();
 		    
 		    // 삭제 처리
-	        boolean success = reviewService.deleteReview(reviewNo);
+	        //boolean success = reviewService.deleteReview(reviewNo);
 
-	        if (success) {
-	            // 삭제 성공 시 리뷰 목록으로 리다이렉트
-	            response.sendRedirect(request.getContextPath() + "/lecture/reviewList.do");
+		    // 리뷰 삭제 후 해당 리뷰의 게시글 ID (lectureNo) 가져오기
+	        String lectureNo = reviewService.deleteReviewAndGetPostId(reviewNo);
+	        
+	        if (lectureNo != null) {
+	            // 삭제 성공 시 게시글 상세 페이지로 리다이렉트
+	            response.sendRedirect(request.getContextPath() + "/lecture/registrationClassMain.do?lectureNo=" + lectureNo);
 	        } else {
 	            // 삭제 실패 시 에러 메시지와 함께 에러 페이지로 이동
 	            request.setAttribute("errorMsg", "댓글 삭제에 실패했습니다.");

@@ -138,22 +138,29 @@ public class ReviewService {
 	    }
 	    
 	    
-	    // 댓글 논리적 삭제
 	    
-	    public boolean deleteReview(String reviewNo) {
+	    public String deleteReviewAndGetPostId(String reviewNo) {
 	        SqlSession session = getSession();
+	        String lectureNo = null;
+
 	        try {
-	            int result = dao.deleteReview(session, reviewNo);
-	            if (result > 0) { // 성공적으로 삭제되었는지 확인
+	            // 리뷰가 연결된 게시글 ID (lectureNo) 가져오기
+	            lectureNo = new ReviewDao().getLectureNoByReviewNo(session, reviewNo);
+
+	            // 리뷰 삭제 수행
+	            int result = new ReviewDao().deleteReview(session, reviewNo);
+
+	            if (result > 0) {
 	                session.commit();
-	                return true;
 	            } else {
 	                session.rollback();
-	                return false;
+	                lectureNo = null;
 	            }
 	        } finally {
 	            session.close();
 	        }
+
+	        return lectureNo; // 게시글 ID 반환
 	    }
 	    
 	    
@@ -169,8 +176,60 @@ public class ReviewService {
 	        return reviews;
 	    }
 
-
 	    
+	    public boolean deleteParentReview(String reviewNo) {
+	        SqlSession session = getSession();
+	        boolean result = false;
+
+	        try {
+	            // 부모 댓글 삭제 (is_deleted = 'Y')
+	            int parentUpdate = dao.updateIsDeletedFlag(session, reviewNo);
+
+	            // 관련 자식 댓글 삭제 (is_deleted = 'Y')
+	            int childUpdate = dao.updateChildReviewsFlag(session, reviewNo);
+
+	            if (parentUpdate > 0 && childUpdate >= 0) {
+	                session.commit();
+	                result = true;
+	            } else {
+	                session.rollback();
+	            }
+	        } finally {
+	            session.close();
+	        }
+
+	        return result;
+	    }
+	    
+	    
+	    // 수강평 수정
+	    
+	    public Review getReviewById(String reviewNo) {
+	        SqlSession session = getSession();
+	        Review review = dao.getReviewById(session, reviewNo);
+	        session.close();
+	        return review;
+	    }
+	    
+	    // 수강평 수정
+	    public boolean updateReview(String reviewNo, String reviewContent) {
+	        SqlSession session = getSession();
+	        boolean isSuccess = false;
+
+	        try {
+	            int result = dao.updateReview(session, reviewNo, reviewContent);
+	            if (result > 0) {
+	                session.commit();
+	                isSuccess = true;
+	            } else {
+	                session.rollback();
+	            }
+	        } finally {
+	            session.close();
+	        }
+
+	        return isSuccess;
+	    }
 	    
 	    
 	}

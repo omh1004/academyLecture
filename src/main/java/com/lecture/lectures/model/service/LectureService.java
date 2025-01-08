@@ -55,7 +55,6 @@ public class LectureService {
         try {
             // DAO를 통해 리뷰 데이터 가져오기
             reviews = dao.selectLectureReviews(session, lectureNo);
-            System.out.println("Service에서 가져온 리뷰: " + reviews);
         } finally {
             session.close(); // 세션 닫기
         }

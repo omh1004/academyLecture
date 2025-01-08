@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath }"/>	
 	
 <!DOCTYPE html>
@@ -323,7 +324,10 @@
     </div>
     
             <div class="rating-summary">
-                <div class="rating-number">${averageRating}</div>
+                <div class="rating-number">
+                <!-- 소숫점은 2자리까지만 나오게하자!!!!!! -->
+                 <fmt:formatNumber value= "${averageRating}" maxFractionDigits="2" />
+                </div>
                 <button class="btn btn-secondary" style="padding: 0.3rem 0.8rem;">추천순 ▾</button>
             </div>
 
@@ -360,21 +364,52 @@
                                 </c:otherwise>
                             </c:choose>
                         </span>
+                        
+                        <!-- 드롭다운 -->
+                        <c:choose>
+                            <c:when test="${review.isDeleted == 'N'}">
+                            
                         <div class="dropdown" style="margin-left: 5px;">
                             <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-three-dots">
                                     <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a.5.5 0 1 1 0-3 1.5.5.5 0 0 1 0 3"/>
                                 </svg>
                             </a>
-                           <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#" onclick="editComment('${review.reviewNo}')">수정</a></li>
-                                <li><a class="dropdown-item" href="#" onclick="deleteComment('${review.reviewNo}')">삭제</a></li>
-                            </ul>
+                          <ul class="dropdown-menu">
+						    <li>
+						        <a class="dropdown-item" href="/univora/lecture/editParentReply.do?reviewNo=${review.reviewNo}&lectureNo=${review.lectureNo}" 
+						           onclick="return confirm('이 댓글을 수정하시겠습니까?');">
+						            수정
+						        </a>
+						    </li>
+						    <li>
+						        <a class="dropdown-item" href="/univora/lecture/deleteParentReply.do?reviewNo=${review.reviewNo}&lectureNo=${review.lectureNo}" 
+						           onclick="return confirm('이 댓글을 삭제하시겠습니까?');">
+						            삭제
+						        </a>
+						    </li>
+						</ul>
                         </div>
+                         </c:when>
+                            <c:otherwise>
+                             <!-- 삭제된 댓글은 드롭다운 표시 X -->
+                               </c:otherwise>
+                        </c:choose>
+                            
                     </div>
                 </div>
                </div>
-                <div>${review.reviewContent}</div>
+                <!-- 댓글 내용 -->
+            <div>
+                <c:choose>
+                    <c:when test="${review.isDeleted == 'Y'}">
+                        <i>수강평이 삭제되었습니다.</i>
+                    </c:when>
+                    <c:otherwise>
+                        ${review.reviewContent}
+                    </c:otherwise>
+                </c:choose>
+            </div>
                 
                 
                 <!-- 좋아요 및 댓글 입력 -->
@@ -478,7 +513,8 @@
                     </c:otherwise>
                 </c:choose>
             </span>
-            <!-- 드롭다운 -->
+             <!-- 드롭다운: 삭제되지 않은 리뷰만 표시 -->
+                    <c:if test="${reply.isDeleted != 'Y'}">
             <div class="dropdown">
                 <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-three-dots">
@@ -487,23 +523,31 @@
                 </a>
                 <ul class="dropdown-menu">
 				    <li>
-				        <a class="dropdown-item" href="/lecture/editReply.do?reviewNo=${reply.reviewNo}" 
+				        <a class="dropdown-item" href="/univora/lecture/editReply.do?reviewNo=${reply.reviewNo}" 
 				           onclick="return confirm('이 답글을 수정하시겠습니까?');">
 				            수정
 				        </a>
 				    </li>
 				    <li>
-				        <a class="dropdown-item" href="/lecture/deleteReply.do?reviewNo=${reply.reviewNo}" 
+				        <a class="dropdown-item" href="/univora/lecture/deleteReply.do?reviewNo=${reply.reviewNo}" 
 				           onclick="return confirm('이 답글을 삭제하시겠습니까?');">
 				            삭제
 				        </a>
 				    </li>
 				</ul>
             </div>
+          </c:if>
         </div>
     </div>
     <!-- 댓글 내용 -->
-    <div>${reply.reviewContent}</div>
+    <c:choose>
+                <c:when test="${reply.isDeleted == 'Y'}">
+                    <div style="font-style: italic; color: #999;">삭제된 수강평입니다.</div>
+                </c:when>
+                <c:otherwise>
+                    <div>${reply.reviewContent}</div>
+                </c:otherwise>
+            </c:choose>
 </div>
 
             </c:if>

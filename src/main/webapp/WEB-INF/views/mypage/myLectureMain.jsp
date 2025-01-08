@@ -70,7 +70,33 @@
     }
 </style>
 
-<div class="course-grid">
+
+
+
+<!--<table border="1">
+    <thead>
+        <tr>
+            <th>결제 강의 ID</th>
+            <th>수강 강의 ID</th>
+            <th>결제 날짜</th>
+            <th>수업 시작 날짜</th>
+        </tr>
+    </thead>
+    <tbody>
+        <c:forEach var="lecture" items="${lectureDetails}">
+            <tr>
+                <td>${lecture.Paid_Lecture_IDs}</td>
+                <td>${lecture.Enrolled_Lecture_IDs}</td>
+                <td>${lecture.PAYMENT_DATE}</td>
+                <td>${lecture.CLASS_START_DATE}</td>
+            </tr>
+        </c:forEach>
+    </tbody>
+</table>-->
+
+
+
+<!-- <div class="course-grid">
     <!-- Row 1 -->
     <!-- Java Course -->
     <div class="course-card">
