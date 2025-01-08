@@ -161,16 +161,12 @@ button {
 		</div>
 		<div class="right-panel">
 			<h1>New Passwords</h1>
-			<div class="subtitle">본인확인 이메일로 인증</div>
+			<div class="subtitle">새로운 비밀번호를 설정해주세요.</div>
 			<p style="color: #aaa; font-size: 14px;">
-				본인확인 이메일 주소와 일치한 이메일 주소가 같아야,<br>인증번호를 받을 수 있습니다.
+				최소 8자 이상,<br> 특수문자(!@#$%^&*) 중 1개 이상 포함,<br>대문자, 소문자, 숫자를 각각 1개 이상 포함해주세요
 			</p>
 
 
-
-			
-			
-			
 			<form class="newpassword-input" method="post" action="${path }/login/newpasswordend.do" onsubmit="return fn_invalidate();">
       		<div class="checkPw-input">
 	      		<input type="password" id="password" name="password" placeholder="새 비밀번호 입력">
