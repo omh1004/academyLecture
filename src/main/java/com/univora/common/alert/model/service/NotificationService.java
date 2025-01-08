@@ -1,0 +1,55 @@
+package com.univora.common.alert.model.service;
+import static com.univora.common.SqlSessionTemplate.getSession;
+
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.session.SqlSession;
+
+import com.univora.common.alert.model.dao.NotificationDAO;
+import com.univora.common.alert.websocket.NotificationWebSocket;
+
+
+public class NotificationService {
+    private final NotificationDAO notificationDAO = new NotificationDAO();
+
+    public void createNotification(String memberId, String type, String content) {
+    	System.out.println("크리에이디 되냐?");
+        try (SqlSession session = getSession()) {
+        	
+        	System.out.println("크리에이디 되냐?");
+            int result =  notificationDAO.insertNotification(session, memberId, type, content);
+            
+            if(result>0) {
+            		session.commit();
+            }else {
+            	session.rollback();
+            }
+            
+            NotificationWebSocket.sendNotification(memberId, "새로운 알림이 도착했습니다!");
+        }
+    }
+
+    public int getUnreadNotificationCount(String memberId) {
+    	
+    	System.out.println("읽었냐? 되냐?");
+        try (SqlSession session = getSession()) {
+            return notificationDAO.countUnreadNotifications(session, memberId);
+        }
+    }
+
+    public List<Map<String, Object>> getUserNotifications(String memberId) {
+    	System.out.println("읽었ㅁㄴㅇ냐?");
+        try (SqlSession session = getSession()) {
+            return notificationDAO.selectNotificationsByMemberId(session, memberId);
+        }
+    }
+
+    public void markNotificationsAsRead(String memberId) {
+    	System.out.println("몇개 읽었냐? 되냐?");
+        try (SqlSession session = getSession()) {
+            notificationDAO.markNotificationsAsRead(session, memberId);
+        }
+    }
+}
+
