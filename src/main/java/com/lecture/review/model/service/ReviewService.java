@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import com.lecture.common.alert.model.dao.NotificationDAO;
+import com.lecture.common.alert.model.service.NotificationService;
 import com.lecture.common.alert.websocket.NotificationWebSocket;
 import com.lecture.model.dao.NotificationDao;
 import com.lecture.model.dto.Review;
@@ -123,8 +124,8 @@ public class ReviewService {
 	                	session.rollback();
 	                }
 	            }
-	            new NotificationDAO().insertNotification(session, "user444", "알림", "좋아요를 날렸습니다.");
-	            
+	            new NotificationService().createNotification("user444", "알림", "좋아요를 날렸습니다.");
+	           
 	            NotificationWebSocket.sendNotification("user555", "새로운 알림이 도착했습니다. ");
 	            
 	            return 2;
