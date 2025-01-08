@@ -367,6 +367,7 @@
                             </c:choose>
                         </span>
                         
+                        
                         <!-- 드롭다운 -->
                         <c:choose>
                             <c:when test="${review.isDeleted == 'N'}">

@@ -1,6 +1,9 @@
 package com.univora.login.model.service;
 
+
 import static com.univora.common.SqlSessionTemplate.getSession;
+
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -34,5 +37,22 @@ private MemberDao dao = new MemberDao();
 		return invalidMember;
 	}
 	
+	
+	public Member selectMemberToFindIdPwd(Map<String, String> param) {
+		SqlSession session = getSession();
+		Member m = dao.selectMemberToFindIdPwd(session, param);
+		session.close();
+		return m;
+	}
+	
+	
+	public int updateMemberInfo(Map<String, Object> param) {
+		SqlSession session = getSession();
+		int result = dao.updateMemberInfo(session, param);
+		if (result > 0) session.commit();
+		else session.rollback();
+		session.close();
+		return result;
+	}
 	
 }

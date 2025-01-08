@@ -168,11 +168,11 @@ button {
 
 
 
-			<form id="emailVerificationForm">
+			<form id="emailVerificationForm" action="${path }/login/checkmember.do">
 				<!-- 이메일 입력 -->
 
 				<div class="input-wrapper">
-					<input type="text" placeholder="ID">
+					<input type="text" name="id" placeholder="ID">
 				</div>
 
 
@@ -208,7 +208,10 @@ button {
 		</div>
 	</div>
 
+
 	<script>
+	
+	
   const sendEmail = () => {
     const email = document.querySelector('input[name="email"]').value.trim();
     const errorElement = document.querySelector('.error');
@@ -253,7 +256,7 @@ button {
   const verifyCode = () => {
     const email = document.querySelector('input[name="email"]').value;
     const checkNum = document.querySelector('input[name="checkNum"]').value;
-    const errorElement = document.querySelector('.checkNum-input .error');
+    const errorElement = document.querySelector('.error');
     const nextBtn = document.querySelector('button[type="submit"]');
 
     if (!checkNum) {
@@ -263,18 +266,24 @@ button {
     }
 
     $.ajax({
-      url: `\${pagecontext.request.contextPath}/login/verifycode.do`,
+      url: `${pageContext.request.contextPath}/login/verifycode.do`,
       type: "POST",
       data: { email: email, checkNum: checkNum },
       success: function (response) {
         if (response.success) {
           errorElement.textContent = "인증번호가 확인되었습니다.";
           errorElement.style.color = "white";
-
+			
+          
+       	  // 인증 성공 시 비밀번호 변경 페이지로 이동
+          // window.location.href = `${pageContext.request.contextPath}/login/changepassword.do`;
+          
           nextBtn.disabled = false;
         } else {
           errorElement.textContent = response.message || "인증번호가 일치하지 않습니다.";
           errorElement.style.color = "red";
+          
+          nextBtn.disabled = true; 
         }
       },
       error: function () {
@@ -285,6 +294,18 @@ button {
   };
 </script>
 
+<style>
+
+
+input:disabled, button:disabled {
+    background-color: #555; /* 어두운 회색 배경 */
+    color: #aaa; /* 텍스트 흐릿한 회색 */
+    border: 1px solid #444; /* 어두운 회색 테두리 */
+    cursor: not-allowed; /* 금지 표시 커서 */
+}
+
+</style>
 
 </body>
+
 </html>
