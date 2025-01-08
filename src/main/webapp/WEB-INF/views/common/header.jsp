@@ -38,19 +38,35 @@ function connectWebSocket(memberId) {
     };
 }
 
-function updateNotificationCount() {
-    fetch('${pageContext.request.contextPath}/notifications')
-        .then(response => response.text())
-        .then(count => {
-            document.getElementById('notification-count').textContent = count;
-        });
+var unreadCount = 0;
+//읽지 않은 알림 카운트를 가져와 표시
+function fetchUnreadCount() {
+ fetch('http://localhost:8080/${pageContext.request.contextPath}/notifications')
+     .then(response => response.text())
+     .then(count => {
+         unreadCount = parseInt(count, 10);
+         updateNotificationCount();
+     });
 }
 
+//알림 카운트 증가
+function incrementNotificationCount() {
+ unreadCount += 1;
+ updateNotificationCount();
+}
+
+//알림 카운트 초기화 (읽음 처리)
 function markAsRead() {
-    fetch('${pageContext.request.contextPath}/notifications', { method: 'POST' })
-        .then(() => {
-            updateNotificationCount();
-        });
+ fetch('http://localhost:8080/${pageContext.request.contextPath}/notifications', { method: 'POST' })
+     .then(() => {
+         unreadCount = 0; // 읽음 처리 후 카운트 초기화
+         updateNotificationCount();
+     });
+}
+
+//화면에 알림 카운트 표시
+function updateNotificationCount() {
+ document.getElementById('notification-count').textContent = unreadCount;
 }
 </script>
 <title>univora</title>

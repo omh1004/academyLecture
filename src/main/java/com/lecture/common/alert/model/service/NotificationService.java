@@ -14,10 +14,18 @@ public class NotificationService {
     private final NotificationDAO notificationDAO = new NotificationDAO();
 
     public void createNotification(String memberId, String type, String content) {
+    	System.out.println("크리에이디 되냐?");
         try (SqlSession session = getSession()) {
         	
         	System.out.println("크리에이디 되냐?");
-            notificationDAO.insertNotification(session, memberId, type, content);
+            int result =  notificationDAO.insertNotification(session, memberId, type, content);
+            
+            if(result>0) {
+            		session.commit();
+            }else {
+            	session.rollback();
+            }
+            
             NotificationWebSocket.sendNotification(memberId, "새로운 알림이 도착했습니다!");
         }
     }
