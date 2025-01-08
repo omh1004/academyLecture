@@ -11,7 +11,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.univora.mypage.model.dao.mypageDao;
 import com.univora.mypage.model.dto.LectureBasket;
-import com.univora.mypage.model.dto.Member;
+import com.univora.login.model.dto.Member;
 import com.univora.mypage.model.dto.OpenLecture;
 import com.univora.mypage.model.dto.Payment;
 import com.univora.mypage.model.dto.PurchaseHistory;

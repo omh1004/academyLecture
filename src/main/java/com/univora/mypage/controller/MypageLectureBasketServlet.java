@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.univora.mypage.model.dto.LectureBasket;
-import com.univora.mypage.model.dto.Member;
+import com.univora.login.model.dto.Member;
 import com.univora.mypage.model.service.MyPageService;
 
 /**

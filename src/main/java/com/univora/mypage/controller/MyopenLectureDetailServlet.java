@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.univora.mypage.model.dto.Member;
+import com.univora.login.model.dto.Member;
 import com.univora.mypage.model.dto.OpenLecture;
 import com.univora.mypage.model.service.MyPageService;
 

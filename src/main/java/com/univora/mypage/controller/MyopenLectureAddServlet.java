@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
-import com.univora.mypage.model.dto.Member;
+import com.univora.login.model.dto.Member;
 import com.univora.mypage.model.service.MyPageService;
 
 
