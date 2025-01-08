@@ -45,8 +45,6 @@ public class PaymentCompleteServlet extends HttpServlet {
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String, Object> paymentData = mapper.readValue(requestBody.toString(), Map.class);
 		
-		System.out.println("넘어오냐?:::"+paymentData);
-		
 		String paymentId = (String) paymentData.get("paymentId");
 		String transactionType = (String) paymentData.get("transactionType");
 		String memberNo = (String) paymentData.get("customer");
@@ -58,6 +56,14 @@ public class PaymentCompleteServlet extends HttpServlet {
 				.paymentStatus(transactionType).studentId(memberNo).totalAmound(totalAmound).lectureId(lectureNo).build();
 		
 		int result = new MyPageService().savePayment(payment);
+		// 결재가 완료되었다.
+		if(result >0) {
+			//결재가 완료된 강의를 찾아서 enrollment에서 수강여부를 y로 업데이트 해준다.
+			//위의 lectureNo 를 받아서 , 로 split해서 하나씩 업데이트 해준다. 
+			
+			
+			
+		}
 		
 		
 		String msg, loc = "/mypage/main.do";
