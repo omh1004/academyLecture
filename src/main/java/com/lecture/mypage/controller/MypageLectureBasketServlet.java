@@ -37,7 +37,7 @@ public class MypageLectureBasketServlet extends HttpServlet {
 
 		 Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 		
-		//수강바구니에서 가져와야 하는 데이터
+		// 수강바구니에서 가져와야 하는 데이터
 		// 강의명, 강사닉네임, 로그인회원이름, 로그인회원 이메일, 로그인 회원 휴대폰번호
 		// DTO 변수 자체는 OpenLecture와 같이나, 로직적으로 다를 수 있기 때문에, DTO를 LectureBasket으로 추가
 		

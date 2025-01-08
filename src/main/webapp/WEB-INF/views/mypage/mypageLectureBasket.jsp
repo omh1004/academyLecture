@@ -133,7 +133,7 @@ body {
 }
 
 .footer {
-	background-color: #2d2b38;
+	
 	color: white;
 	padding: 2rem;
 	margin-top: 4rem;
@@ -147,13 +147,7 @@ body {
 </head>
 <body>
 	<script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
-	<header class="header">
-		<div class="logo">univora</div>
-		<div class="search-bar">
-			<input type="text" placeholder="배우고 싶은 지식을 이야기해주세요">
-		</div>
-		<div class="profile-icon"></div>
-	</header>
+
 	<div class="cart-title">수강바구니</div>
 	<c:forEach var="baskect" items="${basketList}">
 		<div class="course-item">
