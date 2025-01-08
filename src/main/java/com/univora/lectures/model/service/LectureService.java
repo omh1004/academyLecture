@@ -80,6 +80,24 @@ public class LectureService {
     }
     
 	 
+    // 장바구니 클릭하면 수강바구니 추가!
+    public boolean addLectureToBasket(String lectureNo, String memberNo) {
+        SqlSession session = getSession();
+        boolean result = false;
+        try {
+            int rowsAffected = dao.insertLectureToBasket(session, lectureNo, memberNo);
+            if (rowsAffected > 0) {
+                session.commit();
+                result = true;
+            } else {
+                session.rollback();
+            }
+        } finally {
+            session.close();
+        }
+        return result;
+    }
+    
 	 // 강의 타이틀 클릭시 상세정보 (수정필요))
 	 
 	// public Lectures getLectureById(String lectureNo) {

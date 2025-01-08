@@ -1,6 +1,8 @@
 package com.univora.lectures.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -35,5 +37,13 @@ public class LectureDao {
         return session.selectList("lecture.searchLectures", query);
     }
     
+    
+    // 장바구니 담기 클릭시 수강바구니 추가
+    public int insertLectureToBasket(SqlSession session, String lectureNo, String memberNo) {
+        Map<String, String> params = new HashMap<>();
+        params.put("lectureNo", lectureNo);
+        params.put("memberNo", memberNo);
+        return session.insert("lecture.insertLectureToBasket", params);
+    }
 
 }

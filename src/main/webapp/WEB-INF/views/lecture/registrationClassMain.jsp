@@ -279,7 +279,9 @@
                 <div class="course-price">₩${lecture.price}</div>
                 <div class="action-buttons">
                     <button class="btn btn-primary">수강신청 하기</button>
-                    <button class="btn btn-secondary">장바구니 담기</button>
+                    <!-- <button class="btn btn-secondary"> -->
+                   <a class="btn btn-primary" href="/univora/lectureBasket/add.do?lectureNo=${lecture.lectureNo}" role="button"> 장바구니 담기</a>
+                    <!--</button>-->
                 </div>
             </div>
         </div>
