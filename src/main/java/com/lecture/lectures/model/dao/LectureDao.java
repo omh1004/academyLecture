@@ -24,9 +24,9 @@ public class LectureDao {
     
     public List<Review> selectLectureReviews(SqlSession session, String lectureNo) {
         // MyBatis 매퍼 쿼리를 통해 데이터 가져오기
-    		System.out.println("lectureNo에서 가져온 리뷰: " + lectureNo);
+    		
     	 List<Review> reviews = session.selectList("lecture.selectLectureReviews", lectureNo);
-    	    System.out.println("DAO에서 가져온 리뷰: " + reviews);
+    	    
     	    return reviews;
     }
 

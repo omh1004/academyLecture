@@ -7,11 +7,9 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
-
 import com.lecture.model.dto.Member;
-
+import com.lecture.model.dto.PurchaseHistory;
 import com.lecture.mypage.model.dto.LectureBasket;
-
 import com.lecture.mypage.model.dto.OpenLecture;
 import com.lecture.mypage.model.dto.Payment;
 import com.lecture.mypage.model.dto.User;
@@ -66,6 +64,17 @@ public class mypageDao {
 
 	public int savePayment(SqlSession session, Payment payment) {
 		return session.insert(NAMESPACE + ".savePayment", payment);
+	}
+	
+
+	// sk_ 구매내역
+	 public List<PurchaseHistory> getPurchaseHistory(SqlSession session, String studentId) {
+	        return session.selectList("mypage.selectPurchaseHistory", studentId);
+	}
+
+	// sk_내 강의 가져오기
+	 public List<Map<String, Object>> getLectureDetails(SqlSession session, String studentId) {
+		    return session.selectList("mypage.selectLectureDetails", studentId);
 	}
 
 
