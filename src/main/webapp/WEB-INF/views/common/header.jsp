@@ -80,7 +80,10 @@ function updateNotificationCount() {
 			alt="univora" class="logo-img">
 		</a>
 		<div class="nav-items">
-			<span>강의</span>
+
+	
+	<!-- <a href="${pageContext.request.contextPath}/main/msg.do" class="mainpage-link"> </a>  -->
+	<span>강의</span>
 
 
 

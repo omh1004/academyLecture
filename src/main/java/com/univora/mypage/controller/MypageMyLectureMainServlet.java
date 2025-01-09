@@ -1,8 +1,10 @@
 package com.univora.mypage.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.univora.login.model.dto.Member;
+import com.univora.mypage.model.dto.MyLecture;
 import com.univora.mypage.model.service.MyPageService;
 
 /**
@@ -42,16 +45,22 @@ public class MypageMyLectureMainServlet extends HttpServlet {
             return;
         }
 
-        String studentId = loginMember.getMemberId(); // 현재 로그인한 사용자의 ID
+        String studentId = loginMember.getMemberNo(); // 현재 로그인한 사용자의 ID
         MyPageService service = new MyPageService();
-		
+		System.out.println("내강의 " + studentId);
 		
         try {
             // 학생의 강의 상세 정보를 가져옴
-            List<Map<String, Object>> lectureDetails = service.getLectureDetails(studentId);
+        	
+        	List<MyLecture> lectureDetails = service.getLectureDetails(studentId);
+
+        	
+        	// 강의가 중복돼도 Set으로 처리해서 중복된 강의를 제거해줌
+        	Set<MyLecture> lectureSet = new HashSet<>(lectureDetails);
+        	request.setAttribute("lectureDetails", new ArrayList<>(lectureSet));
 
             // JSP에 데이터 전달
-            request.setAttribute("lectureDetails", lectureDetails);
+            //request.setAttribute("lectureDetails", lectureDetails);
 
             // JSP로 포워딩
             request.getRequestDispatcher("/WEB-INF/views/mypage/myLectureMain.jsp").forward(request, response);

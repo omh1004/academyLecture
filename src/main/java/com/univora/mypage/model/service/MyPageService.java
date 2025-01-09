@@ -13,6 +13,7 @@ import org.apache.ibatis.session.SqlSession;
 import com.univora.login.model.dto.Member;
 import com.univora.mypage.model.dao.mypageDao;
 import com.univora.mypage.model.dto.LectureBasket;
+import com.univora.mypage.model.dto.MyLecture;
 import com.univora.mypage.model.dto.OpenLecture;
 import com.univora.mypage.model.dto.Payment;
 import com.univora.mypage.model.dto.PurchaseHistory;
@@ -126,19 +127,32 @@ public class MyPageService {
     }
 	
 	// sk_내강의 리스트 가져오기
-	public List<Map<String, Object>> getLectureDetails(String studentId) {
-	    SqlSession session = getSession();
-	    List<Map<String, Object>> lectureDetails = null;
+//	public List<Map<String, Object>> getLectureDetails(String studentId) {
+//	    SqlSession session = getSession();
+//	    List<Map<String, Object>> lectureDetails = null;
+//
+//	    try {
+//	        // DAO 호출
+//	        lectureDetails = new mypageDao().getLectureDetails(session, studentId);
+//	    } finally {
+//	        // 세션 닫기
+//	        session.close();
+//	    }
+//
+//	    return lectureDetails;
+//	}
+	  public List<MyLecture> getLectureDetails(String studentId) {
+	        SqlSession session = getSession();
+	        List<MyLecture> lectureList;
 
-	    try {
-	        // DAO 호출
-	        lectureDetails = new mypageDao().getLectureDetails(session, studentId);
-	    } finally {
-	        // 세션 닫기
-	        session.close();
+	        try {
+	            lectureList = mypageDao.selectMyLectures(session, studentId);
+	        } finally {
+	            session.close();
+	        }
+
+	        return lectureList;
 	    }
-
-	    return lectureDetails;
-	}
+	  
 
 }

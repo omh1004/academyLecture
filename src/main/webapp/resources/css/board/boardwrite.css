@@ -1,181 +1,164 @@
-/* ===========================
+/* ============================
    기본 페이지 스타일
-=========================== */
+============================ */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #F6F2ED; /* 전체 배경색 */
+    font-family: Arial, sans-serif; /* 전체 폰트 스타일 설정 */
+    background-color: #f8f9fa; /* 페이지의 배경색 */
     margin: 0;
     display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    flex-direction: column; /* 콘텐츠를 세로로 정렬 */
+    min-height: 100vh; /* 최소 높이를 화면 높이로 설정 */
 }
 
+/* ============================
+   메인 컨테이너
+============================ */
 .main-container {
     width: 100%;
-    max-width: 1400px; /* 최대 너비 */
-    min-width: 600px; /* 최소 너비 */
-    margin: 20px auto;
+    max-width: 1000px; /* 컨테이너의 최대 너비 */
+    margin: 20px auto; /* 상하 여백 20px, 좌우 가운데 정렬 */
     padding: 20px;
-    box-sizing: border-box;
-    position: relative; /* 상대적 위치 설정 */
+    box-sizing: border-box; /* 패딩을 포함한 전체 크기 계산 */
+    background-color: #362D4B; /* 카드처럼 보이게 흰색 배경 */
+    border-radius: 10px; /* 둥근 모서리 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
 }
 
-/* 페이지 타이틀: 왼쪽 상단 */
+/* 페이지 제목 */
 .page-title {
-    font-size: 1.8rem; /* 제목 폰트 크기 */
-    font-weight: bold;
-    position: absolute;
-    top: 10px;
-    left: 300px; /* 파란색 박스 위치 */
-    margin: 0;
+    font-size: 2rem; /* 제목의 폰트 크기 */
+    font-weight: bold; /* 폰트 굵기 */
+    margin-bottom: 20px; /* 아래 여백 */
+    color: #ffffff; /* 텍스트 */
+    text-align: center; /* 텍스트를 중앙 정렬 */
 }
 
-/* 등록 버튼: 오른쪽 상단 */
-.button-container {
-    position: absolute;
-    top: 10px;
-    right: 300px; /* 빨간색 박스 위치 */
-}
-
-button#submit-btn {
-    width: 100px;
-    padding: 8px;
-    background-color: #608B62;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    text-align: center;
-    transition: background-color 0.3s;
-}
-
-button#submit-btn:hover {
-    background-color: #45a049;
-}
-
-/* 섹션 스타일 */
+/* ============================
+   섹션 스타일
+============================ */
 .section {
-    padding: 2rem;
-    margin-top: 80px; /* 버튼과 제목을 위해 여백 조정 */
-    margin-bottom: -4rem;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    background-color: #EEE0D9;
+    margin-bottom: 20px; /* 섹션 간 간격 */
 }
 
-
-
-/* 특정 섹션 (태그 입력 섹션)만 대상으로 하여 조절 */
-.section.tags-input { /* 적절한 클래스나 ID를 추가하세요 */
-    padding-bottom: 2px; /* 하단 패딩 줄이기 */
-    margin-bottom: 1px; /* 마진 줄이기 */
+.section-title {
+    font-size: 1.5rem; /* 섹션 제목의 폰트 크기 */
+    font-weight: bold; /* 폰트 굵기 */
+    margin-bottom: 10px; /* 제목과 다음 요소 사이 간격 */
+    color: #ffffff; /* 중간 밝기의 회색 텍스트 */
+    border-bottom: 2px solid #ccc; /* 섹션 제목 아래 선 */
+    padding-bottom: 5px; /* 제목 아래 패딩 */
 }
 
-
-/* 폼 컨트롤 */
+/* ============================
+   폼 스타일
+============================ */
 .form-group {
-    margin-bottom: 0.3rem;
+    margin-bottom: 15px; /* 그룹 간 간격 */
 }
 
 label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 0.75rem;
-    font-size: 1.1rem;
-    color: #333;
+    display: block; /* 라벨을 블록으로 처리 */
+    font-weight: bold; /* 폰트 굵기 */
+    margin-bottom: 10px; /* 라벨과 입력 필드 간격 */
+    font-size: 1.2rem; /* 폰트 크기 */
+    color: #ffffff; /* 중간 밝기의 회색 텍스트 */
 }
-
-
-#category.form-control {
-    font-size: 16px;  
-    width: 100%;     
-    padding: 8px 12px;  
-    box-sizing: border-box; 
-}
-
-
-#title.form-control {
-    font-size: 16px;
-    width: 600px;
-}
-
-
-#tags.form-control {
-    font-size: 16px; 
-    width: 600px;
-}
-
-
-
 
 .form-control {
-    height: 40px;
-    line-height: 1.2;
-    padding: 5px 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #F6F2ED;
-    box-sizing: border-box;
+    width: 100%; /* 입력 필드가 부모 요소 너비를 가득 채우도록 */
+    height: 40px; /* 입력 필드 높이 */
+    padding: 10px; /* 입력 필드 내부 여백 */
+    font-size: 1rem; /* 텍스트 크기 */
+    border: 1px solid #ccc; /* 입력 필드의 테두리 색상 */
+    border-radius: 5px; /* 입력 필드 모서리 둥글게 */
+    background-color: #f8f9fa; /* 입력 필드 배경색 */
+    transition: border-color 0.3s; /* 포커스 시 테두리 색상 부드럽게 전환 */
 }
 
+.form-control:focus {
+    border-color: #007bff; /* 포커스 시 테두리 색상 파란색 */
+    outline: none; /* 기본 아웃라인 제거 */
+}
+
+/* ============================
+   에디터 스타일
+============================ */
 #editor-container {
-    height: 200px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 1rem;
-    font-size: 1.1rem;
-    box-sizing: border-box;
-    background-color: #ffffff;
+    height: 200px; /* 에디터 높이 */
+    border: 1px solid #ccc; /* 테두리 색상 */
+    border-radius: 5px; /* 둥근 모서리 */
+    padding: 15px; /* 내부 여백 */
+    font-size: 1rem; /* 폰트 크기 */
+    background-color: #fff; /* 에디터 배경색 */
 }
 
-/* 반응형 조정 */
-@media (max-width: 768px) {
-    .main-container {
-        max-width: 100%;
-        padding: 10px;
-    }
-    .section {
-        padding: 1rem;
-    }
-    .page-title {
-        font-size: 1.5rem;
-    }
-    button#submit-btn {
-        width: 100%;
-    }
+/* ============================
+   버튼 스타일
+============================ */
+button#submit-btn {
+    width: 150px; /* 버튼 너비 */
+    height: 40px; /* 버튼 높이 */
+    padding: 8px; /* 버튼 내부 여백 */
+    background-color: #9A98C3; /* 기본 버튼 색상 */
+    color: #ffffff; /* 버튼 텍스트 색상 */
+    border: none; /* 기본 테두리 제거 */
+    border-radius: 5px; /* 둥근 모서리 */
+    font-size: 1rem; /* 텍스트 크기 */
+    font-weight: bold; /* 텍스트 굵기 */
+    cursor: pointer; /* 포인터 커서 */
+    text-align: center; /* 텍스트 중앙 정렬 */
+    transition: background-color 0.3s, transform 0.2s; /* 호버 시 전환 효과 */
 }
 
+button#submit-btn:hover {
+    background-color: #0056b3; /* 호버 시 버튼 색상 */
+    transform: translateY(-2px); /* 버튼 약간 올라가 보이게 */
+}
 
-/* 드롭다운 스타일링 */
+button#submit-btn:active {
+    background-color: #003f8a; /* 클릭 시 버튼 색상 */
+    transform: translateY(0); /* 버튼 원위치 */
+}
+
+/* ============================
+   드롭다운 스타일
+============================ */
 .select-container {
-    position: relative;
-    display: inline-block;
-    width: 100%;
+    position: relative; /* 상대적 위치 */
 }
 
 .select-container select {
-    width: 100%;
-    padding: 8px 30px 8px 8px; /* 우측 패딩을 크게 하여 화살표 공간 확보 */
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    -webkit-appearance: none; /* 기본 드롭다운 스타일 제거 */
-    -moz-appearance: none;
-    appearance: none;
-    background-color: #F6F2ED;
-    font-size: 14px;
-    color: #333;
+    width: 100%; /* 드롭다운 너비 */
+    height: 40px; /* 드롭다운 높이 */
+    padding: 8px; /* 내부 여백 */
+    border: 1px solid #ccc; /* 테두리 색상 */
+    border-radius: 5px; /* 둥근 모서리 */
+    background-color: #f8f9fa; /* 배경색 */
+    appearance: none; /* 기본 화살표 제거 */
+    font-size: 1rem; /* 텍스트 크기 */
 }
 
 .select-container::after {
-    content: "▼"; /* 화살표 아이콘 */
+    content: "▼"; /* 커스텀 화살표 */
     position: absolute;
-    right: 20px;
     top: 50%;
-    transform: translateY(-50%);
-    pointer-events: none; /* 클릭 이벤트 무시 */
-    color: #333;
-    font-size: 12px;
+    right: 10px;
+    transform: translateY(-50%); /* 중앙 정렬 */
+    pointer-events: none; /* 클릭 방지 */
+    color: #555; /* 화살표 색상 */
 }
 
+/* ============================
+   반응형 디자인
+============================ */
+@media (max-width: 768px) {
+    .main-container {
+        padding: 10px; /* 작은 화면에서 패딩 줄이기 */
+    }
+    .page-title {
+        font-size: 1.5rem; /* 제목 크기 줄이기 */
+    }
+    button#submit-btn {
+        width: 100%; /* 버튼 너비 전체로 */
+    }
+}

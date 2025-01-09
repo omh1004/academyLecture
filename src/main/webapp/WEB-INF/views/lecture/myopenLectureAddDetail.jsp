@@ -19,13 +19,13 @@
 <script>
 </script>
     <div class="main-container">
-        <h1 class="page-title">커뮤니티 글 수정하기</h1>
+        <h1 class="page-title">강의를 등록해주세요.</h1>
 		<form action='${path}/lecture/myopenLecturedetail.do' 
 		method="post" enctype="multipart/form-data">
 			<input type="hidden" name="lectureNo" value="${openLecture.lectureNo}"/>
 			            <div class="section">
                 <div class="form-group">
-                    <label for="category">카테고리를 선택해 주세요.</label>
+                    <label for="category">난이도를 선택해 주세요.</label>
                     <div class="select-container">
                         <select id="category" class="form-control" name="category">
                         	<option value="LDF001">입문</option>
