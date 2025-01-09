@@ -447,9 +447,10 @@
                 
              
 
-			
+				${lecture }
+				${sessionScope.loginMember }
 				<!-- (게시글은 강사만 올릴 수 있으니 단순 비교만 하면 됨) 게시글을 올린 userId와 현재 접속해있는 memberId가 같으면 답글을 달 수 있음. -->
-             	<c:if test="${lecture.userId != null && sessionScope.loginMember != null && lecture.userId == sessionScope.loginMember.memberId}">   
+             	<c:if test="${lecture.userId != null && sessionScope.loginMember != null && lecture.userId == sessionScope.loginMember.memberNo}">   
                 	<button class="btn btn-reply" onclick="toggleReplyForm('${review.reviewNo}')">답글</button>
 				</c:if>
 				

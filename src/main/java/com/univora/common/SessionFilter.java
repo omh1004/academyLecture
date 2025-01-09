@@ -49,7 +49,9 @@ public class SessionFilter extends HttpFilter implements Filter {
 	     String contextPath = httpRequest.getContextPath(); // 컨텍스트 패스를 가져옴
 	     String path = uri.substring(contextPath.length()); // 컨텍스트 패스 제거
 	     
-	     List<String> permitPath=List.of("/","/index.jsp","/login/login.do","/login/signupagreement.do","/login/signup.do","/login/signupend.do");
+	     // ,"/login/findingpasswords.do"
+	     
+	     List<String> permitPath=List.of("/","/index.jsp","/login/login.do","/login/signupagreement.do","/login/signup.do","/login/signupend.do","/login/findingpasswords.do");
 	     		
 	     		// 로그인 페이지도 필터를 거치지 않도록 예외 처리@@#@#!
 	     		// index.jsp를 포함한 특정 경로 예외 처리 ( 현 로그인 페이지 )
@@ -65,9 +67,9 @@ public class SessionFilter extends HttpFilter implements Filter {
 //	    	        chain.doFilter(request, response);
 //	    	        return;
 //	    	    }
-//	     
-	   	      
+//	     	   	      
 	        
+	     
 	     // 세션 확인
 	        HttpSession session = httpRequest.getSession(false);
 	        if (session == null || session.getAttribute("loginMember") == null) {
@@ -86,7 +88,6 @@ public class SessionFilter extends HttpFilter implements Filter {
 	        
 
 	}
-	
 	
 	
 	

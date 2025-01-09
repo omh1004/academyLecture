@@ -9,6 +9,8 @@
 **/._.DS_Store
 /src/test/
 /src/main/webapp/WEB-INF/META-INF/
+/src/main/webapp/resources/images/
+/src/main/webapp/resources/upload/
 
 emailConfig.properties
 ### Java ###
