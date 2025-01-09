@@ -3,15 +3,16 @@ package com.univora.mypage.model.service;
 
 import static com.univora.common.SqlSessionTemplate.getSession;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.univora.login.model.dto.Member;
 import com.univora.mypage.model.dao.mypageDao;
 import com.univora.mypage.model.dto.LectureBasket;
-import com.univora.login.model.dto.Member;
 import com.univora.mypage.model.dto.OpenLecture;
 import com.univora.mypage.model.dto.Payment;
 import com.univora.mypage.model.dto.PurchaseHistory;
@@ -79,7 +80,16 @@ public class MyPageService {
 		SqlSession session = getSession();
 		int result = mypageDao.savePayment(session, payment);
 		
-    	if(result>0) session.commit();
+    	if(result>0) {
+    		Arrays.stream(payment.getLectureId().split(",")).forEach(lecture->{
+    			int result2=mypageDao.insertMemberLecture(session,Map.of("memberId",payment.getStudentId(),"lectureNo",lecture));
+    			if(result2==0) {
+    				session.rollback();
+    				throw new RuntimeException("입력실패");
+    			}
+    		});
+    		session.commit();
+    	}
 		else session.rollback();
 
         return result;

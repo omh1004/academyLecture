@@ -213,7 +213,7 @@ body {
 						,txId:response.txId
 						,customer:requestData.customer.fullName
 						,totalAmound: 1000
-						,lectureNo: requestData.customer.lectureNo
+						,lectureNo: requestData.customer.lectureNo // 결제한 강의들 다 보내주세요
 						})
 				
 				}).then(response=>response.text())

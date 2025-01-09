@@ -76,6 +76,11 @@ public class mypageDao {
 	 public List<Map<String, Object>> getLectureDetails(SqlSession session, String studentId) {
 		    return session.selectList("mypage.selectLectureDetails", studentId);
 	}
-
+	 
+	 
+	// 결제 완료한 테이블 ENROLLMENT에 집어넣기. 
+	 public int insertMemberLecture(SqlSession session, Map<String, Object> params) {
+		    return session.insert("mypage.insertMemberLecture", params);
+		}
 
 }

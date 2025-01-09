@@ -99,6 +99,7 @@
 <!-- <div class="course-grid">
     <!-- Row 1 -->
     <!-- Java Course -->
+    
     <div class="course-card">
         <div class="thumbnail">
             <svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
