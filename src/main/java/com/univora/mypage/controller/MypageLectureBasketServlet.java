@@ -57,7 +57,7 @@ public class MypageLectureBasketServlet extends HttpServlet {
 			
 		}
 		
-		
+		System.out.println("Basket List: " + basketList); // 디버깅용 로그
 		request.setAttribute("lectureNodes", lectureNodes);
 		request.setAttribute("basketList", basketList);
 		request.setAttribute("loginMember", loginMember);

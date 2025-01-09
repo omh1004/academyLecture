@@ -147,7 +147,6 @@ body {
 </head>
 <body>
 	<script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
-
 	<div class="cart-title">수강바구니</div>
 	<c:forEach var="baskect" items="${basketList}">
 		<div class="course-item">
@@ -158,7 +157,7 @@ body {
 				<div class="course-title">${baskect.className}</div>
 				<div class="course-instructor">${baskect.memberId}</div>
 			</div>
-			<div class="course-price">₩ 17,000,000</div>
+			<div class="course-price">${baskect.price}</div>
 		</div>
 	</c:forEach>
 	<div class="buyer-info">

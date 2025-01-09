@@ -1,6 +1,7 @@
 package com.univora.common;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class SessionFilter
  */
-//@WebFilter("/*")
+@WebFilter(urlPatterns = "/*" )
 public class SessionFilter extends HttpFilter implements Filter {
        
     /**
@@ -48,35 +49,42 @@ public class SessionFilter extends HttpFilter implements Filter {
 	     String contextPath = httpRequest.getContextPath(); // 컨텍스트 패스를 가져옴
 	     String path = uri.substring(contextPath.length()); // 컨텍스트 패스 제거
 	     
-	       
+	     List<String> permitPath=List.of("/","/index.jsp","/login/login.do","/login/signupagreement.do","/login/signup.do","/login/signupend.do");
 	     		
 	     		// 로그인 페이지도 필터를 거치지 않도록 예외 처리@@#@#!
 	     		// index.jsp를 포함한 특정 경로 예외 처리 ( 현 로그인 페이지 )
 	     
-	     if (path.equals("/") || path.equals("/index.jsp") || 
-	    		 
-	    		// 회원가입 페이지는 필터를 거치지 않도록 예외 처리
-	    	    // 회원가입 페이지 : /login/signupagreement.do(로그인 페이지 회원가입 버튼), /login/signup.do (약관 동의 클릭), /login/signupend.do (회원가입 정보 입력 후 가입 버튼 클릭),
-	    	    
-	    		 path.equals("/login/signupagreement.do") || 
-	    	        path.equals("/login/signup.do") || 
-	    	        path.equals("/login/signupend.do")) {
-	    	        chain.doFilter(request, response);
-	    	        return;
-	    	    }
-	     
+//	     if (path.equals("/") || path.equals("/index.jsp") || 
+//	    		 
+//	    		// 회원가입 페이지는 필터를 거치지 않도록 예외 처리
+//	    	    // 회원가입 페이지 : /login/signupagreement.do(로그인 페이지 회원가입 버튼), /login/signup.do (약관 동의 클릭), /login/signupend.do (회원가입 정보 입력 후 가입 버튼 클릭),
+//	    	    
+//	    		 path.equals("/login/signupagreement.do") || 
+//	    	        path.equals("/login/signup.do") || 
+//	    	        path.equals("/login/signupend.do")) {
+//	    	        chain.doFilter(request, response);
+//	    	        return;
+//	    	    }
+//	     
 	   	      
 	        
 	     // 세션 확인
 	        HttpSession session = httpRequest.getSession(false);
 	        if (session == null || session.getAttribute("loginMember") == null) {
 	            // 세션이 없으면 로그인 페이지로 리다이렉트
-	            httpResponse.sendRedirect(httpRequest.getContextPath() + "/main/index.jsp");
-	            return;
+	        	if(permitPath.stream().anyMatch(pp->pp.equals(path))) {
+	        		chain.doFilter(request, response);
+	        	}else {
+	        		
+	        		httpResponse.sendRedirect(httpRequest.getContextPath() + "/?error=1");
+	        		return;
+	        	}
+	        }else {	        	
+	        	// 세션이 있으면 요청을 계속 진행
+	        	chain.doFilter(request, response);
 	        }
+	        
 
-	        // 세션이 있으면 요청을 계속 진행
-	        chain.doFilter(request, response);
 	}
 	
 	
