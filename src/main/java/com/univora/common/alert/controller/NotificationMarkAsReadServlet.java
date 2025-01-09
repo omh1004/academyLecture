@@ -6,8 +6,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.univora.common.alert.model.service.NotificationService;
+import com.univora.login.model.dto.Member;
 
 /**
  * Servlet implementation class NotificationMarkAsReadServlet
@@ -29,15 +31,20 @@ public class NotificationMarkAsReadServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberId = (String) request.getSession().getAttribute("memberId");
+		HttpSession session  = request.getSession();
 
-        if (memberId == null) {
+    	Member user = (Member) session.getAttribute("loginMember");
+    	
+    	
+        String memberId = user.getMemberId();
+        
+        if (user == null) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.getWriter().write("Unauthorized: User not logged in.");
             return;
         }
 
-        int unreadCount = notificationService.getUnreadNotificationCount(memberId);
+        int unreadCount = notificationService.getUnreadNotificationCount(user.getMemberId());
         response.setContentType("application/json");
         response.getWriter().write(String.valueOf(unreadCount));
 	}
