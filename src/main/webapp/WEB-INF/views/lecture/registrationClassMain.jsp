@@ -375,11 +375,16 @@
                             <c:when test="${review.isDeleted == 'N'}">
                             
                         <div class="dropdown" style="margin-left: 5px;">
+                        
+                        <!-- 드롭다운은 본인한테 밖에 안보인다. 본인이 아니면 수정 삭제가 불가능하다. -->
+                       <c:if test="${review.studentNo == sessionScope.loginMember.memberNo}">
                             <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-three-dots">
                                     <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a.5.5 0 1 1 0-3 1.5.5.5 0 0 1 0 3"/>
                                 </svg>
                             </a>
+                            
+                            
                           <ul class="dropdown-menu">
 						    <li>
 						        <a class="dropdown-item" href="/univora/lecture/editParentReply.do?reviewNo=${review.reviewNo}&lectureNo=${review.lectureNo}" 
@@ -392,8 +397,12 @@
 						           onclick="return confirm('이 댓글을 삭제하시겠습니까?');">
 						            삭제
 						        </a>
+						        
 						    </li>
 						</ul>
+						</c:if>
+						
+						
                         </div>
                          </c:when>
                             <c:otherwise>
@@ -447,10 +456,11 @@
                 
                 
                 
-             
-
+             	${review }
+				${reply }
 				${lecture }
 				${sessionScope.loginMember }
+				
 				<!-- (게시글은 강사만 올릴 수 있으니 단순 비교만 하면 됨) 게시글을 올린 userId와 현재 접속해있는 memberId가 같으면 답글을 달 수 있음. -->
              	<c:if test="${lecture.userId != null && sessionScope.loginMember != null && lecture.userId == sessionScope.loginMember.memberNo}">   
                 	<button class="btn btn-reply" onclick="toggleReplyForm('${review.reviewNo}')">답글</button>
@@ -522,6 +532,9 @@
              <!-- 드롭다운: 삭제되지 않은 리뷰만 표시 -->
                     <c:if test="${reply.isDeleted != 'Y'}">
             <div class="dropdown">
+            
+             <!-- 수정 삭제도 본인 이외에는 불가능 -->
+            <c:if test="${review.studentNo == sessionScope.loginMember.memberNo}">
                 <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-three-dots">
                         <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5.5.5 0 0 1 0 3"/>
@@ -529,10 +542,13 @@
                 </a>
                 <ul class="dropdown-menu">
 				    <li>
+				    
+				    	<c:if test="${lecture.userId != null && sessionScope.loginMember != null && lecture.userId == sessionScope.loginMember.memberNo}">                 				
 				        <a class="dropdown-item" href="/univora/lecture/editReply.do?reviewNo=${reply.reviewNo}" 
 				           onclick="return confirm('이 답글을 수정하시겠습니까?');">
 				            수정
 				        </a>
+				        </c:if>
 				    </li>
 				    <li>
 				        <a class="dropdown-item" href="/univora/lecture/deleteReply.do?reviewNo=${reply.reviewNo}" 
@@ -541,6 +557,7 @@
 				        </a>
 				    </li>
 				</ul>
+				</c:if>
             </div>
           </c:if>
         </div>

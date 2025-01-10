@@ -56,7 +56,7 @@ public class MypageMyLectureMainServlet extends HttpServlet {
             
             // 강의가 중복 돼서 들어와도 Set으로 처리했기 떄문에 중복된 강의를 제거해줌.
             Set<MyLecture> lectureSet = new HashSet<>(lectureDetails);
-            request.setAttribute("lectureDetails", new ArrayList<>(lectureDetails));
+            request.setAttribute("lectureDetails", new ArrayList<>(lectureSet));
             
             // JSP에 데이터 전달
             //request.setAttribute("lectureDetails", lectureDetails);
