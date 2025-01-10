@@ -116,7 +116,7 @@
             const notificationList = document.getElementById('notification-list');
 
             // 새로운 알림이 있을 경우 알림창을 표시하고 내용 추가
-        /*     if (unreadCount > 0) { */
+            if (unreadCount > 0) { 
                 notificationPopup.style.display = 'block';
 
                 // 백엔드에서 알림 데이터를 가져와 추가
@@ -133,9 +133,9 @@
                     .catch(error => {
                         console.error('알림 데이터를 가져오는 중 오류 발생:', error);
                     });
-/*             } else {
+             } else {
                 notificationPopup.style.display = 'none';
-            } */
+            }
         }
 
     </script>
