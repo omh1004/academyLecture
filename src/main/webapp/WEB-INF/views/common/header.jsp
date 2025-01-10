@@ -92,15 +92,16 @@
         }
 
         // 알림 카운트 증가
-        function incrementNotificationCount() {
+        function incrementNotificationCount() {	
             unreadCount += 1;
             updateNotificationCount();
         }
 
         // 알림 읽음 처리
         function markAsRead() {
-            fetch('${path}/notifications', { method: 'POST' })
+            fetch('${path}/notification/markAsRead.do')
                 .then(() => {
+					console.log('읽음 처리되냐???')
                     unreadCount = 0; // 읽음 처리 후 카운트 초기화
                     updateNotificationCount();
                 });
@@ -108,6 +109,7 @@
 
         // 알림 카운트를 화면에 표시
         function updateNotificationCount() {
+        	console.log('너 머들오냐냐냐');
             document.getElementById('notification-count').textContent = unreadCount;
         }
     </script>
@@ -171,9 +173,6 @@
 					</a>
 				</div>
 			</c:if>
-
-
-
 			<style>
 .profile-container {
 	display: flex;

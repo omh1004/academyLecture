@@ -25,7 +25,13 @@ public class NotificationWebSocket {
     }
 
     public static void sendNotification(String memberId, String message) {
+    	
+    	
+    	
         Session session = clients.get(memberId);
+        
+        
+        
         if (session != null && session.isOpen()) {
             try {
                 session.getBasicRemote().sendText(message);

@@ -79,12 +79,10 @@ socket.onclose = () => {
 
 
 <!-- 강의 목록 -->
-
-
 <div class="course-list">
 	<c:forEach var="lecture" items="${lectureList}">
 	    <div class="course-card">
-	    	<img src="${pageContext.request.contextPath}/resources/upload/lecture/${lecture.lecturePicture}"  alt="${lecture.className}" class="course-image">
+	    	<img src="${pageContext.request.contextPath}/resources/upload/lecture/image/${lecture.lecturePicture}"  alt="${lecture.className}" class="course-image">
 	        <!-- <img src="${pageContext.request.contextPath}/resources/images/${lecture.lecPic}" alt="${lecture.className}" class="course-image">  -->
 	        <div class="course-info">
 	        	<h3 class="course-title">

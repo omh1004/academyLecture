@@ -65,11 +65,25 @@ public class NotificationService {
     	// 넘어오는 데이터, 받는 대상이 넘어와야함.
     	// ex) 작성하신 [받아온 강의명] 강의에 강사님의 답글이 달렸습니다.  
     	
-    	
+    	int result=0;
     
+    	System.out.println("아이디"+memberId+"타입"+type+"컨텐츠"+content);
+    	
     	try (SqlSession session = getSession()) {
-            notificationDAO.insertNotification(session, memberId, type, content);
-            NotificationWebSocket.sendNotification(memberId, content);
+    		try {
+    		result = notificationDAO.insertNotification(session, memberId, type, content);
+    		
+	            if (result > 0) {
+	            	  NotificationWebSocket.sendNotification(memberId, content);
+	            	session.commit();
+	            } else {
+	            	session.rollback();
+	            }
+	        } finally {
+	        	session.close();
+	        }
+            
+          
         } catch (Exception e) {
             e.printStackTrace();
         }

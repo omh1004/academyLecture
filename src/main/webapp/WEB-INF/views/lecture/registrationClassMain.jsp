@@ -264,11 +264,12 @@
     </style>
 </head>
 <body>
-	
+	${lecture}
     <main class="main-content">
         <div class="course-header">
             <div class="course-image">
-                 <img src="${pageContext.request.contextPath}/resources/images/${lecture.lecPic}" alt="${lecture.className}" />
+                 <img src="${pageContext.request.contextPath}/resources/upload/lecture/image/${lecture.lecturePicture}" alt="${lecture.className}" 
+                 width="250px"/>
             </div>
             <div class="course-info">
                 <h1 class="course-title">${lecture.className}</h1>
@@ -289,7 +290,7 @@
         <section class="instructor-section">
             <h2 class="section-title">강의소개</h2>
             <div class="instructor-profile">
-                <img src="/api/placeholder/120/120" alt="유병승 선생님" class="instructor-image">
+                <img src="${pageContext.request.contextPath}/resources/upload/lecture/image/${lecture.lecturePicture}" alt="유병승 선생님" class="instructor-image">
                 <div class="instructor-info">
                     <div class="instructor-name">${lecture.shortIntro}</div>
                     <div class="instructor-bio">
