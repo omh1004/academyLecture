@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.univora.common.MyFileRenamePolicy;
 import com.univora.login.model.dto.Member;
 import com.univora.mypage.model.dto.AttachFile;
 import com.univora.mypage.model.service.MyLectureService;
@@ -45,12 +46,12 @@ public class MyopenLectureAddServlet extends HttpServlet {
 		
 		 Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 		
-			String path = request.getServletContext().getRealPath("/resources/images");
+			String path = request.getServletContext().getRealPath("/resources/upload/lecture/image/");
 			System.out.println(path);
 			// multipartrequest객체가 생성되면서 바이너리로 전달된 데이터를 해당경로에
 			// 저장!
 			MultipartRequest mr = new MultipartRequest(request, path, 1024 * 1024 * 1024, "utf-8",
-					new DefaultFileRenamePolicy());
+					new MyFileRenamePolicy());
 			
 
 			// 보낸 데이터를 처리

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import com.univora.common.MyFileRenamePolicy;
 import com.univora.mypage.model.dto.AttachFile;
 import com.univora.mypage.model.dto.OpenLecture;
 import com.univora.mypage.model.service.MyLectureService;
@@ -58,12 +59,12 @@ public class MyopenLectureAddDetailServlet extends HttpServlet {
 
 		MyLectureService lectureService = new MyLectureService();
 
-		String path = request.getServletContext().getRealPath("/resources/upload/lecture");
+		String path = request.getServletContext().getRealPath("/resources/upload/lecture/movie/");
 		System.out.println(path);
 		// multipartrequest객체가 생성되면서 바이너리로 전달된 데이터를 해당경로에
 		// 저장!
 		MultipartRequest mr = new MultipartRequest(request, path, 1024 * 1024 * 1024, "utf-8",
-				new DefaultFileRenamePolicy());
+				new MyFileRenamePolicy());
 
 		// 보낸 데이터를 처리
 //		String boardTitle = mr.getParameter("title");
@@ -77,8 +78,6 @@ public class MyopenLectureAddDetailServlet extends HttpServlet {
 		String originalFileName = mr.getOriginalFileName("uploadfile");
 		String renamedFileName = mr.getFilesystemName("uploadfile");
 		
-		System.out.println("머라고 저장되냐??"+renamedFileName);
-
 		// 넘어온 데이터 lecture 테이블에 저장
 
 		OpenLecture lecture = OpenLecture.builder().lectureNo(lectureNo).description(instructorintro).category(category)
@@ -91,21 +90,16 @@ public class MyopenLectureAddDetailServlet extends HttpServlet {
 		
 		if (result > 0) {
 
-			AttachFile uploadFile = AttachFile.builder().lectureNo(lectureNo).originalFileName(originalFileName)
-					.renamedFileName(renamedFileName).path(path).build();
-
-			lectureService.uploadFile(uploadFile);
-
-
-			msg = "게시글 등록성공!";
+//			AttachFile uploadFile = AttachFile.builder().lectureNo(lectureNo).originalFileName(originalFileName)
+//					.renamedFileName(renamedFileName).path(path).build();
+//
+//			lectureService.uploadFile(uploadFile);
+			msg = "강의 상세등록 성공!";
 			loc = "/mypage/myopenlecture.do";
-
-
-
 	
 		}else {
 			
-			msg = "게시글 등록실패!";
+			msg = "강의 상세등록 실패!";
 			loc = "/mypage/myopenlecture.do";
 		}
 
