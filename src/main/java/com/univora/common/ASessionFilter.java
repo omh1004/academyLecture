@@ -77,7 +77,7 @@ public class ASessionFilter extends HttpFilter implements Filter {
 	        if (session == null || session.getAttribute("loginMember") == null) {
 	            // 세션이 없으면 로그인 페이지로 리다이렉트
 	        	if(permitPath.stream().anyMatch(pp->path.equals(pp)||(!pp.equals("/") && path.contains(pp)))) {
-	        		chain.doFilter(request, response);
+		        		chain.doFilter(request, response);
 	        	}else {
 	        		
 	        		httpResponse.sendRedirect(httpRequest.getContextPath() + "/?error=1");

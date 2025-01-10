@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class SessionFilter
  */
-@WebFilter(urlPatterns = "/*" )
+//@WebFilter(urlPatterns = "/*" )
 public class SessionFilter extends HttpFilter implements Filter {
        
     /**
