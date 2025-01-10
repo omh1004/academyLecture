@@ -53,7 +53,7 @@ public class SessionFilter extends HttpFilter implements Filter {
 	     
 	     List<String> permitPath=List.of("/","/index.jsp","/login/login.do",
 	    		 "/login/signupagreement.do","/login/signup.do","/login/signupend.do",
-	    		 "/login/findingpasswords.do","/resources");
+	    		 "/login/findingpasswords.do","/resources/","?error=1");
 	     		
 	     		// 로그인 페이지도 필터를 거치지 않도록 예외 처리@@#@#!
 	     		// index.jsp를 포함한 특정 경로 예외 처리 ( 현 로그인 페이지 )
