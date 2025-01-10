@@ -53,7 +53,7 @@ public class ASessionFilter extends HttpFilter implements Filter {
 	     
 	     List<String> permitPath=List.of("/","/index.jsp","/login/login.do",
 	    		 "/login/signupagreement.do","/login/signup.do","/login/signupend.do",
-	    		 "/login/findingpasswords.do","/resources");
+	    		 "/login/findingpasswords.do","/resources","/admin/main.do");
 	     		
 	     		// 로그인 페이지도 필터를 거치지 않도록 예외 처리@@#@#!
 	     		// index.jsp를 포함한 특정 경로 예외 처리 ( 현 로그인 페이지 )
@@ -70,7 +70,6 @@ public class ASessionFilter extends HttpFilter implements Filter {
 //	    	        return;
 //	    	    }
 //	     	   	      
-	        
 	     
 	     // 세션 확인
 	        HttpSession session = httpRequest.getSession(false);
@@ -87,11 +86,7 @@ public class ASessionFilter extends HttpFilter implements Filter {
 	        	// 세션이 있으면 요청을 계속 진행
 	        	chain.doFilter(request, response);
 	        }
-	        
-
 	}
-	
-	
 	
 	/**
 	 * @see Filter#init(FilterConfig)

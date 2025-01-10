@@ -3,11 +3,11 @@ package com.univora.review.model.service;
 import static com.univora.common.SqlSessionTemplate.getSession;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
 import com.univora.common.alert.model.service.NotificationService;
-import com.univora.common.alert.websocket.NotificationWebSocket;
 import com.univora.review.model.dao.ReviewDao;
 import com.univora.review.model.dto.Review;
 	
@@ -43,6 +43,25 @@ public class ReviewService {
 	    	
 	        int result = dao.insertReply(session, reply);
 	        if (result > 0) {
+	        	
+	        	System.out.println("reply.getReviewNo()::"+reply.getReviewNo());
+	        	
+	        	String reviewNo =   reply.getParentReviewNo();
+	        	
+	        Map<String,Object> alertInfo = 	selectReviewAuthor(reviewNo);
+	        //alertInfo : {TEACHERNAME=as, MEMBERID=user555, CLASSNAME=ㅁㅇㄴㄹ}
+    		String memberId = (String)alertInfo.get("MEMBERID");
+    		String className = (String)alertInfo.get("CLASSNAME");
+    		String teacherName = (String)alertInfo.get("TEACHERNAME");
+    		
+    		// ex) 작성하신 [받아온 강의명] 강의에 강사님의 답글이 달렸습니다.  
+    		
+    		String content = memberId+ " 강사님이 [강의명 : "+className
+    				+"] 강의에 강사님의 답글이 달렸습니다.";
+    		
+    		
+    		notificationService.createNotification(memberId, "답글", content);
+	        	
 	        	session.commit();
 	        } else {
             	session.rollback();
@@ -116,6 +135,29 @@ public class ReviewService {
 	                if(result2>0) {
 	                	result2=dao.increaseLikeCount(session, reviewNo);
 	                	if(result2>0) {
+	                		//좋아요를 눌렀을 시, 좋아요를 받은 
+	                		//수강평을 작성한 작성자에게 좋아요를 눌렀다는 알림이 가야한다.
+	                		//필요한 데이터, 받는사람 id, 알림타입, 알림 내용
+	                		//받는사람id reviewNo로 reviewNo를 가지고 가서 , 
+	                		//review 테이블에 studentNo를 가지고, 작성자정보, 강의명을 가져온다. 
+	                		//좋아요를 한 강사명을 가져온다. 
+	                		
+	                		//ReviewService에 lectureNo를 가지고, review작성자id와 강의명,강사명을 가져오는 
+	                		//service 메소드를 만든다.
+	                		Map<String,Object> alertInfo = selectReviewAuthor(reviewNo);
+	                		
+	                		System.out.println("alertInfo : "+alertInfo);
+	                		
+	                		String memberId = (String)alertInfo.get("MEMBERID");
+	                		String className = (String)alertInfo.get("CLASSNAME");
+	                		String teacherName = (String)alertInfo.get("TEACHERNAME");
+	                		
+	                		String content = teacherName+ " 강사님이 [강의명 : "+className
+	                				+"] 수강평에 좋아요를 남겼습니다.";
+	                		
+	                		
+	                		notificationService.createNotification(memberId, "좋아요", content);
+	                		
 	                		session.commit();
 	                		return 1;
 	                	}
@@ -136,8 +178,9 @@ public class ReviewService {
 	    
 	    
 	    // 댓글 논리적 삭제
-	    
-	    public boolean deleteReview(String reviewNo) {
+	
+
+		public boolean deleteReview(String reviewNo) {
 	        SqlSession session = getSession();
 	        try {
 	            int result = dao.deleteReview(session, reviewNo);
@@ -243,6 +286,26 @@ public class ReviewService {
 	        return isSuccess;
 	    }
 	    
+	    
+	    //리뷰작성자정보 가져오는 메소드 
+	    private Map<String, Object> selectReviewAuthor(String reviewNo) {
+			SqlSession session = getSession();
+    		//좋아요를 눌렀을 시, 좋아요를 받은 
+    		//수강평을 작성한 작성자에게 좋아요를 눌렀다는 알림이 가야한다.
+    		//필요한 데이터, 받는사람 id, 알림타입, 알림 내용
+    		//받는사람id reviewNo로 reviewNo를 가지고 가서 , 
+    		//review 테이블에 studentNo를 가지고, 작성자정보, 강의명을 가져온다. 
+    		//좋아요를 한 강사명을 가져온다. 
+    		
+    		//ReviewService에 lectureNo를 가지고, review작성자id와 강의명,강사명을 가져오는 
+    		//service 메소드를 만든다.
+			
+			System.out.println("리뷰no넘어오냐?::::"+reviewNo);
+			
+			Map<String, Object> result = dao.selectReviewAuthor(session,reviewNo);
+
+			return result;
+		}
 	}
 
 

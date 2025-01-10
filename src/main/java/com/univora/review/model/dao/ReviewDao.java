@@ -105,7 +105,7 @@ public class ReviewDao {
 	  		
 	        return session.update("review.updateReview", review);
 	    }
-	    
-	    
-	    
+		public Map<String, Object> selectReviewAuthor(SqlSession session, String reviewNo) {
+			return session.selectOne("review.selectReviewAuthor", reviewNo);
+		}
 }
