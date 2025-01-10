@@ -82,12 +82,13 @@ public class LoginCheckServlet extends HttpServlet {
 			// com.gamjabat.model.dto.member
 			HttpSession session = request.getSession();
 			session.setAttribute("loginMember", invlidMember);
-			if (memberId.equals("admin123")) {
-				request.getRequestDispatcher("/admin/main.do").forward(request, response);
-			} else {
-				request.getRequestDispatcher("/main/login.do").forward(request, response);
-				
-			}
+//			if (memberId.equals("admin123")) {
+//				request.getRequestDispatcher("/admin/main.do").forward(request, response);
+//			} else {
+//				request.getRequestDispatcher("/main/login.do").forward(request, response);
+//				
+//			}
+			request.getRequestDispatcher("/main/login.do").forward(request, response);
 		} else {
 			//로그인 실패시, 아이디와 패스워드가 일치하지 않습니다. 메세지 팝업후, 
 			//요청한 페이지, 즉!  로그인 페이지로 다시 넘어간다. 

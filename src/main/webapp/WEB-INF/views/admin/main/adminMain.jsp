@@ -27,7 +27,7 @@
 			<ul>
 				<li>사용자관리</li>
 				<li>게시글관리</li>
-				<li>댓관리</li>
+				<li>댓글관리</li>
 			</ul>
 		</nav>
 	</header>

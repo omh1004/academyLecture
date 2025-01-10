@@ -62,9 +62,9 @@ public class NotificationService {
     			//XX 강사님이 '강의명'수강평에 좋아요를 남겼습니다.
     			// 단! 좋아요를 해제했을떄는 알림을 하지 않는다. 
     	//3. 리뷰에 강사가 답글 : answer
-    	
     	// 넘어오는 데이터, 받는 대상이 넘어와야함.
-    	// 그리고 처리될떄, memberId가 넘어오므로, memberId를 넘길
+    	// ex) 작성하신 [받아온 강의명] 강의에 강사님의 답글이 달렸습니다.  
+    	
     	
     
     	try (SqlSession session = getSession()) {
