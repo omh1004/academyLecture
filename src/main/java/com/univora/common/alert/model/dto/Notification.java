@@ -18,4 +18,5 @@ public class Notification {
     private String content;
     private boolean isRead;
     private Timestamp createdAt;
+    private String rnum;
 }

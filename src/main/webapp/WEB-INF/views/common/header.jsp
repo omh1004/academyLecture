@@ -57,7 +57,7 @@
 <body onload="connectWebSocket();">
 
 
-    <script>
+	<script>
         let unreadCount = 0;
 
         // WebSocket 연결
@@ -106,12 +106,38 @@
                     updateNotificationCount();
                 });
         }
-
-        // 알림 카운트를 화면에 표시
+     // 알림 정보를 업데이트하는 함수
         function updateNotificationCount() {
-        	console.log('너 머들오냐냐냐');
+            console.log('업데이트 알림 카운트 실행');
             document.getElementById('notification-count').textContent = unreadCount;
+
+            // 알림 정보창 업데이트
+            const notificationPopup = document.getElementById('notification-popup');
+            const notificationList = document.getElementById('notification-list');
+
+            // 새로운 알림이 있을 경우 알림창을 표시하고 내용 추가
+        /*     if (unreadCount > 0) { */
+                notificationPopup.style.display = 'block';
+
+                // 백엔드에서 알림 데이터를 가져와 추가
+                fetch('${path}/notifications/getLatestNotifications.do')
+                    .then(response => response.json())
+                    .then(data => {
+                        notificationList.innerHTML = ''; 
+                        data.forEach(notification => {
+                            const newNotification = document.createElement('li');
+                            newNotification.textContent = notification.rownum+"||"+notification.type+"||"+notification.content;
+                            notificationList.appendChild(newNotification);
+                        });
+                    })
+                    .catch(error => {
+                        console.error('알림 데이터를 가져오는 중 오류 발생:', error);
+                    });
+/*             } else {
+                notificationPopup.style.display = 'none';
+            } */
         }
+
     </script>
 	<!-- Header -->
 	<header class="header">
@@ -158,11 +184,21 @@
 			<c:if test="${sessionScope.loginMember != null}">
 				<!-- 알림 아이콘 및 프로필 -->
 				<div class="profile-container">
-			    <div class="notification-icon">
-			        <button onclick="markAsRead()">
-			            <span>🔔</span> <span id="notification-count">0</span>
-			        </button>
-			    </div>
+					<div class="notification-icon">
+						<button onclick="markAsRead()">
+							<span>🔔</span> <span id="notification-count">0</span>
+						</button>
+						<!-- 알림 정보창 -->
+						<div id="notification-popup"
+							style="display: none; position: absolute; top: 50px; right: 5px; width: 300px; background-color: white; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); z-index: 1000; padding: 10px;">
+							<h6>알림</h6>
+							<ul id="notification-list"
+								style="list-style: none; padding: 0; margin: 0;">
+								<!-- 알림 항목이 여기에 추가됩니다 -->
+							</ul>
+						</div>
+
+					</div>
 
 					<!-- 프로필 아이콘 -->
 					<a href="${pageContext.request.contextPath}/mypage/main.do"
@@ -306,5 +342,4 @@
 	transform: scale(1.1); /* 호버 시 확대 */
 }
 </style>
-
 	</header>
