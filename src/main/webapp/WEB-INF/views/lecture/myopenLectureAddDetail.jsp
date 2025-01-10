@@ -19,13 +19,14 @@
 <script>
 </script>
     <div class="main-container">
-        <h1 class="page-title">강의 상세등록</h1>
+
+        <h1 class="page-title">강의 상세 등록.</h1>
 		<form action='${path}/lecture/myopenLecturedetail.do' 
 		method="post" enctype="multipart/form-data">
 			<input type="hidden" name="lectureNo" value="${openLecture.lectureNo}"/>
 			            <div class="section">
                 <div class="form-group">
-                    <label for="category">카테고리를 선택해 주세요.</label>
+                    <label for="category">난이도를 선택해 주세요.</label>
                     <div class="select-container">
                         <select id="category" class="form-control" name="category">
                         	<option value="LDF001">입문</option>
@@ -37,10 +38,8 @@
                 </div>
 
                 <div class="form-group">
-                <c:if test="${openLecture eq null}"> <label for="title">강의명이 없습니다.</label></c:if>
-                <c:if test="${openLecture ne null}"> <label for="title"><label for="title">${openLecture.className}</label></label></c:if>
-                    
-        <%--             <input type="text" id="title" class="form-control"  name="title" value="${openLecture.className}" readonly> --%>
+                    <label for="title">${openLecture.className}</label>
+                    <input type="text" id="title" class="form-control"  name="title" value="${openLecture.className}" readonly>
                 </div>
             </div>
 
@@ -58,13 +57,14 @@
             <div class="section">
                 <div class="form-group">
                 <label for="title">강의 동영상</label>
-                   <input type="file" name="uploadfile"/>
+                   <input type="file" name="upfile"/>
                 </div>
             </div>
 
             <!-- 등록 버튼 -->
             <div class="button-container">
-                <button id="submit-btn">상세 상세등록</button>
+                <button id="submit-btn">수정</button>
+
             </div>
 			
 			
