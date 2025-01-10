@@ -47,10 +47,10 @@ public class ReviewService {
 	        	String reviewNo =   reply.getReviewNo();
 	        	
 	        Map<String,Object> alertInfo = 	selectReviewAuthor(reviewNo);
-	        
-    		String memberId = (String)alertInfo.get("memberId");
-    		String className = (String)alertInfo.get("className");
-    		String teacherName = (String)alertInfo.get("teacherName");
+	        //alertInfo : {TEACHERNAME=as, MEMBERID=user555, CLASSNAME=ㅁㅇㄴㄹ}
+    		String memberId = (String)alertInfo.get("MEMBERID");
+    		String className = (String)alertInfo.get("CLASSNAME");
+    		String teacherName = (String)alertInfo.get("TEACHERNAME");
     		
     		// ex) 작성하신 [받아온 강의명] 강의에 강사님의 답글이 달렸습니다.  
     		
@@ -144,14 +144,11 @@ public class ReviewService {
 	                		//service 메소드를 만든다.
 	                		Map<String,Object> alertInfo = selectReviewAuthor(reviewNo);
 	                		
+	                		System.out.println("alertInfo : "+alertInfo);
 	                		
-	                		String memberId = (String)alertInfo.get("memberId");
-	                		String className = (String)alertInfo.get("className");
-	                		String teacherName = (String)alertInfo.get("teacherName");
-	                		
-	                		String content = teacherName+ " 강사님이 [강의명 : "+className
-	                				+"] 수강평에 좋아요를 남겼습니다.";
-	                		
+	                		String memberId = (String)alertInfo.get("MEMBERID");
+	                		String className = (String)alertInfo.get("CLASSNAME");
+	                		String teacherName = (String)alertInfo.get("TEACHERNAME");
 	                		
 	                		notificationService.createNotification(memberId, "좋아요", content);
 	                		
@@ -296,6 +293,9 @@ public class ReviewService {
     		
     		//ReviewService에 lectureNo를 가지고, review작성자id와 강의명,강사명을 가져오는 
     		//service 메소드를 만든다.
+			
+			System.out.println("리뷰no넘어오냐?::::"+reviewNo);
+			
 			Map<String, Object> result = dao.selectReviewAuthor(session,reviewNo);
 
 			return result;
