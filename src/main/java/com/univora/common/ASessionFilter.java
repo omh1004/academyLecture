@@ -19,12 +19,12 @@ import javax.servlet.http.HttpSession;
  * Servlet Filter implementation class SessionFilter
  */
 @WebFilter(urlPatterns = "/*" )
-public class SessionFilter extends HttpFilter implements Filter {
+public class ASessionFilter extends HttpFilter implements Filter {
        
     /**
      * @see HttpFilter#HttpFilter()
      */
-    public SessionFilter() {
+    public ASessionFilter() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -76,7 +76,7 @@ public class SessionFilter extends HttpFilter implements Filter {
 	        HttpSession session = httpRequest.getSession(false);
 	        if (session == null || session.getAttribute("loginMember") == null) {
 	            // 세션이 없으면 로그인 페이지로 리다이렉트
-	        	if(permitPath.stream().anyMatch(pp->pp.equals(path)||pp.contains(path))) {
+	        	if(permitPath.stream().anyMatch(pp->path.equals(pp)||(!pp.equals("/") && path.contains(pp)))) {
 	        		chain.doFilter(request, response);
 	        	}else {
 	        		

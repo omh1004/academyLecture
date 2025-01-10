@@ -20,7 +20,7 @@
 </script>
     <div class="main-container">
 
-        <h1 class="page-title">강의 상세 등록.</h1>
+        <h1 class="page-title">강의 상세 등록</h1>
 		<form action='${path}/lecture/myopenLecturedetail.do' 
 		method="post" enctype="multipart/form-data">
 			<input type="hidden" name="lectureNo" value="${openLecture.lectureNo}"/>
