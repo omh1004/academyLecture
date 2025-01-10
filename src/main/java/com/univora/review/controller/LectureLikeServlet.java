@@ -60,11 +60,12 @@ public class LectureLikeServlet extends HttpServlet {
 
 	    // JSON 파싱 및 유효성 검사
 	    JSONObject jsonRequest;
-	    String reviewNo, memberNo;
+	    String reviewNo, memberNo,memberName,className,studentId,content;
 	    try {
 	        jsonRequest = new JSONObject(jsonBuffer.toString());
 	        reviewNo = jsonRequest.getString("reviewNo");
 	        memberNo = jsonRequest.getString("memberNo");
+	        
 
 	        if (reviewNo == null || reviewNo.isEmpty() || memberNo == null || memberNo.isEmpty()) {
 	            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);

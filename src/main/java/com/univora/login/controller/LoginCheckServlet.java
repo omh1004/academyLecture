@@ -52,6 +52,7 @@ public class LoginCheckServlet extends HttpServlet {
 		
 		// 로그인 유효검사 하기  
 		Member invalidMember =  new MemberService().loginCheckById(checkMember);
+		
 
 		// request로 요청된 정보가 있을 경우,
 		if (invalidMember != null) {
@@ -91,6 +92,13 @@ public class LoginCheckServlet extends HttpServlet {
 			//로그인 실패시, 아이디와 패스워드가 일치하지 않습니다. 메세지 팝업후, 
 			//요청한 페이지, 즉!  로그인 페이지로 다시 넘어간다. 
 			// 로그인 실패
+			
+//			if(checkMember.getMemberId() ==null||checkMember.getMemberId().isEmpty()||checkMember.getMemberId().isBlank()) {
+//				request.setAttribute("msg", "로그인 후, 이용하세요!.");
+//				request.setAttribute("loc", "/main/index.do");
+//				request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
+//			
+//			}
 			request.setAttribute("msg", "아이디와 패스워드가 일치하지 않습니다.");
 			request.setAttribute("loc", "/");
 			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);

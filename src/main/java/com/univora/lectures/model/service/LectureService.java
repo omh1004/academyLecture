@@ -9,6 +9,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.univora.lectures.model.dao.LectureDao;
 import com.univora.lectures.model.dto.Lectures;
+import com.univora.lectures.model.dto.MyClass;
 import com.univora.lectures.model.dto.Review;
 
 public class LectureService {
@@ -97,6 +98,29 @@ public class LectureService {
         }
         return result;
     }
+
+
+	public MyClass getMyclassLectureByNo(String lectureNo) {
+		
+		SqlSession session = getSession();
+		
+		MyClass mylecture = new MyClass();
+		
+		System.out.println("lectureNo::"+lectureNo);
+		
+	     try {
+	    	 mylecture = dao.getMyclassLectureByNo(session, lectureNo);
+	            if (mylecture !=null) {
+	                session.commit();
+	            } else {
+	                session.rollback();
+	            }
+	        } finally {
+	            session.close();
+	        }
+	        return mylecture;
+		
+	}
     
 	 // 강의 타이틀 클릭시 상세정보 (수정필요))
 	 

@@ -7,9 +7,8 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.univora.login.model.dto.Member;
 import com.univora.mypage.model.dto.LectureBasket;
-import com.univora.mypage.model.dto.MyLecture;
+import com.univora.login.model.dto.Member;
 import com.univora.mypage.model.dto.OpenLecture;
 import com.univora.mypage.model.dto.Payment;
 import com.univora.mypage.model.dto.PurchaseHistory;
@@ -43,8 +42,10 @@ public class mypageDao {
 	}
 
 
-	public int saveLecture(SqlSession session, HashMap<String, Object> lectureData) {
-		return session.insert(NAMESPACE + ".insertLecture", lectureData);
+	public String saveLecture(SqlSession session, HashMap<String, Object> lectureData) {
+		session.insert(NAMESPACE + ".insertLecture", lectureData);
+		return (String) lectureData.get("lectureNo");
+		
 	}
 
 	public OpenLecture openLectureByLectureNo(SqlSession session, String lectureNo) {
@@ -74,13 +75,10 @@ public class mypageDao {
 	}
 
 	// sk_내 강의 가져오기
-//	 public List<Map<String, Object>> getLectureDetails(SqlSession session, String studentId) {
-//		    return session.selectList("mypage.selectLectureDetails", studentId);
-//	}
+	 public List<Map<String, Object>> getLectureDetails(SqlSession session, String studentId) {
+		    return session.selectList("mypage.selectLectureDetails", studentId);
+	}
 	 
-	 public List<MyLecture> selectMyLectures(SqlSession session, String studentId) {
-	        return session.selectList("mypage.selectMyLectures", studentId);
-	    }
 	 
 	// 결제 완료한 테이블 ENROLLMENT에 집어넣기. 
 	 public int insertMemberLecture(SqlSession session, Map<String, Object> params) {

@@ -47,6 +47,9 @@ public class MyopenLectureDetailServlet extends HttpServlet {
 			OpenLecture olecture = new MyPageService().openLectureByLectureNo(scheduleId);
 			
 			
+			System.out.println("olecture::"+olecture);
+			
+			
 			request.setAttribute("openLecture", olecture);
 			
 			request.getRequestDispatcher("/WEB-INF/views/lecture/myopenLectureAddDetail.jsp").forward(request, response);

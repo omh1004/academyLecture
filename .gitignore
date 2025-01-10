@@ -2,6 +2,10 @@
 /src/main/resources/
 /src/main/webapp/WEB-INF/lib/
 /src/main/webapp/WEB-INF/config/
+<<<<<<< HEAD
+=======
+*.mp4
+>>>>>>> branch 'dev' of https://github.com/omh1004/univora.git
 /.settings/
 .DS_Store
 ._.DS_Store

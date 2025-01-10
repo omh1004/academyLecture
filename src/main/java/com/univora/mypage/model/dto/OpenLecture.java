@@ -19,4 +19,5 @@ public class OpenLecture {
 	private String openTime;
 	private User member;
 	private String category;
+	private String renamedFileName;
 }

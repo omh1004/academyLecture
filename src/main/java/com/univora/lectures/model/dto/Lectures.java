@@ -1,6 +1,5 @@
 package com.univora.lectures.model.dto;
 
-import java.sql.Blob;
 import java.sql.Date;
 import java.sql.Timestamp;
 

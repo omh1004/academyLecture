@@ -18,12 +18,12 @@ public class ReviewService {
 
 	// 댓글 DB에 insert!!
 	    public int insertReview(Review review) {
-	    		    	
 	        SqlSession session = getSession();
 	        
 	        int result = 0;
 	        try {
 	            result = dao.insertReview(session, review);
+	            
 	            if (result > 0) {
 	            	session.commit();
 	            } else {
@@ -104,8 +104,9 @@ public class ReviewService {
 	                if(result2>0) {
 	                	result2=dao.decreseLike(session, reviewNo);
 	                	if(result2>0) {
-	        	            notificationService.createNotification("user444", "알림", "좋아요를 날렸습니다.");
-	        	            NotificationWebSocket.sendNotification("user444", "새로운 알림이 도착했습니다. ");
+	                		
+	                		
+	                		
 	                		session.commit();
 	                		return 0;
 	                	}
@@ -116,12 +117,8 @@ public class ReviewService {
 	            } else {
 	                int result2=dao.addLike(session, reviewNo, memberNo);
 	                if(result2>0) {
-        	            notificationService.createNotification("user444", "알림", "좋아요를 날렸습니다.");
-        	            NotificationWebSocket.sendNotification("user444", "새로운 알림이 도착했습니다. ");
 	                	result2=dao.increaseLikeCount(session, reviewNo);
 	                	if(result2>0) {
-	        	            notificationService.createNotification("user444", "알림", "좋아요를 날렸습니다.");
-	        	            NotificationWebSocket.sendNotification("user444", "새로운 알림이 도착했습니다. ");
 	                		session.commit();
 	                		return 1;
 	                	}

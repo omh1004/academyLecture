@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.univora.lectures.model.dto.Lectures;
+import com.univora.lectures.model.dto.MyClass;
 import com.univora.lectures.model.dto.Review;
 
 public class LectureDao {
@@ -45,5 +46,10 @@ public class LectureDao {
         params.put("memberNo", memberNo);
         return session.insert("lecture.insertLectureToBasket", params);
     }
+
+
+	public MyClass getMyclassLectureByNo(SqlSession session, String lectureNo) {
+		 return session.selectOne("lecture.getMyclassLectureByNo", lectureNo);
+	}
 
 }

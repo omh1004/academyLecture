@@ -264,7 +264,7 @@
     </style>
 </head>
 <body>
-
+	
     <main class="main-content">
         <div class="course-header">
             <div class="course-image">
@@ -310,6 +310,8 @@
     <div class="add-review-form" id="add-review-form" style="display: none; margin-bottom: 2rem;">
         <form action="/univora/lecture/insertReview.do" method="post" onsubmit="submitReview(); return false;">
             <input type="hidden" name="lectureNo" value="${lecture.lectureNo}" />
+            <input type="hidden" name="className" value="${lecture.className}" />
+            <input type="hidden" name="userId" value="${lecture.userId}" />
             <textarea name="reviewContent" id="reviewContent" class="form-control" placeholder="수강평을 작성해주세요." rows="3" required></textarea>
             <div style="margin-top: 0.5rem;">
                 <label for="reviewRating">평점: </label>
@@ -793,7 +795,9 @@ function updateLikeStatus(event,val) {
         },
         body: JSON.stringify({
         	reviewNo: val, // 실제 boardNo를 동적으로 전달
-            memberNo: "${sessionScope.loginMember.memberNo}" // 실제 memberNo를 동적으로 전달
+            memberNo: "${sessionScope.loginMember.memberNo}", //실제 memberNo를 동적으로 전달
+            memberName: "${sessionScope.loginMember.memberId}",  //좋아요를 누른 강사의 id값을 전달하여, 알림처리
+            className : "${lecture.className}"            
         })
     })
     .then(response => {

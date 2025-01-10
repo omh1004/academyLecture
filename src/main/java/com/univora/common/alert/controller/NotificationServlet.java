@@ -2,7 +2,8 @@ package com.univora.common.alert.controller;
 
 import java.io.IOException;
 
-import javax.servlet.ServletException;
+//import com.example.service.NotificationService;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -10,43 +11,40 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.univora.common.alert.model.service.NotificationService;
 
-/**
- * Servlet implementation class NotificationServlet
- */
+// 알림 데이터 처리 서블릿
 @WebServlet("/notifications")
 public class NotificationServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-	private final NotificationService notificationService = new NotificationService();
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public NotificationServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
+    private NotificationService notificationService = new NotificationService();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String memberId = (String) request.getSession().getAttribute("memberId");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+       System.out.println("여기 들어오냐?");
+    	
+    	String memberId = (String) request.getSession().getAttribute("memberId");
 
-        if (memberId != null) {
-            int unreadCount = notificationService.getUnreadNotificationCount(memberId);
-            response.getWriter().write(String.valueOf(unreadCount));
-        } else {
-            response.getWriter().write("0");
+        if (memberId == null) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().write("Unauthorized: User not logged in.");
+            return;
         }
+
+        int unreadCount = notificationService.getUnreadNotificationCount(memberId);
+        response.setContentType("application/json");
+        response.getWriter().write(String.valueOf(unreadCount));
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String memberId = (String) request.getSession().getAttribute("memberId");
 
-        if (memberId != null) {
-            notificationService.markNotificationsAsRead(memberId);
-            response.getWriter().write("Notifications marked as read.");
+        if (memberId == null) {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().write("Unauthorized: User not logged in.");
+            return;
         }
-    }
 
+        notificationService.markNotificationsAsRead(memberId);
+        response.getWriter().write("Notifications marked as read.");
+    }
 }

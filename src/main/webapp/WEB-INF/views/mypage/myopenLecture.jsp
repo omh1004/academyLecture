@@ -201,8 +201,8 @@ body {
 			</select>
 		</div>
 
-<!-- 		<label for="lectureVideo">동영상 업로드:</label> <input type="file"
-			id="lectureVideo"> -->
+		<label for="lectureVideo">강의이미지 업로드:</label> 
+		<input type="file" name="lectureImage" id="lectureImage">
 
 		<button id="saveLecture">저장</button>
 		<button id="closePopup">닫기</button>
@@ -256,18 +256,26 @@ body {
             const emptyCell = document.createElement('div');
             calendarDates.appendChild(emptyCell);
         }
+        
+
 
         for (let i = 1; i <= daysInMonth; i++) {
             const dayCell = document.createElement('div');
             dayCell.textContent = i;
             dayCell.classList.add('day');
-
-            const dateKey = `\${year}-0\${month + 1}-0\${i}`;
+            
+            let dateKey ='';
+			
+            if(i<10){
+            	dateKey = `\${year}-0\${month + 1}-0\${i}`;
+            }else{
+            	dateKey = `\${year}-0\${month + 1}-\${i}`;
+            }
             if (schedules[dateKey]) {
                 schedules[dateKey].forEach(schedule => {
                     const scheduleItem = document.createElement('div');
                     scheduleItem.classList.add('schedule-item');
-                    scheduleItem.innerHTML = `<a href="${pageContext.request.contextPath}/mypage/addLectureDetail.do?id=\${schedule.lectureNo}" target="_blank">\${schedule.name} (\${schedule.time})</a>`;
+                    scheduleItem.innerHTML = `<a href="${pageContext.request.contextPath}/lecture/myclassDetail.do?id=\${schedule.lectureNo}" target="_blank">\${schedule.name} (\${schedule.time})</a>`;
                     dayCell.appendChild(scheduleItem);
                 });
             }
@@ -278,12 +286,12 @@ body {
 
                 renderSchedule(dateKey);
                 
-/*                 // 강의 입력 필드 초기화
+                 // 강의 입력 필드 초기화
                 document.getElementById('lectureName').value = '';
                 document.getElementById('lectureContent').value = '';
                 document.getElementById('lectureDate').value = '';
                 document.getElementById('lectureTime').value = '';
-                document.getElementById('timePeriod').value = 'AM'; */
+                document.getElementById('timePeriod').value = 'AM'; 
                 
                 
                 // 클릭한 날짜를 날짜 입력 필드에 설정
@@ -331,7 +339,8 @@ body {
         const lectureContent = document.getElementById('lectureContent').value;
         const lectureDate = document.getElementById('lectureDate').value;
         const lectureTime = document.getElementById('lectureTime').value;
-
+        const lectureImage = document.querySelector("input[name='lectureImage']")
+		
         
         if (!lectureDate || !lectureTime) {
             alert('날짜와 시간을 선택해주세요.');
@@ -359,15 +368,19 @@ body {
             alert(`한 날짜에는 최대 \${maxLecturesPerDay}개의 강의만 등록할 수 있습니다.`);
             return;
         }
+        let formData = new FormData();
         
-
+        
+        formData.append("name", lectureName);
+        formData.append("content", lectureContent);
+        formData.append("date", lectureDate);
+        formData.append("time", lectureTime+" "+timePeriod);
+        formData.append("lectureImage", lectureImage.files[0]);
+        
         try {
             const response = await fetch(`${pageContext.request.contextPath}/mypage/myopenLectureAdd.do`, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(lectureData)
+                body: formData
             });
 
             if (response.ok) {

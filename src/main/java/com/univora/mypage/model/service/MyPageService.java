@@ -13,7 +13,6 @@ import org.apache.ibatis.session.SqlSession;
 import com.univora.login.model.dto.Member;
 import com.univora.mypage.model.dao.mypageDao;
 import com.univora.mypage.model.dto.LectureBasket;
-import com.univora.mypage.model.dto.MyLecture;
 import com.univora.mypage.model.dto.OpenLecture;
 import com.univora.mypage.model.dto.Payment;
 import com.univora.mypage.model.dto.PurchaseHistory;
@@ -42,7 +41,7 @@ public class MyPageService {
 		
 	}
 
-    public boolean saveLecture(String name, String content, String date, String time, String userId) {
+    public String saveLecture(String name, String content, String date, String time, String userId, String renamedFileName) {
     	SqlSession session = getSession();
     	
     	HashMap<String, Object> lectureData = new HashMap<>();
@@ -51,16 +50,17 @@ public class MyPageService {
         lectureData.put("dateTime", date);
         lectureData.put("time", time);
         lectureData.put("userId", userId);
+        lectureData.put("renamedFileName", renamedFileName);
         
         
         System.out.println("뭥미"+lectureData.get("dateTime"));
         
-        int result = mypageDao.saveLecture(session,lectureData);
+        String result = mypageDao.saveLecture(session,lectureData);
         
-    	if(result>0) session.commit();
+    	if(result.length()>0) session.commit();
 		else session.rollback();
 
-        return result>0;
+        return result;
     }
 
 	public OpenLecture openLectureByLectureNo(String scheduleId) {
@@ -127,32 +127,19 @@ public class MyPageService {
     }
 	
 	// sk_내강의 리스트 가져오기
-//	public List<Map<String, Object>> getLectureDetails(String studentId) {
-//	    SqlSession session = getSession();
-//	    List<Map<String, Object>> lectureDetails = null;
-//
-//	    try {
-//	        // DAO 호출
-//	        lectureDetails = new mypageDao().getLectureDetails(session, studentId);
-//	    } finally {
-//	        // 세션 닫기
-//	        session.close();
-//	    }
-//
-//	    return lectureDetails;
-//	}
-	  public List<MyLecture> getLectureDetails(String studentId) {
-	        SqlSession session = getSession();
-	        List<MyLecture> lectureList;
+	public List<Map<String, Object>> getLectureDetails(String studentId) {
+	    SqlSession session = getSession();
+	    List<Map<String, Object>> lectureDetails = null;
 
-	        try {
-	            lectureList = mypageDao.selectMyLectures(session, studentId);
-	        } finally {
-	            session.close();
-	        }
-
-	        return lectureList;
+	    try {
+	        // DAO 호출
+	        lectureDetails = new mypageDao().getLectureDetails(session, studentId);
+	    } finally {
+	        // 세션 닫기
+	        session.close();
 	    }
-	  
+
+	    return lectureDetails;
+	}
 
 }

@@ -5,28 +5,27 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+
+import org.apache.ibatis.session.SqlSession;
+
+import java.util.List;
+import java.util.Map;
+
 public class NotificationDAO {
 
-	
+	// 읽지 않은 알림 개수 조회
+	public int countUnreadNotifications(SqlSession session, String memberId) {
+		return session.selectOne("notification.countUnreadNotifications", memberId);
+	}
 
-    public int insertNotification(SqlSession session, String memberId, String type, String content) {
-    	System.out.println("durlemfdjdhsl??");
-        return session.insert("notification.insertNotification", Map.of(
-            "memberId", memberId,
-            "type", type,
-            "content", content
-        ));
-    }
+	// 알림 읽음 처리
+	public void markNotificationsAsRead(SqlSession session, String memberId) {
+		session.update("notification.markNotificationsAsRead", memberId);
+	}
 
-    public int countUnreadNotifications(SqlSession session, String memberId) {
-        return session.selectOne("notification.countUnreadNotifications", memberId);
-    }
-
-    public void markNotificationsAsRead(SqlSession session, String memberId) {
-        session.update("notification.markNotificationsAsRead", memberId);
-    }
-
-    public List<Map<String, Object>> selectNotificationsByMemberId(SqlSession session, String memberId) {
-        return session.selectList("notification.selectNotificationsByMemberId", memberId);
-    }
+	// 알림 생성
+	public int insertNotification(SqlSession session, String memberId, String type, String content) {
+		return session.insert("notification.insertNotification",
+				Map.of("memberId", memberId, "type", type, "content", content));
+	}
 }

@@ -9,7 +9,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<%--     <link rel="stylesheet" href="${path}/resources/css/style.css"> --%>
 
 <link rel="stylesheet"
 	href="${path}/resources/css/common/headerfooter.css">
@@ -28,51 +27,90 @@
 	src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.min.js"></script>
 <script src="${pageContext.request.contextPath }/resources/js/main.js"></script>
 <script>
-function connectWebSocket(memberId) {
-    const socket = new WebSocket("ws://localhost:8080/univora/notification-websocket/"+memberId);
-   // ws://localhost:9090/HelloMVC/chatting
-    
-    	//let socket=new WebSocket("ws://localhost:9090/HelloMVC/chatting");
-    socket.onmessage = function (event) {
-        updateNotificationCount();
-    };
-}
+/* function connectWebSocket() {
+    fetch('ws://localhost:8080/univora/notification-websocket/${memberId}') // WebSocket URL 요청
+        .then(response => response.text())
+        .then(wsUrl => {
+            const socket = new WebSocket(wsUrl); // WebSocket 연결
 
-var unreadCount = 0;
-//읽지 않은 알림 카운트를 가져와 표시
-function fetchUnreadCount() {
- fetch('http://localhost:8080/${pageContext.request.contextPath}/notifications')
-     .then(response => response.text())
-     .then(count => {
-         unreadCount = parseInt(count, 10);
-         updateNotificationCount();
-     });
-}
+            socket.onopen = function () {
+                console.log("WebSocket 연결 성공");
+            };
 
-//알림 카운트 증가
-function incrementNotificationCount() {
- unreadCount += 1;
- updateNotificationCount();
-}
+            socket.onmessage = function (event) {
+                console.log("알림 수신:", event.data);
+            };
 
-//알림 카운트 초기화 (읽음 처리)
-function markAsRead() {
- fetch('http://localhost:8080/${pageContext.request.contextPath}/notifications', { method: 'POST' })
-     .then(() => {
-         unreadCount = 0; // 읽음 처리 후 카운트 초기화
-         updateNotificationCount();
-     });
-}
+            socket.onclose = function () {
+                console.log("WebSocket 연결 종료");
+            };
 
-//화면에 알림 카운트 표시
-function updateNotificationCount() {
- document.getElementById('notification-count').textContent = unreadCount;
-}
+            socket.onerror = function (error) {
+                console.error("WebSocket 오류:", error);
+            };
+        });
+} */
 </script>
 <title>univora</title>
 
 </head>
-<body onload="updateNotificationCount(); connectWebSocket('${sessionScope.loginMember.memberId}');">
+<body onload="connectWebSocket();">
+
+
+    <script>
+        let unreadCount = 0;
+
+        // WebSocket 연결
+        function connectWebSocket() {
+            // WebSocket URL을 백엔드에서 가져옴
+            fetch('${path}/notifications/ws-url')
+                .then(response => response.text())
+                .then(wsUrl => {	
+					console.log('너 머들오냐냐냐'+wsUrl);
+                	
+                    const socket = new WebSocket(wsUrl);
+
+                    socket.onopen = function () {
+                        console.log("WebSocket 연결 성공");
+                        fetchUnreadCount(); // 초기 알림 개수 가져오기
+                    };
+
+                    socket.onmessage = function (event) {
+                        incrementNotificationCount(); // 메시지 수신 시 알림 카운트 증가
+                    };
+                });
+        }
+
+        // 읽지 않은 알림 개수 가져오기
+        function fetchUnreadCount() {
+            fetch('${path}/notificatoin/getUnreadNotificationCount.do')
+                .then(response => response.text())
+                .then(count => {
+                    unreadCount = parseInt(count, 10);
+                    updateNotificationCount();
+                });
+        }
+
+        // 알림 카운트 증가
+        function incrementNotificationCount() {
+            unreadCount += 1;
+            updateNotificationCount();
+        }
+
+        // 알림 읽음 처리
+        function markAsRead() {
+            fetch('${path}/notifications', { method: 'POST' })
+                .then(() => {
+                    unreadCount = 0; // 읽음 처리 후 카운트 초기화
+                    updateNotificationCount();
+                });
+        }
+
+        // 알림 카운트를 화면에 표시
+        function updateNotificationCount() {
+            document.getElementById('notification-count').textContent = unreadCount;
+        }
+    </script>
 	<!-- Header -->
 	<header class="header">
 		<a href="${path }/main/login.do"> <img
@@ -80,10 +118,7 @@ function updateNotificationCount() {
 			alt="univora" class="logo-img">
 		</a>
 		<div class="nav-items">
-
-	
-	<!-- <a href="${pageContext.request.contextPath}/main/msg.do" class="mainpage-link"> </a>  -->
-	<span>강의</span>
+			<span>강의</span>
 
 
 
@@ -121,12 +156,11 @@ function updateNotificationCount() {
 			<c:if test="${sessionScope.loginMember != null}">
 				<!-- 알림 아이콘 및 프로필 -->
 				<div class="profile-container">
-					<!-- 알림 아이콘 -->
-					<div class="notification-icon">
-						<button onclick="markAsRead()">
-							<span>🔔</span> <span id="notification-count">0</span>
-						</button>
-					</div>
+			    <div class="notification-icon">
+			        <button onclick="markAsRead()">
+			            <span>🔔</span> <span id="notification-count">0</span>
+			        </button>
+			    </div>
 
 					<!-- 프로필 아이콘 -->
 					<a href="${pageContext.request.contextPath}/mypage/main.do"
