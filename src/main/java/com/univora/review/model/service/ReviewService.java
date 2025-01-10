@@ -44,7 +44,9 @@ public class ReviewService {
 	        int result = dao.insertReply(session, reply);
 	        if (result > 0) {
 	        	
-	        	String reviewNo =   reply.getReviewNo();
+	        	System.out.println("reply.getReviewNo()::"+reply.getReviewNo());
+	        	
+	        	String reviewNo =   reply.getParentReviewNo();
 	        	
 	        Map<String,Object> alertInfo = 	selectReviewAuthor(reviewNo);
 	        //alertInfo : {TEACHERNAME=as, MEMBERID=user555, CLASSNAME=ㅁㅇㄴㄹ}
@@ -149,6 +151,10 @@ public class ReviewService {
 	                		String memberId = (String)alertInfo.get("MEMBERID");
 	                		String className = (String)alertInfo.get("CLASSNAME");
 	                		String teacherName = (String)alertInfo.get("TEACHERNAME");
+	                		
+	                		String content = teacherName+ " 강사님이 [강의명 : "+className
+	                				+"] 수강평에 좋아요를 남겼습니다.";
+	                		
 	                		
 	                		notificationService.createNotification(memberId, "좋아요", content);
 	                		
