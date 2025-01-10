@@ -1,0 +1,181 @@
+/* ===========================
+   기본 페이지 스타일
+=========================== */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #F6F2ED; /* 전체 배경색 */
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main-container {
+    width: 60%;
+    max-width: 1000px; /* 최대 너비 */
+    min-width: 600px; /* 최소 너비 */
+    margin: 80px auto;
+    padding: 20px;
+    box-sizing: border-box;
+    position: relative; /* 상대적 위치 설정 */
+}
+
+/* 페이지 타이틀: 왼쪽 상단 */
+.page-title {
+    font-size: 1.8rem; /* 제목 폰트 크기 */
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    left: 300px; /* 파란색 박스 위치 */
+    margin: 0;
+}
+
+/* 등록 버튼: 오른쪽 상단 */
+.button-container {
+    position: absolute;
+    top: 10px;
+    right: 300px; /* 빨간색 박스 위치 */
+}
+
+button#submit-btn {
+    width: 100px;
+    padding: 8px;
+    background-color: #608B62;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+button#submit-btn:hover {
+    background-color: #45a049;
+}
+
+/* 섹션 스타일 */
+.section {
+    padding: 2rem;
+    margin-top: 80px; /* 버튼과 제목을 위해 여백 조정 */
+    margin-bottom: -4rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #EEE0D9;
+}
+
+
+
+/* 특정 섹션 (태그 입력 섹션)만 대상으로 하여 조절 */
+.section.tags-input { /* 적절한 클래스나 ID를 추가하세요 */
+    padding-bottom: 2px; /* 하단 패딩 줄이기 */
+    margin-bottom: 1px; /* 마진 줄이기 */
+}
+
+
+/* 폼 컨트롤 */
+.form-group {
+    margin-bottom: 0.3rem;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+
+#category.form-control {
+    font-size: 16px;  
+    width: 100%;     
+    padding: 8px 12px;  
+    box-sizing: border-box; 
+}
+
+
+#title.form-control {
+    font-size: 16px;
+    width: 600px;
+}
+
+
+#tags.form-control {
+    font-size: 16px; 
+    width: 600px;
+}
+
+
+
+
+.form-control {
+    height: 40px;
+    line-height: 1.2;
+    padding: 5px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #F6F2ED;
+    box-sizing: border-box;
+}
+
+#editor-container {
+    height: 250px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 1rem;
+    font-size: 1.1rem;
+    box-sizing: border-box;
+    background-color: #ffffff;
+}
+
+/* 반응형 조정 */
+@media (max-width: 768px) {
+    .main-container {
+        max-width: 100%;
+        padding: 10px;
+    }
+    .section {
+        padding: 1rem;
+    }
+    .page-title {
+        font-size: 1.5rem;
+    }
+    button#submit-btn {
+        width: 100%;
+    }
+}
+
+
+/* 드롭다운 스타일링 */
+.select-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.select-container select {
+    width: 100%;
+    padding: 8px 30px 8px 8px; /* 우측 패딩을 크게 하여 화살표 공간 확보 */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    -webkit-appearance: none; /* 기본 드롭다운 스타일 제거 */
+    -moz-appearance: none;
+    appearance: none;
+    background-color: #F6F2ED;
+    font-size: 14px;
+    color: #333;
+}
+
+.select-container::after {
+    content: "▼"; /* 화살표 아이콘 */
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none; /* 클릭 이벤트 무시 */
+    color: #333;
+    font-size: 12px;
+}
+

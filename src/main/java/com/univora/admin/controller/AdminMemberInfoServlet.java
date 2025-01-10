@@ -30,9 +30,9 @@ public class AdminMemberInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String memberId = request.getParameter("memberId");
-		Member searchMember = new AdminMemberService().selectMemberById(memberId);
-		request.setAttribute("member", searchMember);
+//		String memberId = request.getParameter("memberId");
+//		Member searchMember = new AdminMemberService().selectMemberById(memberId);
+//		request.setAttribute("member", searchMember);
 		request.getRequestDispatcher("/WEB-INF/views/admin/member/memberInfo.jsp").forward(request, response);
 	
 	}
