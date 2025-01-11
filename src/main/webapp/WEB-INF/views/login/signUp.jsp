@@ -367,12 +367,12 @@ $(document).ready(function () {
         const age = today.getFullYear() - birthYear;
 
         if (
-            age < 18 ||
-            (age === 18 &&
+            age < 12 ||
+            (age === 12 &&
                 (today.getMonth() < birthMonth || 
                 (today.getMonth() === birthMonth && today.getDate() < birthDay)))
         ) {
-            alert("만 18세 이상만 가입할 수 있습니다.");
+            alert("만 12세 이상만 가입할 수 있습니다.");
             birthYearSelect.focus();
             return false;
         }

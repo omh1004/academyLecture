@@ -1,5 +1,6 @@
 package com.univora.review.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -108,4 +109,18 @@ public class ReviewDao {
 		public Map<String, Object> selectReviewAuthor(SqlSession session, String reviewNo) {
 			return session.selectOne("review.selectReviewAuthor", reviewNo);
 		}
+		
+		
+		public Review getReplyById(SqlSession session, String reviewNo) {
+		    return session.selectOne("review.getReplyById", reviewNo);
+		}
+
+		public int updateReply(SqlSession session, String reviewNo, String reviewContent) {
+		    Map<String, Object> params = new HashMap<>();
+		    params.put("reviewNo", reviewNo);
+		    params.put("reviewContent", reviewContent);
+		    return session.update("review.updateReply", params);
+		}
+
+		  
 }

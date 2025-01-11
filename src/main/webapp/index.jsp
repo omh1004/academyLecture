@@ -8,12 +8,17 @@
 
 <link rel="stylesheet" href="${path}/resources/css/index.css">
 
+
+
+
 <body
 	style="background-image: url('${pageContext.request.contextPath}/resources/images/space.jpg');">
 <body>
 	<div class="login-container">
 		<div class="logo">
-			<c:if test="${param.error==1 }"><h3>로그인 후 이용할 수 있습니다</h3></c:if>
+			<c:if test="${param.error==1 }">
+			<h3 class="errorlogin-message">로그인 후 이용할 수 있습니다</h3>
+			</c:if>
 			<h1 style="color: white; font-size: 32px;">univora</h1>
 		</div>
 		<form method="post" action="${path}/login/login.do">

@@ -146,7 +146,7 @@
 			alt="univora" class="logo-img">
 		</a>
 		<div class="nav-items">
-			<span>강의</span>
+			<a href = "${path }/main/msg.do"><span>강의</span> </a>
 
 
 
