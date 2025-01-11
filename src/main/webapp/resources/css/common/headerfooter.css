@@ -93,3 +93,15 @@
 			outline: none;     /* 외곽선 제거 */
 			box-shadow: none;  /* 그림자 효과 제거 */
         }
+
+			    
+		.header a {
+		    color: #000000; 
+		    text-decoration: none; 
+		}
+		
+		
+		.header a:hover {
+		    color: #555555; 
+		    text-decoration: underline; 
+		}
