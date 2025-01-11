@@ -181,7 +181,6 @@ body {
 	    	requestPayment();
 	    });
         async function requestPayment() {
-	
         	
 			const requestData={
 	         	    storeId: "store-3bc36c78-6806-4618-9eb6-a4543ab8b481", // 고객사 storeId로 변경해주세요.

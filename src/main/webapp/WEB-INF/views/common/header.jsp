@@ -204,15 +204,14 @@
 					</div>
 
 					<!-- 프로필 아이콘 -->
-					<a href="${pageContext.request.contextPath}/mypage/main.do"
-						class="profile-link">
+					<a href="${pageContext.request.contextPath}/mypage/main.do" class="profile-link">
 						<div class="profile-circle">
 							<!-- 프로필 이미지가 없다면 기본 배경 표시 -->
 						</div>
 					</a>
 				</div>
 			</c:if>
-			<style>
+<style>
 .profile-container {
 	display: flex;
 	align-items: center;
