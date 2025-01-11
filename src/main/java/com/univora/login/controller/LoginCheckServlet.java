@@ -49,11 +49,12 @@ public class LoginCheckServlet extends HttpServlet {
 		// 로그인 유효검사 하기  
 		Member invalidMember =  new MemberService().loginCheckById(checkMember);
 		
-		 LectureService lectureService = new LectureService();
-         List<Lectures> lectureList = lectureService.getAllLectures();
-	     request.setAttribute("lectureList", lectureList);
-		
-
+		LectureService lectureService = new LectureService();
+        List<Lectures> lectureList = lectureService.getAllLectures();
+	    request.setAttribute("lectureList", lectureList);
+	     
+	     
+	     
 		// request로 요청된 정보가 있을 경우,
 		if (invalidMember!=null) {
 			
