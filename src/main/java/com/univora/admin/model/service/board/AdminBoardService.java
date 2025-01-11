@@ -9,24 +9,10 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.univora.admin.model.dao.AdminBoardDao;
 import com.univora.admin.model.dto.Board;
-import com.univora.admin.model.dto.InqueryBoard;
-import com.univora.admin.model.dto.ReportBoard;
 
 public class AdminBoardService {
 	AdminBoardDao boardDao = new AdminBoardDao();
 
-	public List<InqueryBoard> selectInqueryBoardAll(Map<String, Integer> param) {
-		SqlSession session = getSession();
-		List<InqueryBoard> inqueryBoard = boardDao.selectInqueryBoardAll(session, param);
-		return inqueryBoard;
-	}
-
-	public List<ReportBoard> selectReportBoardAll(Map<String, Integer> param) {
-		SqlSession session = getSession();
-		
-		List<ReportBoard> reportBoard = boardDao.selectReportBoardAll(session, param);
-		return reportBoard;
-	}
 
 	public int updateReportProcessing(Map<String, String> param) {
 		SqlSession session = getSession();

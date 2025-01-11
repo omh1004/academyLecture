@@ -16,13 +16,11 @@ import lombok.NoArgsConstructor;
 public class Member {
 	private String memberNo;
 	private String memberId;
-	private String memberPwd;
 	private String memberName;
 	private String email;
 	private String phone;
 	private String address;
-	private Date birthday;
-	private String nickName;
+	private String role;
 	private Timestamp createdAt;
 	private Timestamp updatedAt;
 	private Timestamp deletedAt;
