@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.univora.common.alert.model.dto.Notification;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -27,5 +28,9 @@ public class NotificationDAO {
 	public int insertNotification(SqlSession session, String memberId, String type, String content) {
 		return session.insert("notification.insertNotification",
 				Map.of("memberId", memberId, "type", type, "content", content));
+	}
+
+	public List<Notification> selectAlert(SqlSession session, String memberId) {
+		return session.selectList("notification.selectAlert",memberId);
 	}
 }

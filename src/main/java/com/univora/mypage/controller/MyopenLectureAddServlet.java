@@ -46,15 +46,15 @@ public class MyopenLectureAddServlet extends HttpServlet {
 		
 		 Member loginMember = (Member) request.getSession().getAttribute("loginMember");
 		
-			String path = request.getServletContext().getRealPath("/resources/upload/lecture/image/");
+			String path = request.getServletContext().getRealPath("/resources/upload/lecture/image");
 			System.out.println(path);
 			// multipartrequest객체가 생성되면서 바이너리로 전달된 데이터를 해당경로에
 			// 저장!
 			MultipartRequest mr = new MultipartRequest(request, path, 1024 * 1024 * 1024, "utf-8",
-					new MyFileRenamePolicy());
+					new DefaultFileRenamePolicy());
 			
 
-			// 보낸 데이터를 처리
+			// 보낸 데이터를 처리${pageContext.request.contextPath}/resources/upload/lecture/image/${lecture.lecturePicture}"
 //			String boardTitle = mr.getParameter("title");
 			String name = mr.getParameter("name");
 			String content = mr.getParameter("content");
@@ -77,6 +77,7 @@ public class MyopenLectureAddServlet extends HttpServlet {
 			// 업로드 파일에 대한 정보 가져오기
 			// getOriginalFileName("type=file의 name속성값") -> 업로드한 파일명
 			// getFilesystemName("type=file의 name속성값") -> 리네임된 파일명
+	        
 			String originalFileName = mr.getOriginalFileName("lectureImage");
 			String renamedFileName = mr.getFilesystemName("lectureImage");
 
