@@ -36,13 +36,9 @@ public class LoginCheckServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
+		HttpSession session = request.getSession();
 		// Service를 통해 강의 정보 가져오기(sk)
-        LectureService lectureService = new LectureService();
-        List<Lectures> lectureList = lectureService.getAllLectures();
-
-        // 강의 정보를 JSP로 전달(sk)
-        request.setAttribute("lectureList", lectureList);
+       
         
 		String memberId = request.getParameter("memberId");
 		// request로 넘어온 비밀번호평문 암호화시켜서 db에 로그인 데이터와 비교
@@ -53,9 +49,13 @@ public class LoginCheckServlet extends HttpServlet {
 		// 로그인 유효검사 하기  
 		Member invalidMember =  new MemberService().loginCheckById(checkMember);
 		
+		 LectureService lectureService = new LectureService();
+         List<Lectures> lectureList = lectureService.getAllLectures();
+	     request.setAttribute("lectureList", lectureList);
+		
 
 		// request로 요청된 정보가 있을 경우,
-		if (invalidMember != null) {
+		if (invalidMember!=null) {
 			
 			// 세션 넣기!~
 			Member invlidMember = Member.builder()
@@ -80,7 +80,7 @@ public class LoginCheckServlet extends HttpServlet {
 			// 세션으로 받은 Member 객체의 정보는 아래와 같다.
 			// 혹시나 형변환시 아래의 객체로 형변환하기 바란다.오바!
 			// com.gamjabat.model.dto.member
-			HttpSession session = request.getSession();
+			
 			session.setAttribute("loginMember", invlidMember);
 			if (memberId.equals("admin123")) {
 				request.getRequestDispatcher("/admin/main.do").forward(request, response);
@@ -99,9 +99,11 @@ public class LoginCheckServlet extends HttpServlet {
 //				request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 //			
 //			}
-			request.setAttribute("msg", "아이디와 패스워드가 일치하지 않습니다.");
-			request.setAttribute("loc", "/");
-			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
+			
+				request.setAttribute("msg", "아이디와 패스워드가 일치하지 않습니다.");
+				request.setAttribute("loc", "/");
+				request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
+			
 		}
 	// 메인 페이지로 포워딩
         //request.getRequestDispatcher("/WEB-INF/views/common/main.jsp").forward(request, response);

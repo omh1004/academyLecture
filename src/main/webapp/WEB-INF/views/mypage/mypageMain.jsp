@@ -192,6 +192,8 @@ a:hover {
 					</span>
 				</div>
 			</div>
+			
+	
 
 			<div class="profile-card">
 				<div class="profile-header">

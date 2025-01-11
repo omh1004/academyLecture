@@ -146,10 +146,7 @@
 			alt="univora" class="logo-img">
 		</a>
 		<div class="nav-items">
-			<a href = "${path }/main/msg.do"><span>강의</span> </a>
-
-
-
+			<a href = "${path }/main/login.do"><span>강의</span> </a>
 			<form method="get" action="/univora/lecture/search.do"
 				class="search-form">
 				<div class="search-container">
