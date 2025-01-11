@@ -59,6 +59,11 @@ public class LectureDao {
                                       Map.of("lectureNo", lectureNo, "memberNo", memberNo));
         return count > 0; // 강의에 등록되어 있다면 true 반환
     }
-    
 
+
+	public int getCountLectureBaskectByLectureNo(SqlSession session,String lectureNo, String memberNo) {
+		  int count = session.selectOne("lecture.getCountLectureBaskectByLectureNo", 
+                  Map.of("lectureNo", lectureNo, "memberNo", memberNo));
+		  return count; 
+	}
 }

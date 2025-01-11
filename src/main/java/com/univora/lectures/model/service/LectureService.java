@@ -141,4 +141,12 @@ public class LectureService {
 
 	        return isEnrolled;
 	    }
+
+
+	public int getCountLectureBaskectByLectureNo(String lectureNo, String memberNo) {
+		SqlSession session = getSession();
+		int result = dao.getCountLectureBaskectByLectureNo(session,lectureNo, memberNo);
+		return result;
+	
+	}
 }

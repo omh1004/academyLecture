@@ -177,7 +177,8 @@ body {
 	<script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
 	<script>
 	    document.querySelector('.checkout-button').addEventListener('click', function () {
-	        // PortOne SDK 초기화
+	        
+	    	// PortOne SDK 초기화
 	    	requestPayment();
 	    });
         async function requestPayment() {

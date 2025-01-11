@@ -37,6 +37,7 @@ public class LectureBasketAddServlet extends HttpServlet {
         String memberNo = ((Member) request.getSession().getAttribute("loginMember")).getMemberNo();
 		
         
+        
         // 2. 장바구니 추가 비즈니스 로직 호출
         LectureService basketService = new LectureService();
         boolean isAdded = basketService.addLectureToBasket(lectureNo, memberNo);

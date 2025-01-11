@@ -282,9 +282,8 @@
                 <div class="course-price">₩${lecture.price}</div>
                 <div class="action-buttons">
                     <button class="btn btn-primary">수강신청 하기</button>
-                    <!-- <button class="btn btn-secondary"> -->
-                   <a class="btn btn-primary" href="/univora/lectureBasket/add.do?lectureNo=${lecture.lectureNo}" role="button"> 장바구니 담기</a>
-                    <!--</button>-->
+                    <button class="btn btn-secondary" onclick='addLectureBasket()'>장바구니 담기</button>
+<%--                     			<a class="btn btn-primary" href="/univora/lectureBasket/add.do?lectureNo=${lecture.lectureNo}" role="button"> 장바구니 담기</a> --%>
                 </div>
             </div>
         </div>
@@ -865,5 +864,48 @@ function updateHeartIcon(element,isLikeStatus) {
         <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15"/>
     </svg>`;
 }
+
+
+    async function addLectureBasket() {
+
+    	const memberId = "${lecture.userId}";
+
+    	console.log('무기개약직');
+        try {
+            //장바구니에 중복체크 (같은 강의가 있으면 안담기게 한다. )
+            const response1 = await fetch('${pageContext.request.contextPath}/lectures/duplecateLecture.do', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ memberNo: memberId ,lectureNo : ${lecture.lectureNo} })
+            });
+
+            const result1 = await response1.json();
+
+            if (result1.value > 0) { // 첫 번째 결과 값이 0보다 클 때만 두 번째 요청 수행
+                const response2 = await fetch('${pageContext.request.contextPath}/univora/lectureBasket/add.do', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({lectureNo: ${lecture.lectureNo} })
+                });
+
+                const result2 = await response2.json();
+
+                if (result2.success) {
+                    alert('장바구니에 추가하였습니다.');
+                } else {
+                    alert('장바구니 담기에 실패하였습니다.');
+                }
+            } else {
+                alert('이미 장바구니에 존재합니다. 장바구니를 확인하새요');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('서버 요청 중 오류가 발생했습니다.');
+        }
+    }
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>   
