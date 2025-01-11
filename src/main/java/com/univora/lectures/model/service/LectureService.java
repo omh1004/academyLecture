@@ -49,19 +49,49 @@ public class LectureService {
 	    }
 	   
     
-    public List<Review> getLectureReviews(String lectureNo) {
-        SqlSession session = getSession(); // 세션 시작
+//    public List<Review> getLectureReviews(String lectureNo) {
+//        SqlSession session = getSession(); // 세션 시작
+//        List<Review> reviews;
+//
+//        try {
+//            // DAO를 통해 리뷰 데이터 가져오기
+//            reviews = dao.selectLectureReviews(session, lectureNo);
+//        } finally {
+//            session.close(); // 세션 닫기
+//        }
+//
+//        return reviews; // 가져온 리뷰 반환
+//    }
+    
+    
+ // LectureService.java
+    public List<Review> getLectureReviewsSortedByLikes(String lectureNo) {
+        SqlSession session = getSession();
         List<Review> reviews;
-
         try {
-            // DAO를 통해 리뷰 데이터 가져오기
-            reviews = dao.selectLectureReviews(session, lectureNo);
+            reviews = dao.selectLectureReviewsSortedByLikes(session, lectureNo);
         } finally {
-            session.close(); // 세션 닫기
+            session.close();
         }
-
-        return reviews; // 가져온 리뷰 반환
+        System.out.println(reviews);
+        return reviews;
     }
+
+    public List<Review> getLectureReviewsSortedByLatest(String lectureNo) {
+        SqlSession session = getSession();
+        System.out.println("lectureNO넘어온다" + lectureNo);
+        List<Review> reviews;
+        try {
+            reviews = dao.selectLectureReviewsSortedByLatest(session, lectureNo);
+            System.out.println("DB다녀온 reviews" + reviews);
+        } finally {
+            session.close();
+        }
+        return reviews;
+    }
+
+
+    
     
     
     // 강좌 검색 서비스

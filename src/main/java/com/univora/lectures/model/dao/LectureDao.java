@@ -25,14 +25,26 @@ public class LectureDao {
 	    }
 	
     
-    public List<Review> selectLectureReviews(SqlSession session, String lectureNo) {
-        // MyBatis 매퍼 쿼리를 통해 데이터 가져오기
-    		
-    	 List<Review> reviews = session.selectList("lecture.selectLectureReviews", lectureNo);
-    	    
-    	    return reviews;
+//    public List<Review> selectLectureReviews(SqlSession session, String lectureNo) {
+//        // MyBatis 매퍼 쿼리를 통해 데이터 가져오기
+//    		
+//    	 List<Review> reviews = session.selectList("lecture.selectLectureReviews", lectureNo);
+//    	    
+//    	    return reviews;
+//    }
+
+    
+ // LectureDao.java
+    public List<Review> selectLectureReviewsSortedByLikes(SqlSession session, String lectureNo) {
+        return session.selectList("lecture.selectLectureReviewsSortedByLikes", lectureNo);
     }
 
+    public List<Review> selectLectureReviewsSortedByLatest(SqlSession session, String lectureNo) {
+        return session.selectList("lecture.selectLectureReviewsSortedByLatest", lectureNo);
+    }
+
+    
+    
     // 강좌 검색
     public List<Lectures> searchLectures(SqlSession session, String query) {
         return session.selectList("lecture.searchLectures", query);
@@ -57,6 +69,8 @@ public class LectureDao {
     public boolean checkStudentEnrollment(SqlSession session, String lectureNo, String memberNo) {
         int count = session.selectOne("lecture.checkStudentEnrollment", 
                                       Map.of("lectureNo", lectureNo, "memberNo", memberNo));
+        System.out.println("수강생 여부 : " + lectureNo);
+        System.out.println("수강생 여부 : " + memberNo);
         return count > 0; // 강의에 등록되어 있다면 true 반환
     }
     

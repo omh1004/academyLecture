@@ -146,7 +146,7 @@
 			alt="univora" class="logo-img">
 		</a>
 		<div class="nav-items">
-			<a href = "${path }/main/msg.do"><span>강의</span> </a>
+			<a href = "${path }/main/login.do"><span>강의</span> </a>
 
 
 
@@ -342,6 +342,17 @@
 .search-button:hover .search-icon {
 	stroke: #333; /* 호버 시 색상 */
 	transform: scale(1.1); /* 호버 시 확대 */
+}
+
+button {
+	padding: 10px 20px;
+	font-size: 1rem;
+	color: white;
+	background-color: #3498db;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
 }
 </style>
 	</header>
