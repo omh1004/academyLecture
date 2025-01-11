@@ -107,13 +107,13 @@
             text-decoration: underline;
         }
         
-        .login-message {
+        .errorlogin-message {
 	    font-family: 'Arial', sans-serif; /* 원하는 글꼴 지정 */
-	    font-size: 18px; /* 글꼴 크기 */
-	    color: #fff; /* 텍스트 색상 */
+	    font-size: 20px; /* 글꼴 크기 */
+	    color: #9194F3; /* 텍스트 색상 */
 	    text-align: center; /* 가운데 정렬 */
 	    font-weight: bold; /* 글꼴 굵기 */
-	    margin-bottom: 20px; /* 아래 여백 */
+	    margin-bottom: 10px; /* 아래 여백 */
 	}
         
     

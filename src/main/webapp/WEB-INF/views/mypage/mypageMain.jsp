@@ -120,6 +120,30 @@ body {
 	background-color: white;
 	cursor: pointer;
 }
+
+
+a {
+    color: #000000; 
+    text-decoration: none; 
+}
+
+a:hover {
+    color: #1a202c; 
+    text-decoration: underline; 
+}
+
+.menu-item1 {
+    padding: 0.5rem;
+    font-weight: normal;
+    color: white;
+    border-top: 1px solid #e0e0e0; /* 위쪽 선 */
+    border-bottom: 1px solid #e0e0e0; /* 아래쪽 선 */
+    margin: 10px 0; /* 위아래 여백 추가 */
+    background-color: #362D4B; /* 필요 시 강조를 위해 배경색 추가 */
+}
+
+
+
 </style>
 </head>
 <body>
@@ -127,14 +151,14 @@ body {
 	<main class="main-content">
 		<aside class="sidebar">
 			<div class="sidebar-menu">
-				<div class="menu-item">학습관리</div>
+				<div class="menu-item1">학습관리</div>
 				<div class="menu-item">
 					<a href="${pageContext.request.contextPath}/mypage/myLectureMain.do">내 학습</a>
 				</div>
 				<div class="menu-item">
 				<a href="${pageContext.request.contextPath}/mypage/userReviews.do">작성한 수강평</a>
 				</div>
-				<div class="menu-item">수강신청 관리</div>
+				<div class="menu-item1">수강신청 관리</div>
 				
 				<div class="menu-item">
 					<a href="${pageContext.request.contextPath}/mypage/lectureBasket.do">수강바구니</a>
