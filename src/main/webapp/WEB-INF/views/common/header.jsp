@@ -178,6 +178,9 @@
 			<c:if test="${sessionScope.loginMember==null }">
 				<a href="${path}/main/index.do"><button class="login-btn">Login</button></a>
 			</c:if>
+			<c:if test="${sessionScope.loginMember!=null }">
+				<a href="${path}/login/logout.do"><button class="login-btn">Logout</button></a>
+			</c:if>
 
 
 
