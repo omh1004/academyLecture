@@ -266,7 +266,7 @@
     </style>
 </head>
 <body>
-	${lecture}
+	
     <main class="main-content">
         <div class="course-header">
             <div class="course-image">
@@ -345,8 +345,25 @@
                 <!-- 소숫점은 2자리까지만 나오게하자!!!!!! -->
                  <fmt:formatNumber value= "${averageRating}" maxFractionDigits="3" />
                 </div>
-                <button class="btn btn-secondary" style="padding: 0.3rem 0.8rem;">추천순 ▾</button>
+                
+                 <!-- 정렬 드롭다운 -->
+		<form method="get" action="${pageContext.request.contextPath}/lecture/registrationClassMain.do">
+		    <input type="hidden" name="lectureNo" value="${lecture.lectureNo}" />
+		    <select name="sortBy" onchange="this.form.submit()" class="form-select">
+		        <option value="latest" ${sortBy == 'latest' ? 'selected="selected"' : ''}>최신순</option>
+		        <option value="likes" ${sortBy == 'likes' ? 'selected="selected"' : ''}>좋아요순</option>
+		    </select>
+		</form>
+
+    
+                <!-- <button class="btn btn-secondary" style="padding: 0.3rem 0.8rem;">최신순 ▾</button> -->
             </div>
+
+<script>
+    document.getElementById("sortByDropdown").addEventListener("change", function () {
+        document.getElementById("sortForm").submit();
+    });
+</script>
 
 
 <div class="review-list">
@@ -454,15 +471,7 @@
 					</div>
 	                <span class="fw-bold"> 좋아요 ${review.reviewLikeCount } </span>
            		</div>
-                <div class="d-flex justify-content-center align-items-center px-1">
-                	<div class="icons">
-	                	<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-chat-left-dots mx-1" viewBox="0 0 16 16">
-						  <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
-						  <path d="M5 6a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0"/>
-						</svg>
-                	</div>
-	                <span class="fw-bold"> 댓글 1</span>
-                </div>
+               
             </div>
             
                 

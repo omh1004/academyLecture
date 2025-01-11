@@ -58,8 +58,14 @@ public class InsertReviewServlet extends HttpServlet {
 		String userId = request.getParameter("userId");
 
 		// DTO 생성
-		Review review = Review.builder().lectureNo(lectureNo).studentNo(studentNo).reviewContent(reviewContent)
-				.reviewRating(reviewRating).reviewLikeCount(0).reviewLevel(1).build();
+		Review review = Review.builder()
+				.lectureNo(lectureNo)
+				.studentNo(studentNo)
+				.reviewContent(reviewContent)
+				.reviewRating(reviewRating)
+				.reviewLikeCount(0)
+				.reviewLevel(1)
+				.build();
 
 		// 리뷰 등록 서비스 호출
 		ReviewService reviewService = new ReviewService();

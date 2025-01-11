@@ -38,9 +38,16 @@ public class RegistrationClassMainServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+			List<Review> reviews;
 		  	String lectureNo = request.getParameter("lectureNo");
-		  					  
+		  	
+		    String sortBy = request.getParameter("sortBy");
+		    System.out.println("sortBy값 :" + sortBy);
+		    if (sortBy == null || sortBy.isEmpty()) {
+	            sortBy = "latest"; // 기본값: 최신순
+	        }
+		    
+		    
 	        // 세션에서 로그인된 사용자 정보 가져오기
 		    HttpSession session = request.getSession();
 		    Member loginMember = (Member) session.getAttribute("loginMember");
@@ -60,7 +67,6 @@ public class RegistrationClassMainServlet extends HttpServlet {
 		  	
 		    request.setAttribute("isStudentEnrolled", isStudentEnrolled);
 		  	
-		  	System.out.println("전달받은 lectureNo: " + lectureNo);
 
 		  	
 		  	LectureService lectureService = new LectureService();
@@ -71,7 +77,15 @@ public class RegistrationClassMainServlet extends HttpServlet {
 	        Lectures lecture = lectureService.getLectureDetail(lectureNo);      
 	  
 	        // 리뷰 리스트 가져오기
-	        List<Review> reviews = lectureService.getLectureReviews(lectureNo);
+	        //List<Review> reviews = lectureService.getLectureReviews(lectureNo);
+	        
+	        System.out.println("넘어온다" + sortBy);
+	        if ("likes".equals(sortBy)) {
+	            reviews = lectureService.getLectureReviewsSortedByLikes(lectureNo);
+	        } else { // 기본값은 최신순
+	            reviews = lectureService.getLectureReviewsSortedByLatest(lectureNo);
+	        }
+	        
 	        
 	        // 강의에 평균 점수를 가져와보자!!!!!!!!!!!!@@  review 테이블에서 가져와야함.
 	        double averageRating = reviewService.getAverageRating(lectureNo);
@@ -80,6 +94,7 @@ public class RegistrationClassMainServlet extends HttpServlet {
 	        // JSP로 데이터 전달
 	        request.setAttribute("lecture", lecture);
 	        request.setAttribute("reviews", reviews);
+	        request.setAttribute("sortBy", sortBy);
 	        
 	        for (Review review : reviews) {
 	            System.out.println(review);
