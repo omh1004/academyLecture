@@ -51,5 +51,14 @@ public class LectureDao {
 	public MyClass getMyclassLectureByNo(SqlSession session, String lectureNo) {
 		 return session.selectOne("lecture.getMyclassLectureByNo", lectureNo);
 	}
+	
+	
+	 // 수강생 여부 확인
+    public boolean checkStudentEnrollment(SqlSession session, String lectureNo, String memberNo) {
+        int count = session.selectOne("lecture.checkStudentEnrollment", 
+                                      Map.of("lectureNo", lectureNo, "memberNo", memberNo));
+        return count > 0; // 강의에 등록되어 있다면 true 반환
+    }
+    
 
 }

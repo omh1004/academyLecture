@@ -127,4 +127,18 @@ public class LectureService {
 	// public Lectures getLectureById(String lectureNo) {
 	  //      return dao.getLectureById(lectureNo);
 	    //}
+	
+	 public boolean isStudentEnrolled(String lectureNo, String memberNo) {
+	        SqlSession session = getSession();
+	        boolean isEnrolled = false;
+
+	        try {
+	            // DAO 호출
+	            isEnrolled = dao.checkStudentEnrollment(session, lectureNo, memberNo);
+	        } finally {
+	            session.close(); // 세션 닫기
+	        }
+
+	        return isEnrolled;
+	    }
 }

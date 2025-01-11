@@ -27,29 +27,34 @@ body {
 	font-family: Arial, sans-serif;
 	margin: 0;
 	padding: 0;
-	background-color: #f4f4f9;
+	background-color: #f9f9f9;
 }
 
 .container {
 	max-width: 900px;
-	margin: 20px auto;
-	padding: 20px;
-	background: #fff;
-	border-radius: 8px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	margin: 30px auto;
+	padding: 25px;
+	background: #362D4B;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	
+	border: 2px solid;
+    border-color: #472ED6; 
 }
 
 .lecture-header {
 	display: flex;
 	align-items: center;
-	margin-bottom: 20px;
+	gap: 20px;
+	margin-bottom: 25px;
 }
 
 .lecture-header img {
-	width: 150px;
-	height: 150px;
-	border-radius: 8px;
-	margin-right: 20px;
+	width: 160px;
+	height: 160px;
+	border-radius: 10px;
+	object-fit: cover;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .lecture-header .details {
@@ -57,14 +62,23 @@ body {
 }
 
 .lecture-header .details h1 {
-	margin: 0 0 10px 0;
-	font-size: 24px;
-	color: #333;
+	margin: 0 0 10px;
+	font-size: 2.2rem;
+	color: #fff;
+	font-weight: bold;
+}
+
+.lecture-header .details h6 {
+	margin: 5px 0;
+	font-size: 1rem;
+	color: #7f8c8d;
 }
 
 .lecture-header .details p {
-	margin: 5px 0;
-	color: #555;
+	margin: 10px 0;
+	font-size: 0.95rem;
+	color: #555555;
+	line-height: 1.6;
 }
 
 .video-container {
@@ -74,7 +88,27 @@ body {
 .video-container video {
 	width: 100%;
 	height: auto;
-	border-radius: 8px;
+	border-radius: 10px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+	
+	/* 테두리 스타일 */
+    border: 1px solid;
+    border-color: #472ED6; 
+}
+
+button {
+	padding: 10px 20px;
+	font-size: 1rem;
+	color: white;
+	background-color: #3498db;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+button:hover {
+	background-color: #2980b9;
 }
 </style>
 <script>
@@ -107,4 +141,5 @@ body {
 		</div>
 
 	</div>
+	</body>
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />

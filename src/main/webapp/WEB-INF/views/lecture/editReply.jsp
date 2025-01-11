@@ -1,25 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    
     <jsp:include page="/WEB-INF/views/common/header.jsp"/>
-    
-    <title>수강평 수정</title>
-    <style>
+    <title>답글 수정</title>
+ <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+    display: flex;
+    flex-direction: column; /* 컨텐츠가 위에서 아래로 쌓이도록 설정 */
+    justify-content: flex-start; /* 컨텐츠 상단 정렬 */
+    align-items: center; /* 가로로 중앙 정렬 */
+    min-height: 100vh; /* 페이지가 최소 뷰포트 높이만큼 차지하도록 설정 */
+    margin: 0; /* 기본 여백 제거 */
+}
 
         .guidelines-container {
             background-color: #fff;
@@ -29,7 +25,7 @@
             border-radius: 8px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
             border-left: 6px solid #007bff;
-            margin-bottom: 20px;
+            margin-bottom: 20px; /* 수정 컨테이너와 간격 */
         }
 
         .guidelines-container h3 {
@@ -79,6 +75,11 @@
             resize: none;
         }
 
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
         .btn {
             padding: 10px 20px;
             font-size: 16px;
@@ -108,46 +109,43 @@
             background-color: #e2e6ea;
         }
         
-        
-            .guidelines-container h3 {
+           .guidelines-container h3 {
         color: #362D4B; /* 글씨 색깔 */
         font-size: 28px; /* 글씨 크기 */
         font-weight: bold; /* 글씨 굵기 */
         margin-bottom: 10px;
     }
-        
     </style>
-    
 </head>
 <body>
 
-    <!-- 수강평 작성 가이드 -->
+    <!-- 답글 작성 가이드 컨테이너 -->
     <div class="guidelines-container">
-        <h3 >수강평 작성(수정) 시 유의사항</h3>
-        <ul>
-            <li>강의에 대한 구체적인 피드백을 제공해주세요.</li>
-            <li>긍정적인 부분과 개선할 점을 균형 있게 작성해주세요.</li>
-            <li>다른 수강생들에게 유익한 정보를 포함해주세요.</li>
-            <li>비속어나 부적절한 표현을 삼가주세요.</li>
-            <li>강의와 무관한 내용은 포함하지 마세요.</li>
-        </ul>
-    </div>
+    
+            <h3>답글 작성(수정) 시 유의사항</h3>
+            <ul>
+                <li>수강생들의 피드백이나 질문에 성실히 답변해주세요.</li>
+                <li>답변은 친절하고 이해하기 쉽게 작성해주세요.</li>
+                <li>강의 내용과 관련 없는 주제는 삼가주세요.</li>
+                <li>비판적인 질문에도 정중하게 답변을 제공해주세요.</li>
+                <li>수강생의 학습을 돕는 유용한 정보를 포함하는 것이 좋습니다.</li>
+            </ul>
+        </div>
 
-    <!-- 수강평 수정 -->
-    <div class="edit-container">
-        <h2>수강평 수정</h2>
+        
+        <div class="edit-container">
+        <h2>답글 수정</h2>
         <form action="${pageContext.request.contextPath}/lecture/editParentReply.do" method="post">
-            <input type="hidden" name="reviewNo" value="${review.reviewNo}">
-            <input type="hidden" name="lectureNo" value="${lectureNo}">
-            <textarea name="reviewContent" rows="5" placeholder="수강평 내용을 입력하세요">${review.reviewContent}</textarea>
+            <input type="hidden" name="reviewNo" value="${review.reviewNo}" />
+            <input type="hidden" name="lectureNo" value="${lectureNo}" />
+            <textarea name="reviewContent" rows="5" placeholder="답글 내용을 입력하세요">${review.reviewContent}</textarea>
             <div class="buttons">
                 <button type="submit" class="btn btn-primary">수정 완료</button>
                 <a href="${pageContext.request.contextPath}/lecture/registrationClassMain.do?lectureNo=${lectureNo}" class="btn btn-secondary">취소</a>
             </div>
         </form>
     </div>
-
-    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-
 </body>
 </html>
+
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>

@@ -28,7 +28,8 @@
         h2 {
             text-align: center;
             margin-bottom: 20px;
-            color: #333;
+            color: #362D4B;
+            font-weight: bold;
         }
         table {
             width: 100%;
@@ -40,7 +41,7 @@
             text-align: center;
         }
         th {
-            background-color: #4CAF50;
+            background-color: #362D4B;
             color: white;
         }
         tr:nth-child(even) {

@@ -182,6 +182,7 @@
 
         .rating-summary {
             display: flex;
+            justify-content: center;
             align-items: center;
             gap: 1rem;
             padding: 1rem;
@@ -191,6 +192,7 @@
         }
 
         .rating-number {
+          text-align: center;
             font-size: 2rem;
             font-weight: bold;
         }
@@ -301,11 +303,22 @@
         </section>
 
 <section class="reviews-section">
+  
     <!-- 수강평 제목과 등록 버튼 -->
     <div class="review-header d-flex justify-content-between align-items-center mb-3">
         <h2 class="section-title mb-0">수강평</h2>
+    <c:if test="${isStudentEnrolled}">
+    
+    <!-- 수강생일 경우에만 수강평 등록 버튼 표시 -->
         <button class="btn btn-primary" onclick="toggleReviewForm()">수강평 등록</button>
+    </c:if>
+	<c:if test="${!isStudentEnrolled}">
+	
+	    <!-- 수강생이 아닐 경우 -->
+	    <p>수강평 등록은 강의를 수강한 학생만 가능합니다.</p>
+	</c:if>
     </div>
+    
 
     <div class="add-review-form" id="add-review-form" style="display: none; margin-bottom: 2rem;">
         <form action="/univora/lecture/insertReview.do" method="post" onsubmit="submitReview(); return false;">
@@ -330,7 +343,7 @@
             <div class="rating-summary">
                 <div class="rating-number">
                 <!-- 소숫점은 2자리까지만 나오게하자!!!!!! -->
-                 <fmt:formatNumber value= "${averageRating}" maxFractionDigits="2" />
+                 <fmt:formatNumber value= "${averageRating}" maxFractionDigits="3" />
                 </div>
                 <button class="btn btn-secondary" style="padding: 0.3rem 0.8rem;">추천순 ▾</button>
             </div>
@@ -538,14 +551,21 @@
                 <ul class="dropdown-menu">
 				    <li>
 				    
+				    
+				    
 				    	<c:if test="${lecture.userId != null && sessionScope.loginMember != null && lecture.userId == sessionScope.loginMember.memberNo}">                 				
-				        <a class="dropdown-item" href="/univora/lecture/editReply.do?reviewNo=${reply.reviewNo}" 
+				        <a class="dropdown-item" href="/univora/lecture/editReply.do?reviewNo=${reply.reviewNo}&lectureNo=${reply.lectureNo}" 
 				           onclick="return confirm('이 답글을 수정하시겠습니까?');">
 				            수정
 				        </a>
 				        </c:if>
 				    </li>
 				    <li>
+				    
+				    
+				    
+				    
+				    
 				        <a class="dropdown-item" href="/univora/lecture/deleteReply.do?reviewNo=${reply.reviewNo}" 
 				           onclick="return confirm('이 답글을 삭제하시겠습니까?');">
 				            삭제
@@ -823,7 +843,7 @@ function updateLikeStatus(event,val) {
          if(isLikeStatus==1||isLikeStatus==0){   
          	updateHeartIcon(event.currentTarget,isLikeStatus); // 하트 아이콘 업데이트
          	const count=data.newLikeCount;
-         	$("#heart-icon+span").text("좋아요 "+ count);
+         	$(event.currentTarget).next().text("좋아요 "+ count);
          }
          else alert("좋아요 실패! :( , 관리자에게 문의하세요!");
     })

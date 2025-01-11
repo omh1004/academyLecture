@@ -306,6 +306,36 @@ public class ReviewService {
 
 			return result;
 		}
+	    
+	    public boolean updateReply(String reviewNo, String reviewContent) {
+	        SqlSession session = getSession();
+	        boolean isSuccess = false;
+
+	        try {
+	            int result = dao.updateReply(session, reviewNo, reviewContent);
+	            if (result > 0) {
+	                session.commit();
+	                isSuccess = true;
+	            } else {
+	                session.rollback();
+	            }
+	        } finally {
+	            session.close();
+	        }
+
+	        return isSuccess;
+	    }
+	    
+
+	    public Review getReplyById(String reviewNo) {
+	        SqlSession session = getSession();
+	        Review review = dao.getReplyById(session, reviewNo);
+	        session.close();
+	        return review;
+	    }
+	    
+	  
+	    
 	}
 
 

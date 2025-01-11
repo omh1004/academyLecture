@@ -8,10 +8,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.univora.lectures.model.dto.Lectures;
 import com.univora.lectures.model.dto.Review;
 import com.univora.lectures.model.service.LectureService;
+import com.univora.login.model.dto.Member;
 import com.univora.review.model.service.ReviewService;
 
 
@@ -38,9 +40,26 @@ public class RegistrationClassMainServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		  	String lectureNo = request.getParameter("lectureNo");
+		  					  
+	        // 세션에서 로그인된 사용자 정보 가져오기
+		    HttpSession session = request.getSession();
+		    Member loginMember = (Member) session.getAttribute("loginMember");
+		    
+		    
+		    if (loginMember == null) {
+		        response.sendRedirect("/"); // 로그인 페이지로 리다이렉트
+		        return;
+		    }
+		    
+		    // 학생 번호 추출
+		    String memberNo = loginMember.getMemberNo();
+		    
 		  	
-
-
+		    // 수강생 여부 확인
+		    boolean isStudentEnrolled = lectureService.isStudentEnrolled(lectureNo, memberNo);		  			  					
+		  	
+		    request.setAttribute("isStudentEnrolled", isStudentEnrolled);
+		  	
 		  	System.out.println("전달받은 lectureNo: " + lectureNo);
 
 		  	
