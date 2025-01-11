@@ -150,6 +150,8 @@
 
 
 
+
+
 			<form method="get" action="/univora/lecture/search.do"
 				class="search-form">
 				<div class="search-container">
@@ -200,7 +202,6 @@
 								<!-- 알림 항목이 여기에 추가됩니다 -->
 							</ul>
 						</div>
-
 					</div>
 
 					<!-- 프로필 아이콘 -->
