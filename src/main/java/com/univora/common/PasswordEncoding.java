@@ -7,6 +7,8 @@ import java.util.Base64;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 
+import com.univora.common.exception.LoginCheckException;
+
 public class PasswordEncoding extends HttpServletRequestWrapper{
 	public PasswordEncoding(HttpServletRequest request) {
 		super(request);
@@ -14,12 +16,19 @@ public class PasswordEncoding extends HttpServletRequestWrapper{
 	
 	@Override
 	public String getParameter(String name) {
-		String oriVal = super.getParameter(name);
-		if(name.equals("password")) {
-			String encStr = getSHA512(oriVal);
-			return encStr;
-		}
 		
+		String oriVal="";
+		
+		try {
+			oriVal = super.getParameter(name);
+			if(name.equals("password")) {
+				String encStr = getSHA512(oriVal);
+				return encStr;
+			}
+			
+		}catch(NullPointerException e) {
+			new LoginCheckException("로그인이 필요합니다.");
+		}	
 		return oriVal;
 	}
 	
@@ -35,9 +44,13 @@ public class PasswordEncoding extends HttpServletRequestWrapper{
 		}
 		
 		// 문자열을 바이트로 변경
-		byte[] orivalByte = orival.getBytes();
-		md.update(orivalByte);
 		
+		try {
+			byte[] orivalByte = orival.getBytes();
+			md.update(orivalByte);
+		}catch(NullPointerException e) {
+			new LoginCheckException("로그인이 필요합니다.");
+		}
 		// 암호화하기 -> 암호화한 것에 대해 바이트로 반환
 		byte[] encByte = md.digest();
 		

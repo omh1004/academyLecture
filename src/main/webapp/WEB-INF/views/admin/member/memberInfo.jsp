@@ -56,8 +56,6 @@
     <header class="popup-header">
         <h3>사용자 상세 정보</h3>
     </header>
-    넘어온 맴버 : ${member}
-
     <main>
         <p><strong>사용자번호:</strong> ${member.memberNo}</p>
         <p><strong>아이디:</strong> ${member.memberId}</p>
@@ -65,9 +63,9 @@
         <p><strong>이메일:</strong> ${member.email}</p>
         <p><strong>연락처:</strong> ${member.phone}</p>
         <p><strong>역할:</strong>
-            <select id="role-selector" onchange="updateRole()">
-                <option value="학생" ${member.role == '학생' ? 'selected' : ''}>학생</option>
-                <option value="강사" ${member.role == '강사' ? 'selected' : ''}>강사</option>
+            <select id="role-selector" onchange="javascript:updateRole();">
+                <option value="S" ${member.role == '학생' ? 'selected' : ''}>학생</option>
+                <option value="T" ${member.role == '강사' ? 'selected' : ''}>강사</option>
             </select>
         </p>
         <div id="btn_container">
@@ -76,13 +74,29 @@
     </main>
 
     <script>
+    	//넘어갈 데이터 
+    	//memberId,변경할 롤 정보 
+    
         function updateRole() {
             const selectedRole = document.getElementById("role-selector").value;
-            fetch(`\${pageContext.request.contextPath}/admin/updateRole`,{
-
+            fetch('${pageContext.request.contextPath}/admin/updateRole',{
+            	headers:{
+					/* "Content-type":"application/x-www-form-urlencoded" */
+					"Content-type":"application/json"
+				},
+				method:"POST",
+				/* body:"data=testdata&number=20" */
+				body:JSON.stringify(
+						{
+						  memberId : '${member.memberId}'
+						 ,role : `\${selectedRole}` 
+						})
             }).then(response =>response.text())
             .then(data=>{
 				console.log(data);
+				
+				location.href = location.href;
+				
 			})
             
             

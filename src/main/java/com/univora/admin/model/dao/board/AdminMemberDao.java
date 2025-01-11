@@ -27,4 +27,8 @@ public class AdminMemberDao {
 		return session.selectOne("admin.selectMemberByid",memberId);
 	}
 
+	public int updateMemberRole(SqlSession session, Member memberInfo) {
+		return session.update("admin.updateMemberRole",memberInfo);
+	}
+
 }

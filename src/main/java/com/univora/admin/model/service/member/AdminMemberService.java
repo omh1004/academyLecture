@@ -38,4 +38,19 @@ public class AdminMemberService {
 		Member searchMember = memberDao.selectMemberByid(session, memberId);
 		return searchMember;
 	}
+
+	public int updateMemberRole(Member memberInfo) {
+		SqlSession session = getSession();
+		
+		int result= memberDao.updateMemberRole(session, memberInfo);
+		
+		if(result>0) {
+			session.commit();
+		}else {
+			session.rollback();
+		}
+		session.close();
+		return result;
+		
+	}
 }
