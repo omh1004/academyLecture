@@ -177,8 +177,8 @@ a:hover {
 			<div class="profile-card">
 				<div class="profile-header">
 					<h2>내 프로필</h2>
-					<button class="edit-button">
-					 <a href="${pageContext.request.contextPath}/mypage/editProfile.do" style="text-decoration: none; color: inherit;">설정</a>
+					<button  onclick="location.href='${pageContext.request.contextPath}/mypage/editProfile.do'">
+					    설정
 					</button>
 				</div>
 				<div class="profile-image">
