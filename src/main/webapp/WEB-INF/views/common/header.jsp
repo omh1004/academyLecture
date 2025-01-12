@@ -123,7 +123,7 @@
                         notificationList.innerHTML = ''; 
                         data.forEach(notification => {
                             const newNotification = document.createElement('li');
-                            newNotification.textContent = notification.type+"||"+notification.content;
+                            newNotification.textContent = notification.content;
                             notificationList.appendChild(newNotification);
                         });
                     })
@@ -191,7 +191,7 @@
 							<span>🔔</span> <span id="notification-count">0</span>
 						</button>
 						<!-- 알림 정보창 -->
-						 <div class="table-container">
+						 <!-- <div class="table-container"> -->
 <!-- 				        <table>
 				            <thead>
 				                <tr>
@@ -212,8 +212,8 @@
 				        </table>
 				    </div> -->
 						
-						<div id="notification-popup"
-							style="display: none; position: absolute; top: 50px; right: 5px; width: 300px; background-color: white; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); z-index: 1000; padding: 10px;">
+						<div id="notification-popup" 
+							style="display: none; position: absolute; top: 50px; right: 5px; width: 500px; background-color: white; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); z-index: 1000; padding: 10px;">
 							<h6>알림</h6>
 							<ul id="notification-list"
 								style="list-style: none; padding: 0; margin: 0;">
@@ -331,6 +331,12 @@
 	width: 16px; /* 돋보기 크기 */
 	height: 16px;
 	transition: fill 0.3s, transform 0.3s;
+}
+
+li {
+	font-size:15px;
+	font-weight: bold;
+	font-family:'Nato Sans KR';
 }
 
 .search-button:hover svg {
