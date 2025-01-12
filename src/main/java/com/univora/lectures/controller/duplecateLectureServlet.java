@@ -18,7 +18,7 @@ import com.univora.lectures.model.service.LectureService;
 /**
  * Servlet implementation class duplecateLectureServlet
  */
-@WebServlet("/lectures/duplecateLecture")
+@WebServlet("/lectures/duplecateLecture.do")
 public class duplecateLectureServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

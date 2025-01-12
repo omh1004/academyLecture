@@ -282,8 +282,8 @@
                 <div class="course-price">₩${lecture.price}</div>
                 <div class="action-buttons">
                     <button class="btn btn-primary">수강신청 하기</button>
-                    <button class="btn btn-secondary" onclick='addLectureBasket()'>장바구니 담기</button>
-<%--                     			<a class="btn btn-primary" href="/univora/lectureBasket/add.do?lectureNo=${lecture.lectureNo}" role="button"> 장바구니 담기</a> --%>
+<!--                     <button class="btn btn-secondary" onclick='addLectureBasket()'>장바구니 담기</button> -->
+                     			<a class="btn btn-primary" href="/univora/lectureBasket/add.do?lectureNo=${lecture.lectureNo}" role="button"> 장바구니 담기</a> 
                 </div>
             </div>
         </div>
@@ -874,12 +874,11 @@ function updateHeartIcon(element,isLikeStatus) {
     </svg>`;
 }
 
-
-    async function addLectureBasket() {
-
+/*
+      async function addLectureBasket() {
+    	 debugger;
     	const memberId = "${lecture.userId}";
-
-    	console.log('무기개약직');
+    	const lectureNo = "${lecture.lectureNo}"
         try {
             //장바구니에 중복체크 (같은 강의가 있으면 안담기게 한다. )
             const response1 = await fetch('${pageContext.request.contextPath}/lectures/duplecateLecture.do', {
@@ -887,9 +886,9 @@ function updateHeartIcon(element,isLikeStatus) {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ memberNo: memberId ,lectureNo : ${lecture.lectureNo} })
+                body: JSON.stringify({ memberNo: memberId ,lectureNo : lectureNo })
             });
-
+			debugger;
             const result1 = await response1.json();
 
             if (result1.value > 0) { // 첫 번째 결과 값이 0보다 클 때만 두 번째 요청 수행
@@ -915,6 +914,6 @@ function updateHeartIcon(element,isLikeStatus) {
             console.error('Error:', error);
             alert('서버 요청 중 오류가 발생했습니다.');
         }
-    }
+    }  */
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>   

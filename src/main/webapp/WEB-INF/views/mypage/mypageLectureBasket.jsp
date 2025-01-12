@@ -207,12 +207,14 @@ body {
 				},
 				method:"POST",
 				/* body:"data=testdata&number=20" */
-				body:JSON.stringify({paymentId:response.paymentId
+				body:JSON.stringify(
+						{paymentId:response.paymentId
 						,transactionType:response.transactionType
 						,txId:response.txId
 						,customer:requestData.customer.fullName
 						,totalAmound: 1000
 						,lectureNo: requestData.customer.lectureNo // 결제한 강의들 다 보내주세
+						})
 				
 				}).then(response=>response.text())
 				.then(data=>{
