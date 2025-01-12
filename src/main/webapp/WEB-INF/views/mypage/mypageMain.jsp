@@ -168,9 +168,11 @@ a:hover {
 				<a href="${pageContext.request.contextPath}/mypage/purchaseHistory.do">구매내역</a>
 				</div> 
 				
-				<div class="menu-item">
-					<a href="${pageContext.request.contextPath}/mypage/myopenlecture.do">강의 스케줄</a>
-				</div>
+				 <c:if test="${sessionScope.loginMember.role=='T'}">
+					<div class="menu-item">
+						<a href="${pageContext.request.contextPath}/mypage/myopenlecture.do">강의 스케줄</a>
+					</div>
+				 </c:if> 
 			</div>
 		</aside>
 		<section class="profile-section">

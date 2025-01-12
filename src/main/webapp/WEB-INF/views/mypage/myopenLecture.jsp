@@ -377,6 +377,9 @@ body {
         formData.append("time", lectureTime+" "+timePeriod);
         formData.append("lectureImage", lectureImage.files[0]);
         
+        
+        
+        
         try {
             const response = await fetch(`${pageContext.request.contextPath}/mypage/myopenLectureAdd.do`, {
                 method: 'POST',

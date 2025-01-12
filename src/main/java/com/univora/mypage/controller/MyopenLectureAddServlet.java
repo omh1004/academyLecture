@@ -45,6 +45,8 @@ public class MyopenLectureAddServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		 Member loginMember = (Member) request.getSession().getAttribute("loginMember");
+		 
+		 
 		
 			String path = request.getServletContext().getRealPath("/resources/upload/lecture/image");
 			System.out.println(path);

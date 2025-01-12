@@ -121,15 +121,12 @@ button:hover {
 	}
 </script>
 </head>
-
 <body>
-
-	${myclass}
 	<div class="container">
 		<div class="lecture-header">
 			<c:if test="${myclass.myLecture.lecturePicture ==null}">
 				<img
-					src="${path}/resources/upload/lecture/image/bs-teacher4.jpg"
+					src="${path}/resources/upload/lecture/image/readyUpload.jpg"
 					alt="강의 썸네일">
 			</c:if>
 			<c:if test="${myclass.myLecture.lecturePicture !=null}">

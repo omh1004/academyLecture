@@ -82,7 +82,12 @@ socket.onclose = () => {
 <div class="course-list">
 	<c:forEach var="lecture" items="${lectureList}">
 	    <div class="course-card">
-	    	<img src="${pageContext.request.contextPath}/resources/upload/lecture/image/${lecture.lecturePicture}"  alt="${lecture.className}" class="course-image">
+	    	<c:if test="${lecture.lecturePicture!=null}">
+	    		<img src="${pageContext.request.contextPath}/resources/upload/lecture/image/${lecture.lecturePicture}"  alt="${lecture.className}" class="course-image">
+	    	</c:if>
+	    	<c:if test="${lecture.lecturePicture==null}">
+	    		<img src="${pageContext.request.contextPath}/resources/upload/lecture/image/readyUpload.jpg"  alt="${lecture.className}" class="course-image">
+	    	</c:if>
 	        <div class="course-info">
 	        	<h3 class="course-title">
 	            	<a href="${pageContext.request.contextPath}/lecture/registrationClassMain.do?lectureNo=${lecture.lectureNo}">
@@ -95,7 +100,7 @@ socket.onclose = () => {
 	    </div>
 	</c:forEach>
 
-	<div class="course-card">
+<%-- 	<div class="course-card">
 		<img
 			src="${pageContext.request.contextPath}/resources/images/java-lecture.jpg"
 			alt="Java Course" class="course-image">
@@ -128,7 +133,7 @@ socket.onclose = () => {
 				<p class="course-price">₩17,000,000</p>
 			</div>
 		</a>
-	</div>
+	</div> --%>
 </div>
 
 

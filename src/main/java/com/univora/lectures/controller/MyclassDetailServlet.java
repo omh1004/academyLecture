@@ -38,6 +38,8 @@ public class MyclassDetailServlet extends HttpServlet {
 		//가져와야 하는 데이터
 		//강의사진, 강의명, 강사 닉네임, 강의 동영상 경로, 강사정보(강사명, 강사 짧은 소개 , 강의 긴소개);
 		
+		System.out.println("lectureNo:::"+lectureNo);
+		
 		MyClass myclass = new LectureService().getMyclassLectureByNo(lectureNo); 
 		
 		System.out.println("myclassekt:::"+myclass);

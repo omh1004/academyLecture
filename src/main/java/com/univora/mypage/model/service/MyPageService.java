@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -123,8 +124,15 @@ public class MyPageService {
 	public List<PurchaseHistory> getPurchaseHistory(String studentId) {
         SqlSession session = getSession();
         List<PurchaseHistory> historyList = mypageDao.getPurchaseHistory(session, studentId);
+        
+        
+        List<PurchaseHistory> distinctList  = historyList.stream()
+        .collect(Collectors.toMap(PurchaseHistory::getLectureId, dto -> dto, (existing, replacement) -> existing))
+        .values()
+        .stream()
+        .collect(Collectors.toList());
         session.close();
-        return historyList;
+        return distinctList;
     }
 	
 	// sk_내강의 리스트 가져오기

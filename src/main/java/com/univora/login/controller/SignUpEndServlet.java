@@ -1,25 +1,20 @@
 package com.univora.login.controller;
-
 import java.io.IOException;
 import java.sql.Date;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.univora.common.PasswordEncoding;
 import com.univora.login.model.dto.Member;
 import com.univora.login.model.service.MemberService;
-
 /**
  * Servlet implementation class SignUpEndServlet
  */
 @WebServlet("/login/signupend.do")
 public class SignUpEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -27,7 +22,6 @@ public class SignUpEndServlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -79,6 +73,10 @@ public class SignUpEndServlet extends HttpServlet {
 								.introduction(introduction)
 								.build();
 		
+		
+		System.out.println("insertMember:::"+insertMember);
+		
+		
 		MemberService service = new MemberService();
 		
 		String msg, loc ="/";
@@ -96,14 +94,12 @@ public class SignUpEndServlet extends HttpServlet {
 		
 		request.setAttribute("msg", msg);
 		request.setAttribute("loc", loc);
-
 		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 		
 		
 		
 		
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -111,5 +107,4 @@ public class SignUpEndServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
-
 }

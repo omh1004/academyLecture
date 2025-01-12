@@ -24,6 +24,7 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden; /* 내용이 잘리지 않도록 처리 */
         }
         h2 {
             text-align: center;
@@ -32,13 +33,16 @@
             font-weight: bold;
         }
         table {
-            width: 100%;
+            width: 100%; /* 테이블이 container 크기에 맞도록 설정 */
             border-collapse: collapse;
+            table-layout: fixed; /* 모든 열의 너비가 균일하도록 설정 */
         }
         th, td {
             padding: 10px;
             border: 1px solid #ddd;
             text-align: center;
+            word-wrap: break-word; /* 내용 줄바꿈 */
+            overflow-wrap: break-word; /* 긴 단어 줄바꿈 */
         }
         th {
             background-color: #362D4B;
@@ -47,11 +51,11 @@
         tr:nth-child(even) {
             background-color: #f9f9f9;
         }
-        .no-data {
+/*         .no-data {
             text-align: center;
             padding: 20px;
             color: #999;
-        }
+        } */
     </style>
 </head>
 <body>

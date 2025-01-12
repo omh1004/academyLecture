@@ -43,6 +43,9 @@ public class SearchLectureServlet extends HttpServlet {
 	    LectureService lectureService = new LectureService();
 	    List<Lectures> searchResults = null;
 
+	    
+	    System.out.println("query::: "+ query);
+	    
 	    try {
 	        searchResults = lectureService.searchLectures(query.trim());
 	    } catch (RuntimeException e) {

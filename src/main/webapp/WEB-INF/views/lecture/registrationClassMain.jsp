@@ -186,7 +186,7 @@
             align-items: center;
             gap: 1rem;
             padding: 1rem;
-            border: 1px solid #eee;
+            border: 4px solid #362D4B;
             border-radius: 4px;
             margin-bottom: 2rem;
         }
@@ -266,7 +266,6 @@
     </style>
 </head>
 <body>
-	
     <main class="main-content">
         <div class="course-header">
             <div class="course-image">
@@ -279,11 +278,15 @@
                      <span>${lecture.difficulty}</span>
                 </div>
                 <div>${lecture.userId}</div>
-                <div class="course-price">₩${lecture.price}</div>
+                <div class="course-price">${lecture.price}</div>
                 <div class="action-buttons">
-                    <a class="btn btn-primary" href="/univora/lectureBasket/add.do?lectureNo=${lecture.lectureNo}" role="button">수강신청 하기</a> 
+                <c:if test="${isStudentEnrolled==false}">
+                    <a class="btn btn-primary" href="/univora/lectureBasket/add.do?lectureNo=${lecture.lectureNo}" role="button">수강신청 하기</a>                 
+                </c:if>
 <!--                     <button class="btn btn-secondary" onclick='addLectureBasket()'>장바구니 담기</button> -->
-           			<a class="btn btn-primary" href="/univora/lectureBasket/add.do?lectureNo=${lecture.lectureNo}" role="button"> 장바구니 담기</a> 
+				  <c:if test="${isStudentEnrolled==false}">
+           			<a class="btn btn-primary" href="/univora/lectureBasket/add.do?lectureNo=${lecture.lectureNo}" role="button"> 장바구니 담기</a>
+       			</c:if> 
                 </div>
             </div>
         </div>
@@ -307,10 +310,10 @@
     <!-- 수강평 제목과 등록 버튼 -->
     <div class="review-header d-flex justify-content-between align-items-center mb-3">
         <h2 class="section-title mb-0">수강평</h2>
-    <c:if test="${isStudentEnrolled}">
-    
+     <c:if test="${isStudentEnrolled && sessionScope.loginMember.role=='S'}">
     <!-- 수강생일 경우에만 수강평 등록 버튼 표시 -->
         <button class="btn btn-primary" onclick="toggleReviewForm()">수강평 등록</button>
+     </c:if>
         	<!-- 팝업창 -->
 
 <div id="review-popup" class="popup-overlay" style="display: none;">
@@ -325,9 +328,7 @@
 	        <button id="confirm-btn" class="btn btn-success">확인</button>
 	    </div>
 	</div>
-    </c:if>
 	<c:if test="${!isStudentEnrolled}">
-	
 	    <!-- 수강생이 아닐 경우 -->
 	    <p>수강평 등록은 강의를 수강한 학생만 가능합니다.</p>
 	</c:if>
@@ -472,10 +473,10 @@
                 </c:choose>
             </div>
                 
-                
+         <c:if test="${review.isDeleted == 'N'}">      
                 <!-- 좋아요 및 댓글 입력 -->
             <div class="board-stats my-3 d-flex align-items-center">
-           		<div class="d-flex justify-content-center align-items-center px-1">	
+           		<div class="d-flex justify-content-center align-items-center px-1">
 	            	<div id="heart-icon" class="heart-icon" class="icons" name="${review.reviewNo }">
 		            	<!-- 빈하트 -->
 	           			<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-heart mx-1" viewBox="0 0 16 16">
@@ -488,15 +489,14 @@
 					</div>
 	                <span class="fw-bold"> 좋아요 ${review.reviewLikeCount } </span>
            		</div>
-               
-            </div>
-            
+           	 </div>
+            </c:if>
                 
                 
                 
              
 				<!-- (게시글은 강사만 올릴 수 있으니 단순 비교만 하면 됨) 게시글을 올린 userId와 현재 접속해있는 memberId가 같으면 답글을 달 수 있음. -->
-             	<c:if test="${lecture.userId != null && sessionScope.loginMember != null && lecture.userId == sessionScope.loginMember.memberNo}">   
+             	<c:if test="${lecture.userId != null && sessionScope.loginMember != null && lecture.userId == sessionScope.loginMember.memberNo && sessionScope.loginMember.role=='T'}">   
                 	<button class="btn btn-reply" onclick="toggleReplyForm('${review.reviewNo}')">답글</button>
 				</c:if>
 				
