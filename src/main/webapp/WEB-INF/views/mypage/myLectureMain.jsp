@@ -125,7 +125,7 @@
 	                <h2>${lecture.className}</h2>
 	                <p>강사: ${lecture.instructorName}</p>
 	                <p>시작일: ${lecture.classStartDate}</p>
-	                <a href="${pageContext.request.contextPath}/lecture/view?lectureId=${lecture.lectureId}" class="btn-learn">학습 시작</a>
+	                <a href="${pageContext.request.contextPath}/lecture/myclassDetail.do?lectureId=${lecture.lectureId}" class="btn-learn">학습 시작</a>
 	            </div>
 	        </div>
 	    </c:forEach>

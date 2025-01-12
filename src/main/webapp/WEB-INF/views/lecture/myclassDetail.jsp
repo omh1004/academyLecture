@@ -37,9 +37,8 @@ body {
 	background: #362D4B;
 	border-radius: 10px;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	
 	border: 2px solid;
-    border-color: #472ED6; 
+	border-color: #472ED6;
 }
 
 .lecture-header {
@@ -90,10 +89,9 @@ body {
 	height: auto;
 	border-radius: 10px;
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-	
 	/* 테두리 스타일 */
-    border: 1px solid;
-    border-color: #472ED6; 
+	border: 1px solid;
+	border-color: #472ED6;
 }
 
 button {
@@ -117,8 +115,8 @@ button:hover {
 		const videoPlayer = document.getElementById('videoPlayer');
 
 		videoPlayer.src = videoPath;
-/* 
-		videoPlayer.style.display = 'block'; */
+		/* 
+		 videoPlayer.style.display = 'block'; */
 
 	}
 </script>
@@ -126,22 +124,41 @@ button:hover {
 
 <body>
 
-${myclass}
+	${myclass}
 	<div class="container">
 		<div class="lecture-header">
-			<img src="${path}/resources/upload/lecture/image/${myclass.myLecture.lecturePicture}" alt="강의 썸네일">
+			<c:if test="${myclass.myLecture.lecturePicture ==null}">
+				<img
+					src="${path}/resources/upload/lecture/image/bs-teacher4.jpg"
+					alt="강의 썸네일">
+			</c:if>
+			<c:if test="${myclass.myLecture.lecturePicture !=null}">
+				<img
+					src="${path}/resources/upload/lecture/image/${myclass.myLecture.lecturePicture}"
+					alt="강의 썸네일">
+			</c:if>
 			<div class="details">
 				<h1>강의명 : ${myclass.myLecture.className}</h1>
-				<h6>강사명: ${myclass.teacher.memberName} </h3>
-				<p></p>
+				<h6>
+					강사명: ${myclass.teacher.memberName}
+					</h3>
+					<p></p>
 			</div>
 
 		</div>
 		<div class="video-container">
-			<video id="videoPlayer" width="640" height="360" controls src="${path}/resources/upload/lecture/movie/${myclass.myLecture.lectureMovie}">${myclass.myLecture.lectureMovie}</video>
 
+			<c:if test="${myclass.myLecture.lectureMovie !=null}">
+				<video id="videoPlayer" width="640" height="360" controls
+					src="${path}/resources/upload/lecture/movie/${myclass.myLecture.lectureMovie}">${myclass.myLecture.lectureMovie}</video>
+			</c:if>
+			<c:if test="${myclass.myLecture.lectureMovie ==null}">
+				<video id="videoPlayer" width="640" height="360" controls
+					src="${path}/resources/upload/lecture/movie/turtle.mp4">turtle.mp4
+				</video>
+			</c:if>
 		</div>
 
 	</div>
-	</body>
-	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+</body>
+<jsp:include page="/WEB-INF/views/common/footer.jsp" />
