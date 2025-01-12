@@ -281,9 +281,9 @@
                 <div>${lecture.userId}</div>
                 <div class="course-price">₩${lecture.price}</div>
                 <div class="action-buttons">
-                    <button class="btn btn-primary">수강신청 하기</button>
+                    <a class="btn btn-primary" href="/univora/lectureBasket/add.do?lectureNo=${lecture.lectureNo}" role="button">수강신청 하기</a> 
 <!--                     <button class="btn btn-secondary" onclick='addLectureBasket()'>장바구니 담기</button> -->
-                     			<a class="btn btn-primary" href="/univora/lectureBasket/add.do?lectureNo=${lecture.lectureNo}" role="button"> 장바구니 담기</a> 
+           			<a class="btn btn-primary" href="/univora/lectureBasket/add.do?lectureNo=${lecture.lectureNo}" role="button"> 장바구니 담기</a> 
                 </div>
             </div>
         </div>
@@ -359,11 +359,11 @@
                 <!-- <button class="btn btn-secondary" style="padding: 0.3rem 0.8rem;">최신순 ▾</button> -->
             </div>
 
-<script>
+<!-- <script>
     document.getElementById("sortByDropdown").addEventListener("change", function () {
         document.getElementById("sortForm").submit();
     });
-</script>
+</script> -->
 
 
 <div class="review-list">
@@ -660,8 +660,11 @@
             button.addEventListener('click', function() {
                 if (this.textContent.includes('수강신청')) {
                     alert('수강신청이 진행됩니다.');
+                    location.href= '${pageContext.request.contextPath}/mypage/lectureBasket.do';
                 } else if (this.textContent.includes('장바구니')) {
                     alert('장바구니에 담았습니다.');
+                    location.href= '${pageContext.request.contextPath}/mypage/lectureBasket.do';
+                   
                 }
             });
         });
@@ -915,5 +918,12 @@ function updateHeartIcon(element,isLikeStatus) {
             alert('서버 요청 중 오류가 발생했습니다.');
         }
     }  */
+    
+    const addBasket = ()=>{
+    	const lectureNo = "${lecture.lectureNo}"
+    	location.assign('${pageContext.request.contextPath}/lectureBasket/add.do?lectureNo='+lectureNo);
+    }
+    
+    
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>   

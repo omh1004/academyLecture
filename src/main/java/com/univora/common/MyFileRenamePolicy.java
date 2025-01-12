@@ -17,7 +17,7 @@ public class MyFileRenamePolicy implements FileRenamePolicy {
 			int rnd = (int) (Math.random() * 1000) + 1;
 			// 확장자
 			String ext = oriName.substring(oriName.lastIndexOf("."));
-			String rename = "teachers_" + sdf.format(new Date()) + "_" + rnd + ext;
+			String rename = "univora" + sdf.format(new Date()) + "_" + rnd + ext;
 			newFile = new File(f.getParent(), rename);
 		} while (!createFile(newFile));
 

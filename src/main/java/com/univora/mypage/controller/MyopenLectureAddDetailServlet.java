@@ -64,7 +64,7 @@ public class MyopenLectureAddDetailServlet extends HttpServlet {
 		// multipartrequest객체가 생성되면서 바이너리로 전달된 데이터를 해당경로에
 		// 저장!
 		MultipartRequest mr = new MultipartRequest(request, path, 1024 * 1024 * 1024, "utf-8",
-				new DefaultFileRenamePolicy());
+				new MyFileRenamePolicy());
 
 		// 보낸 데이터를 처리
 //		String boardTitle = mr.getParameter("title");

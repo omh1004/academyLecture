@@ -45,7 +45,7 @@ public class LectureBasketAddServlet extends HttpServlet {
 		
         // 3. 결과에 따라 페이지 이동
         if (isAdded) {
-            response.sendRedirect(request.getContextPath() + "/lecture/registrationClassMain.do?lectureNo=" + lectureNo);
+            response.sendRedirect(request.getContextPath() + "/mypage/lectureBasket.do");
         } else {
             request.setAttribute("errorMsg", "장바구니 추가에 실패했습니다.");
             request.getRequestDispatcher("/WEB-INF/views/common/errorPage.jsp").forward(request, response);
