@@ -71,6 +71,8 @@ private MemberDao dao = new MemberDao();
 		public Member selectMemberById(String id) {
 			SqlSession session = getSession();
 			Member m = dao.selectMemberById(session, id);
+			
+			System.out.println("맴버 던져주");
 			session.close();
 			return m;
 		}

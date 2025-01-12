@@ -213,12 +213,11 @@ body {
 						,txId:response.txId
 						,customer:requestData.customer.fullName
 						,totalAmound: 1000
-						,lectureNo: requestData.customer.lectureNo // 결제한 강의들 다 보내주세
+						,lectureNo: requestData.customer.lectureNo
 						})
-				
 				}).then(response=>response.text())
 				.then(data=>{
-					console.log(data);
+					location.href='${pageContext.request.contextPath}/mypage/myLectureMain.do';
 				})
 	   		
 	   		});

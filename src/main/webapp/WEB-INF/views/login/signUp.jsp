@@ -387,19 +387,25 @@ $(document).ready(function () {
     }
 	
 	
-	const checkId=()=> {
+	const checkId =()=> {
 	    const idInput = document.getElementById("id");
 	    const idError = document.querySelector('.id-group').nextElementSibling;
 	    const idValue = idInput.value.trim();
-
+	    debugger;
+        const data = {
+                id: idValue,
+          };
+	    
 	    if (!validateId()) {
 	        return; // 유효성 검사에 실패하면 중복 확인 요청을 하지 않음
 	    }
+	    
 
 	    $.ajax({
-	        url: `${path}/login/idduplicate.do`, // 서버 요청 URL
+	        url: '${path}/login/idduplicate.do', // 서버 요청 URL
 	        type: "POST",
-	        data: { id: idValue }, // 전송 데이터
+	        contentType: "application/json", // 요청의 Content-Type
+	        data: JSON.stringify(data), // JSON 객체를 문자열로 변환
 	        success: function (response) {
 	            // 서버에서 반환된 JSON 데이터 처리
 	            if (response.isDuplicate) {
@@ -415,7 +421,22 @@ $(document).ready(function () {
 	            idError.style.color = "red";
 	        }
 	    });
-	}
+	    
+	}   
+	    
+/* 	 url: "https://example.com/api/endpoint", // 요청 보낼 URL
+     type: "POST", // 요청 메서드 (POST, GET, PUT 등)
+     contentType: "application/json", // 요청의 Content-Type
+     data: JSON.stringify(data), // JSON 객체를 문자열로 변환
+     success: function (response) {
+         console.log("서버 응답:", response);
+     },
+     error: function (xhr, status, error) {
+         console.error("에러 발생:", status, error);
+     } */
+
+	   
+	
 	
 	const checkDuplicate=()=> {
 	    const nicknameInput = document.getElementById("nickname");
@@ -454,9 +475,8 @@ $(document).ready(function () {
 	            return false;
 	        }
 	    });
+	
 	}
-	
-	
 	
 
 </script>
