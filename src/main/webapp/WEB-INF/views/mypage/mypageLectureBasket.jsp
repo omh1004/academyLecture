@@ -151,13 +151,15 @@ body {
 	<c:forEach var="baskect" items="${basketList}">
 		<div class="course-item">
 			<div class="course-image">
-				<div class="java-logo">☕</div>
+				<div class="java-logo">
+					<img alt="" src="${pageContext.request.contextPath}/resources/upload/lecture/image/${baskect.lecturePicture}">
+				</div>
 			</div>
 			<div class="course-info">
 				<div class="course-title">${baskect.className}</div>
 				<div class="course-instructor">${baskect.memberId}</div>
 			</div>
-			<div class="course-price">${baskect.price}</div>
+			<div class="course-price">17000</div>
 		</div>
 	</c:forEach>
 	<div class="buyer-info">
@@ -176,6 +178,27 @@ body {
 	</div>
 	<script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
 	<script>
+	
+	function generateRandomPassword(length) {
+	    // 암호에 사용할 가능한 문자들
+	    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+	    let password = '';
+	    
+	    // 암호 생성
+	    for (let i = 0; i < length; i++) {
+	        const randomIndex = Math.floor(Math.random() * characters.length);
+	        password += characters[randomIndex];
+	    }
+
+	    return password;
+	}
+
+	// 예제 사용
+	const randomPassword = generateRandomPassword(18); // 12자리 랜덤 암호 생성
+	console.log(randomPassword);
+	
+	
+	
 	    document.querySelector('.checkout-button').addEventListener('click', function () {
 	        
 	    	// PortOne SDK 초기화
@@ -186,7 +209,7 @@ body {
 			const requestData={
 	         	    storeId: "store-3bc36c78-6806-4618-9eb6-a4543ab8b481", // 고객사 storeId로 변경해주세요.
 	         	    channelKey: "channel-key-9f12fe14-e2c6-4789-9a14-adbde33a2914", // 콘솔 결제 연동 화면에서 채널 연동 시 생성된 채널 키를 입력해주세요.
-	         	    paymentId: `pa-\${crypto.randomUUID()}`,
+	         	    paymentId: `payment-\${randomPassword}`,
 	         	    orderName: `[${basketList[0]['className']}] 외 ${basketList.size()-1} 건` ,
 	         	    totalAmount: 1000,
 	         	    currency: "CURRENCY_KRW",
@@ -197,6 +220,7 @@ body {
 	         	      email: "${loginMember.email}",
 	         	      lectureNo : "${lectureNodes}"
 	         	    }};
+        	
         	const response = PortOne.requestPayment(requestData).then(response => {
 	   			console.log(response)
 				fetch(`${pageContext.request.contextPath}/payment/complete`,{

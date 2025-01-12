@@ -37,7 +37,6 @@
 	</header>
 
 	<main>
-	넘어오는 값 : ${members}
 		<section id="users">
 			<h2>사용자 관리</h2>
 			<table>

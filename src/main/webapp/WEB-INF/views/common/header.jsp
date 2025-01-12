@@ -66,8 +66,6 @@
             fetch('${path}/notifications/ws-url')
                 .then(response => response.text())
                 .then(wsUrl => {	
-					console.log('너 머들오냐냐냐'+wsUrl);
-                	
                     const socket = new WebSocket(wsUrl);
 
                     socket.onopen = function () {
@@ -108,7 +106,6 @@
         }
      // 알림 정보를 업데이트하는 함수
         function updateNotificationCount() {
-            console.log('업데이트 알림 카운트 실행');
             document.getElementById('notification-count').textContent = unreadCount;
 
             // 알림 정보창 업데이트
@@ -126,7 +123,7 @@
                         notificationList.innerHTML = ''; 
                         data.forEach(notification => {
                             const newNotification = document.createElement('li');
-                            newNotification.textContent = notification.rownum+"||"+notification.type+"||"+notification.content;
+                            newNotification.textContent = notification.type+"||"+notification.content;
                             notificationList.appendChild(newNotification);
                         });
                     })
@@ -194,6 +191,27 @@
 							<span>🔔</span> <span id="notification-count">0</span>
 						</button>
 						<!-- 알림 정보창 -->
+						 <div class="table-container">
+<!-- 				        <table>
+				            <thead>
+				                <tr>
+				                    <th>사용자</th>
+				                    <th>강의명</th>
+				                    <th>행동</th>
+				                    <th>추가 메시지</th>
+				                </tr>
+				            </thead>
+				            <tbody>
+				                <tr>
+				                    <td>좋아요유저11</td>
+				                    <td>Python으로 시작하는 데이터 분석</td>
+				                    <td>좋아요</td>
+				                    <td>수강평에 좋아요를 남겼습니다.</td>
+				                </tr>
+				            </tbody>
+				        </table>
+				    </div> -->
+						
 						<div id="notification-popup"
 							style="display: none; position: absolute; top: 50px; right: 5px; width: 300px; background-color: white; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); z-index: 1000; padding: 10px;">
 							<h6>알림</h6>
