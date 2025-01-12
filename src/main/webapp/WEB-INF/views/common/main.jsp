@@ -95,7 +95,7 @@ socket.onclose = () => {
       		  		</a>
       		  	</h3>
 	            <p class="course-instructor">${lecture.userId}</p>
-	            <p class="course-price">₩${lecture.price}</p>
+	            <p class="course-price">₩17,000</p>
 	        </div>
 	    </div>
 	</c:forEach>

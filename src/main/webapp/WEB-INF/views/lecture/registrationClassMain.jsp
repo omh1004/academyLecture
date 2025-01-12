@@ -278,7 +278,7 @@
                      <span>${lecture.difficulty}</span>
                 </div>
                 <div>${lecture.userId}</div>
-                <div class="course-price">${lecture.price}</div>
+                <div class="course-price">17,000원</div>
                 <div class="action-buttons">
                 <c:if test="${isStudentEnrolled==false}">
                     <a class="btn btn-primary" href="/univora/lectureBasket/add.do?lectureNo=${lecture.lectureNo}" role="button">수강신청 하기</a>                 

@@ -333,11 +333,43 @@
 	transition: fill 0.3s, transform 0.3s;
 }
 
-li {
-	font-size:15px;
-	font-weight: bold;
-	font-family:'Nato Sans KR';
-}
+        /* ul을 테이블처럼 */
+        ul {
+            display: table;
+            width: 100%;
+            border-collapse: collapse;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* li를 행(row)처럼 */
+        li {
+            display: table-row;
+            border: 1px solid #ddd;
+            font-family : 'Noto Sanz KR';
+            font-size : 13px;
+            font-weigh: bolder;
+        }
+
+        /* li 내부를 셀(cell)처럼 */
+        li span {
+            display: table-cell;
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            li span {
+                font-size: 12px;
+                padding: 8px;
+            }
+        }
+
+
 
 .search-button:hover svg {
 	fill: #333;
