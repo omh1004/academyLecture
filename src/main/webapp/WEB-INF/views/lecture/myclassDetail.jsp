@@ -125,6 +125,8 @@ button:hover {
 </head>
 
 <body>
+
+${myclass}
 	<div class="container">
 		<div class="lecture-header">
 			<img src="${path}/resources/upload/lecture/image/${myclass.myLecture.lecturePicture}" alt="강의 썸네일">

@@ -75,8 +75,9 @@ public class MyopenLectureAddDetailServlet extends HttpServlet {
 		// 업로드 파일에 대한 정보 가져오기
 		// getOriginalFileName("type=file의 name속성값") -> 업로드한 파일명
 		// getFilesystemName("type=file의 name속성값") -> 리네임된 파일명
-		String originalFileName = mr.getOriginalFileName("uploadfile");
-		String renamedFileName = mr.getFilesystemName("uploadfile");
+		String originalFileName = mr.getOriginalFileName("upfile");
+		String renamedFileName = mr.getFilesystemName("upfile");
+		System.out.println("upload파일들어오냐??"+originalFileName);
 		
 		// 넘어온 데이터 lecture 테이블에 저장
 

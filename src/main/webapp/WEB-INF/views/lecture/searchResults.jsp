@@ -17,7 +17,7 @@
     <div class="course-list">
         <c:forEach var="lecture" items="${searchResults}">
             <div class="course-card">
-                <img src="${pageContext.request.contextPath}/resources/images/${lecture.lecPic}" alt="${lecture.className}" class="course-image">
+                <img src="${pageContext.request.contextPath}/resources/upload/lecture/image/${lecture.lecturePicture}" alt="${lecture.className}" class="course-image">
                 <div class="course-info">
                     <h3 class="course-title">
                         <a href="${pageContext.request.contextPath}/lecture/registrationClassMain.do?lectureNo=${lecture.lectureNo}">

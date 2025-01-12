@@ -28,7 +28,6 @@ public class Lectures {
     private String detailedIntro;   // VARCHAR2
     private Timestamp createdDate;  // TIMESTAMP
     private Timestamp updatedDate;  // TIMESTAMP
-    private byte[] lecPic;            // BLOB
     private String lecturePicture;    
     private String lectureMovie;    
     

@@ -17,6 +17,8 @@ public class MyLectureService {
 	public int updateMyLectureDetail(OpenLecture lecture) {
 		SqlSession session = getSession();
 
+		System.out.println(lecture.toString());
+		
 		int result = lectureDao.updateMyLectureDetail(session, lecture);
 
 		if (result > 0) {
