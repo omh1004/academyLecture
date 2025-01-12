@@ -311,6 +311,20 @@
     
     <!-- 수강생일 경우에만 수강평 등록 버튼 표시 -->
         <button class="btn btn-primary" onclick="toggleReviewForm()">수강평 등록</button>
+        	<!-- 팝업창 -->
+
+<div id="review-popup" class="popup-overlay" style="display: none;">
+    <div class="popup-content">
+        <h2>수강평 작성 시 유의사항</h2>
+        <ul>
+            <li>수강평은 강의를 수강한 학생만 작성 가능합니다.</li>
+            <li>타인에게 불쾌감을 줄 수 있는 내용은 작성하지 마세요.</li>
+            <li>강의와 관련된 내용만 작성해주세요.</li>
+            <li>욕설, 비방 등의 내용은 삭제될 수 있습니다.</li>
+        </ul>
+	        <button id="confirm-btn" class="btn btn-success">확인</button>
+	    </div>
+	</div>
     </c:if>
 	<c:if test="${!isStudentEnrolled}">
 	
@@ -319,6 +333,9 @@
 	</c:if>
     </div>
     
+    
+
+
 
     <div class="add-review-form" id="add-review-form" style="display: none; margin-bottom: 2rem;">
         <form action="/univora/lecture/insertReview.do" method="post" onsubmit="submitReview(); return false;">
@@ -653,6 +670,34 @@
             </div> -->
         </section>
     </main>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const toggleButton = document.querySelector(".btn-primary");
+    const popup = document.getElementById("review-popup");
+    const confirmBtn = document.getElementById("confirm-btn");
+
+    if (!popup || !confirmBtn) {
+        console.error("Popup or confirm button not found.");
+        return;
+    }
+
+    toggleButton.addEventListener("click", function () {
+        popup.style.display = "block";
+    });
+
+    confirmBtn.addEventListener("click", function () {
+        popup.style.display = "none";
+
+        const reviewForm = document.getElementById("review-form");
+        if (reviewForm) {
+            reviewForm.style.display = "block";
+        }
+    });
+});
+
+</script>
+
 
     <script>
         // Add event listeners for buttons

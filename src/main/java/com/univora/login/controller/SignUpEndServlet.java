@@ -81,21 +81,21 @@ public class SignUpEndServlet extends HttpServlet {
 		
 		MemberService service = new MemberService();
 		
-		//String msg, loc ="/";
+		String msg, loc ="/";
 		try {
 			int result = service.signupMember(insertMember);
-			//msg="회원가입을 성공하였습니다.";
-			//loc="/";
+			msg="회원가입을 성공하였습니다.";
+			loc="/";
 		} catch(RuntimeException e) {
 			e.printStackTrace();
-			//msg="회원가입 실패하였습니다. 다시 시도해주세요.";
-			//loc="/login/signupagreement.do";
+			msg="회원가입 실패하였습니다. 다시 시도해주세요.";
+			loc="/login/signupagreement.do";
 		}
 		
-		//response.setContentType("text/html;charset=utf-8");
+		response.setContentType("text/html;charset=utf-8");
 		
-		//request.setAttribute("msg", msg);
-		//request.setAttribute("loc", loc);
+		request.setAttribute("msg", msg);
+		request.setAttribute("loc", loc);
 
 		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
 		

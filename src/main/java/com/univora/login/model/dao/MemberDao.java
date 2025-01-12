@@ -23,4 +23,21 @@ public class MemberDao {
 	public int updateMemberInfo(SqlSession session, Map<String, Object> param) {
 		return session.update("member.updateMemberInfo", param);
 	}
+	
+    public boolean isNicknameDuplicate(SqlSession session, String nickname) {
+        return session.selectOne("member.isNicknameDuplicate", nickname) != null;
+    }
+
+    public boolean isPhoneDuplicate(SqlSession session, String phone) {
+        return session.selectOne("member.isPhoneDuplicate", phone) != null;
+    }
+
+    public boolean isEmailDuplicate(SqlSession session, String email) {
+        return session.selectOne("member.isEmailDuplicate", email) != null;
+    }
+    
+	public Member selectMemberById(SqlSession session, String id) {
+		return session.selectOne("member.selectMemberById", id);
+	}
+    
 }

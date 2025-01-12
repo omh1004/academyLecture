@@ -19,7 +19,7 @@
       			<div class="agreement-text overflow-auto">
       				<strong>제1장 총칙</strong>
 		            <strong>제1조 [목적]</strong>
-		            <p>본 약관은 학부모 커뮤니티 사이트 "univora"(이하 "서비스")가 제공하는 모든 서비스의 이용조건 및 절차, 이용자와 univora의 권리, 의무, 책임사항과 기타 필요한 사항을 규정함을 목적으로 합니다.</p>
+		            <p>본 약관은 온라인 강의 사이트 "univora"(이하 "서비스")가 제공하는 모든 서비스의 이용조건 및 절차, 이용자와 univora의 권리, 의무, 책임사항과 기타 필요한 사항을 규정함을 목적으로 합니다.</p>
 		            
 		            <strong>제2조 [정의]</strong>
 		            <ol>

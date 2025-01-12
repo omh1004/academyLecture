@@ -1,8 +1,10 @@
 package com.univora.login.model.service;
 
 
+
 import static com.univora.common.SqlSessionTemplate.getSession;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -55,4 +57,22 @@ private MemberDao dao = new MemberDao();
 		return result;
 	}
 	
+	
+	 public Map<String, Boolean> checkDuplicate(String nickname, String phone, String email) {
+			SqlSession session = getSession();
+	        Map<String, Boolean> result = new HashMap<>();
+	        result.put("nicknameIsDuplicate", dao.isNicknameDuplicate(session, nickname));
+	        result.put("phoneIsDuplicate", dao.isPhoneDuplicate(session, phone));
+	        result.put("emailIsDuplicate", dao.isEmailDuplicate(session, email));
+	        session.close();
+	        return result;
+		 }
+	 
+		public Member selectMemberById(String id) {
+			SqlSession session = getSession();
+			Member m = dao.selectMemberById(session, id);
+			session.close();
+			return m;
+		}
+	 
 }

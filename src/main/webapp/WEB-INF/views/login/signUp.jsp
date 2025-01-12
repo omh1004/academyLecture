@@ -397,7 +397,7 @@ $(document).ready(function () {
 	    }
 
 	    $.ajax({
-	        url: `${path}/member/idduplicate.do`, // 서버 요청 URL
+	        url: `${path}/login/idduplicate.do`, // 서버 요청 URL
 	        type: "POST",
 	        data: { id: idValue }, // 전송 데이터
 	        success: function (response) {
@@ -426,7 +426,7 @@ $(document).ready(function () {
 	    const emailValue = emailInput.value.trim();
 
 	    $.ajax({
-	        url: `${path}/member/checkduplicate.do`, // 서버 요청 URL
+	        url: `${path}/login/checkduplicate.do`, // 서버 요청 URL
 	        type: "POST",
 	        data: { nickname: nicknameValue, phone: phoneValue, email: emailValue }, // 전송 데이터
 	        success: function (response) {
