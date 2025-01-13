@@ -24,8 +24,20 @@ public class NotificationService {
 
 	// 알림 읽음 처리
 	public void markNotificationsAsRead(String memberId) {
+		
+		
+		System.out.println("memberId::"+memberId);
+		
 		try (SqlSession session = getSession()) {
-			notificationDAO.markNotificationsAsRead(session, memberId);
+			int result = notificationDAO.markNotificationsAsRead(session, memberId);
+			
+			if(result >0) {
+				session.commit();
+			}else {
+				session.rollback();
+			}
+			
+			session.close();
 		}
 	}
 

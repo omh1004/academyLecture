@@ -20,8 +20,8 @@ public class NotificationDAO {
 	}
 
 	// 알림 읽음 처리
-	public void markNotificationsAsRead(SqlSession session, String memberId) {
-		session.update("notification.markNotificationsAsRead", memberId);
+	public int markNotificationsAsRead(SqlSession session, String memberId) {
+		return session.update("notification.markNotificationsAsRead", memberId);
 	}
 
 	// 알림 생성

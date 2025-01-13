@@ -14,7 +14,7 @@ import com.univora.login.model.dto.Member;
 /**
  * Servlet implementation class NotificationMarkAsReadServlet
  */
-@WebServlet("/notification/markAsRead.do")
+@WebServlet("/notifications/markAsRead.do")
 public class NotificationMarkAsReadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private NotificationService notificationService = new NotificationService();
@@ -43,10 +43,10 @@ public class NotificationMarkAsReadServlet extends HttpServlet {
             response.getWriter().write("Unauthorized: User not logged in.");
             return;
         }
-
-        int unreadCount = notificationService.getUnreadNotificationCount(user.getMemberId());
+        
+        notificationService.markNotificationsAsRead(memberId);
         response.setContentType("application/json");
-        response.getWriter().write(String.valueOf(unreadCount));
+        //response.getWriter().write(String.valueOf(unreadCount));
 	}
 
 	/**

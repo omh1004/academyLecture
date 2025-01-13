@@ -97,7 +97,7 @@
 
         // 알림 읽음 처리
         function markAsRead() {
-            fetch('${path}/notification/markAsRead.do')
+            fetch('${path}/notifications/markAsRead.do')
                 .then(() => {
 					console.log('읽음 처리되냐???')
                     unreadCount = 0; // 읽음 처리 후 카운트 초기화
@@ -112,6 +112,10 @@
             const notificationPopup = document.getElementById('notification-popup');
             const notificationList = document.getElementById('notification-list');
 
+            
+            
+            
+            
             // 새로운 알림이 있을 경우 알림창을 표시하고 내용 추가
             if (unreadCount > 0) { 
                 notificationPopup.style.display = 'block';
@@ -132,9 +136,10 @@
                     });
              } else {
                 notificationPopup.style.display = 'none';
+                
             }
-        }
-
+     }
+           
     </script>
 	<!-- Header -->
 	<header class="header">
@@ -377,7 +382,7 @@ button {
 }
 
 #notification-list {
-            display: table;
+             display: table;
             width: 100%;
             border-collapse: collapse;
             list-style: none;
@@ -386,22 +391,38 @@ button {
         }
 #notification-list>li {
             display: table-row;
-            border: 1px solid #ddd;
+            border-top: 1px solid #ddd; /* 상단 경계선 */
+            border-bottom: 1px solid #ddd; /* 하단 경계선 */
             font-family : 'Noto Sanz KR';
             font-size : 13px;
             font-weigh: bolder;
+            bottom-magin: 10px;
+            
         }
         #notification-list>li span {
             display: table-cell;
             padding: 10px;
-            border: 1px solid #ddd;
+            magin:5px;
+            border-top: 1px solid #ddd; /* 셀 상단 경계선 */
+            border-bottom: 1px solid #ddd; /* 셀 하단 경계선 */
             text-align: left;
+            
+            
         }
         media (max-width: 768px) {
             #notification-list>li span {
                 font-size: 12px;
                 padding: 8px;
+            }
 
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            li span {
+                font-size: 12px;
+                padding: 8px;
+            }
+        }
 
 
 
