@@ -39,11 +39,11 @@ public class UnreadNotificationCountServlet extends HttpServlet {
     	
         String memberId = user.getMemberId();
         
-        if (user == null) {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getWriter().write("Unauthorized: User not logged in.");
-            return;
-        }
+//        if (user == null) {
+//            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+//            response.getWriter().write("Unauthorized: User not logged in.");
+//            return;
+//        }
 
         int unreadCount = notificationService.getUnreadNotificationCount(user.getMemberId());
         response.setContentType("application/json");

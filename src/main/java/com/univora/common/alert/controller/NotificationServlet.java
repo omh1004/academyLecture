@@ -36,15 +36,7 @@ public class NotificationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String memberId = (String) request.getSession().getAttribute("memberId");
-
-        if (memberId == null) {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            response.getWriter().write("Unauthorized: User not logged in.");
-            return;
-        }
-
-        notificationService.markNotificationsAsRead(memberId);
-        response.getWriter().write("Notifications marked as read.");
+    	// TODO Auto-generated method stub
+		doGet(request, response);;
     }
 }

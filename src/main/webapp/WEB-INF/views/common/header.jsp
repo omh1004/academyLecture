@@ -101,7 +101,7 @@
                 .then(() => {
 					console.log('읽음 처리되냐???')
                     unreadCount = 0; // 읽음 처리 후 카운트 초기화
-                    updateNotificationCount();
+                     updateNotificationCount();
                 });
         }
      // 알림 정보를 업데이트하는 함수
@@ -112,10 +112,6 @@
             const notificationPopup = document.getElementById('notification-popup');
             const notificationList = document.getElementById('notification-list');
 
-            
-            
-            
-            
             // 새로운 알림이 있을 경우 알림창을 표시하고 내용 추가
             if (unreadCount > 0) { 
                 notificationPopup.style.display = 'block';
@@ -127,7 +123,7 @@
                         notificationList.innerHTML = ''; 
                         data.forEach(notification => {
                             const newNotification = document.createElement('li');
-                            newNotification.textContent = notification.content;
+                            newNotification.textContent = notification.type+"||"+notification.content;
                             notificationList.appendChild(newNotification);
                         });
                     })

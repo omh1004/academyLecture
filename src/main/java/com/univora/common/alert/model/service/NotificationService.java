@@ -87,12 +87,11 @@ public class NotificationService {
 			try {
 				result = notificationDAO.insertNotification(session, memberId, type, content);
 
-				if (result > 0) {
 					NotificationWebSocket.sendNotification(memberId, content);
 					session.commit();
-				} else {
+
 					session.rollback();
-				}
+
 			} finally {
 				session.close();
 			}

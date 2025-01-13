@@ -568,7 +568,7 @@
             <div class="dropdown">
             
              <!-- 수정 삭제도 본인 이외에는 불가능 -->
-            <c:if test="${review.studentNo == sessionScope.loginMember.memberNo}">
+            <c:if test="${reply.studentNo == sessionScope.loginMember.memberNo}">
                 <a href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-three-dots">
                         <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3m5 0a1.5 1.5 0 1 1 0-3 1.5.5.5 0 0 1 0 3"/>

@@ -35,6 +35,9 @@ public class LatestNotificationServlet extends HttpServlet {
         
         try {
 
+        	
+        	System.out.println("login:::"+memberId);
+        	
         	List<Notification> notifications = new NotificationService().selectAlert(memberId);
 
         	System.out.println("notifications::"+notifications);

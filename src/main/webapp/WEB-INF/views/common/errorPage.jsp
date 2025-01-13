@@ -67,7 +67,7 @@
         <h1>오류가 발생했습니다</h1>
         <p><%= request.getAttribute("errorMsg") != null ? request.getAttribute("errorMsg") : "알 수 없는 오류가 발생했습니다. 나중에 다시 시도해주세요." %></p>
         <a href="javascript:history.back()" class="btn btn-secondary">이전 페이지로</a>
-        <a href="<%= request.getContextPath() %>/" class="btn">홈으로 이동</a>
+        <a href="<%= request.getContextPath() %>/main/login.do" class="btn">홈으로 이동</a>
     </div>
 </body>
 </html>
