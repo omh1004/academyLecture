@@ -73,7 +73,6 @@ public class PaymentCompleteServlet extends HttpServlet {
 		
 		String msg, loc = "/mypage/myLectureMain.do";
 		if (result > 0) {
-
 			msg = "결재 처리 성공";
 		} else {
 			msg = "결재 처리 실패";

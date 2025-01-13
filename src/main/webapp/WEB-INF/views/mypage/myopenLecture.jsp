@@ -378,10 +378,10 @@ body {
         formData.append("lectureImage", lectureImage.files[0]);
         
         
-        
+        debugger;
         
         try {
-            const response = await fetch(`${pageContext.request.contextPath}/mypage/myopenLectureAdd.do`, {
+            const response = await fetch('${pageContext.request.contextPath}/mypage/myopenLectureAdd.do', {
                 method: 'POST',
                 body: formData
             });
