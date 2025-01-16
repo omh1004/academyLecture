@@ -30,8 +30,8 @@ public class NotificationUrlServlet extends HttpServlet {
         }
 
         // WebSocket URL 반환 (컨텍스트 경로 포함)
-        String wsUrl = "ws://localhost:9090/univora/notification-websocket/" + memberId;
-        //String wsUrl = "ws://3.34.104.219:9090/univora/notification-websocket/" + memberId;
+        //String wsUrl = "ws://localhost:9090/univora/notification-websocket/" + memberId;
+        String wsUrl = "ws://3.34.104.219:9090/univora/notification-websocket/" + memberId;
         response.setContentType("text/plain");
         response.getWriter().write(wsUrl);
     }

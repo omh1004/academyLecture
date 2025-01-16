@@ -69,8 +69,11 @@ public class MyopenLectureAddServlet extends HttpServlet {
 	        String convertedTime;
 	        try {
 	            Date parsedTime = inputFormat.parse(timeWithPeriod);
+	            System.out.println("parseTime:::"+parsedTime);
 	            convertedTime = outputFormat.format(parsedTime); // Convert to 24-hour format
+	            System.out.println("convertedTime:::"+convertedTime);
 	        } catch (ParseException e) {
+	        	e.printStackTrace();
 	            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 	            response.getWriter().write("{\"message\": \"Invalid time format.\"}");
 	            return;
@@ -81,37 +84,44 @@ public class MyopenLectureAddServlet extends HttpServlet {
 			// getFilesystemName("type=file의 name속성값") -> 리네임된 파일명
 	        
 			String originalFileName = mr.getOriginalFileName("lectureImage");
+			System.out.println("originalFileName:::"+originalFileName);
 			String renamedFileName = mr.getFilesystemName("lectureImage");
+			System.out.println("renamedFileName:::"+renamedFileName);
 
-			String lectureNo 
-				= new MyPageService().saveLecture(
+			int lectureNo=
+				 new MyPageService().saveLecture(
 						name, content
 						, date, convertedTime
 						,loginMember.getMemberNo(),renamedFileName);
 
 			String msg, loc;
 			
-			if (lectureNo!=null) {
 
-				AttachFile uploadFile = AttachFile.builder().lectureNo(lectureNo).originalFileName(originalFileName)
-						.renamedFileName(renamedFileName).path(path).build();
 
-				lectureService.uploadFile(uploadFile);
+			
 
+			
+			if (lectureNo>0) {
 
 				
 				msg = "강의 등록성공!";
 				loc = "/mypage/myopenlecture.do";
 
-
-
 		
 			}else {
+				
 				
 				msg = "강의 등록실패!";
 				loc = "/mypage/myopenlecture.do";
 			}
 
+			
+			request.setAttribute("msg", msg);
+			request.setAttribute("loc", loc);
+
+			request.getRequestDispatcher(getServletContext().getInitParameter("viewpath") + "/common/msg.jsp")
+					.forward(request, response);
+			
 	}
 
 	/**

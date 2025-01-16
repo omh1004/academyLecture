@@ -43,7 +43,7 @@ public class MyPageService {
 		
 	}
 
-    public String saveLecture(String name, String content, String date, String time, String userId, String renamedFileName) {
+    public int saveLecture(String name, String content, String date, String time, String userId, String renamedFileName) {
     	SqlSession session = getSession();
     	
     	HashMap<String, Object> lectureData = new HashMap<>();
@@ -57,10 +57,15 @@ public class MyPageService {
         
         System.out.println("뭥미"+lectureData.get("dateTime"));
         
-        String result = mypageDao.saveLecture(session,lectureData);
+        int result = mypageDao.saveLecture(session,lectureData);
         
-    	if(result.length()>0) session.commit();
-		else session.rollback();
+        if(result>0) {
+        	session.commit();
+        }else {
+        	session.rollback();
+        }
+        
+        System.out.println("값나오냐??/"+result);
 
         return result;
     }

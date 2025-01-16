@@ -377,8 +377,7 @@ body {
         formData.append("time", lectureTime+" "+timePeriod);
         formData.append("lectureImage", lectureImage.files[0]);
         
-        
-        debugger;
+        xx
         
         try {
             const response = await fetch('${pageContext.request.contextPath}/mypage/myopenLectureAdd.do', {
@@ -386,14 +385,12 @@ body {
                 body: formData
             });
 
-            if (response.ok) {
+           
                 alert('강의가 저장되었습니다!');
                 renderCalendar();
                 popup.style.display = 'none';
                 popupOverlay.style.display = 'none';
-            } else {
-                alert('강의 저장에 실패했습니다.');
-            }
+
         } catch (error) {
             console.error('Error saving lecture:', error);
             alert('강의 저장 중 오류가 발생했습니다.');

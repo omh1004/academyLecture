@@ -43,9 +43,16 @@ public class mypageDao {
 	}
 
 
-	public String saveLecture(SqlSession session, HashMap<String, Object> lectureData) {
-		session.insert(NAMESPACE + ".insertLecture", lectureData);
-		return (String) lectureData.get("lectureNo");
+	public int saveLecture(SqlSession session, HashMap<String, Object> lectureData) {
+		
+		System.out.println("넘어요냐?db넘어가기전 최종 ");
+		
+		int result=session.insert(NAMESPACE + ".insertLecture", lectureData);
+		
+		System.out.println(result);
+		
+		
+		return result;
 		
 	}
 
