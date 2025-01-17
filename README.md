@@ -4,7 +4,7 @@
   </h1>
 
   <div style="text-align: center;">
-    <img src="https://github.com/omh1004/univora/tree/dev/src/main/webapp/resources/images/codingCharacter.png" alt="Coding Character" width="300" />
+    <img src="https://raw.githubusercontent.com/omh1004/univora/dev/src/main/webapp/resources/images/codingCharacter.png" alt="Coding Character" width="300" />
   </div>
 
   <div style="display: flex; justify-content: center;">
@@ -24,4 +24,3 @@
     </div>
   </div>
 </p>
-
