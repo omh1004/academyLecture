@@ -21,7 +21,7 @@
       <img src="https://img.shields.io/badge/AWS-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white" alt="AWS" />
     </div>
     <div>
-      <h2 style="font-size: 1.5em; color: #333;">:압정: 참여 프로젝트: Univora</h2>
+      <h2 style="font-size: 1.5em; color: #333;">📌 참여 프로젝트: Univora</h2>
       <ul style="font-size: 1em; line-height: 1.8; color: #333;">
         <li><strong>웹소켓 알림 기능</strong> 구현</li>
         <li><strong>강의 스케줄 (달력)</strong> 기능 구현</li>
