@@ -23,4 +23,23 @@
       <img src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white" alt="Ubuntu" />
     </div>
   </div>
+
+  <div style="text-align: left; margin-top: 30px;">
+    <h2 style="font-size: 2em; color: #4CAF50; font-family: 'Arial, sans-serif';">
+      <strong>📌 참여 프로젝트: Univora</strong>
+    </h2>
+    <ul style="font-size: 1.2em; line-height: 1.8; color: #333;">
+      <li><strong>웹소켓 알림 기능</strong> 구현</li>
+      <li><strong>강의 스케줄 (달력)</strong> 기능 구현</li>
+      <li><strong>Google SMTP API</strong>를 활용한 로그인 알림 기능 구현</li>
+      <li><strong>동영상 및 이미지 파일 업로드</strong> 기능 구현</li>
+      <li><strong>동영상 재생 기능</strong> 구현</li>
+      <li><strong>Admin 페이지</strong> 구현</li>
+      <li><strong>강의 등록 (CRUD)</strong> 기능 구현</li>
+      <li><strong>포트원 API</strong>를 활용한 결제 기능 구현</li>
+      <li><strong>비밀번호 암호화</strong> 처리</li>
+      <li><strong>비즈니스 로직</strong> 기획 및 설계</li>
+      <li>배포 테스트 이후 실제 환경에서 발생한 <strong>버그 전체 수정</strong></li>
+    </ul>
+  </div>
 </p>
