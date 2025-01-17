@@ -43,7 +43,7 @@
       <strong>🌟 Profile 2: SK_Dev 🌟</strong>
     </h1>
     <div style="text-align: center; margin-bottom: 20px;">
-      <img src="https://raw.githubusercontent.com/omh1004/univora/dev/src/main/webapp/resources/images/설기씨.JPG" alt="Coding Character" width="200" />
+      <img src="https://raw.githubusercontent.com/omh1004/univora/dev/src/main/webapp/resources/images/sulgi.png" alt="Coding Character" width="200" />
     </div>
     <div style="display: flex; justify-content: center; flex-wrap: wrap; margin-bottom: 20px;">
       <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=coffee&logoColor=white" alt="Java" />
