@@ -5,7 +5,7 @@
       <strong>🌟 Profile 1: omh_dev 🌟</strong>
     </h1>
     <div style="text-align: center; margin-bottom: 20px;">
-      <img src="https://raw.githubusercontent.com/omh1004/univora/dev/src/main/webapp/resources/images/omh_dev.png" alt="Coding Character" width="200" />
+      <img src="https://raw.githubusercontent.com/omh1004/univora/dev/src/main/webapp/resources/images/codingCharacter.png" alt="Coding Character" width="200" />
     </div>
     <div style="display: flex; justify-content: center; flex-wrap: wrap; margin-bottom: 20px;">
       <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=coffee&logoColor=white" alt="Java" />
@@ -40,10 +40,11 @@
   <!-- 두 번째 프로필 -->
   <div style="width: 45%; text-align: left; padding-left: 20px;">
     <h1 style="font-size: 2em; color: #4CAF50;">
-      <strong>🌟 Profile 2: SK_Dev 🌟</strong>
+      <strong>🌟 Profile 2: Another_Dev 🌟</strong>
     </h1>
     <div style="text-align: center; margin-bottom: 20px;">
-      <img src="https://raw.githubusercontent.com/omh1004/univora/dev/src/main/webapp/resources/images/sulgi.png" alt="Coding Character" width="200" />
+      <!-- 이미지에 동그란 효과 추가 -->
+      <img src="https://raw.githubusercontent.com/omh1004/univora/dev/src/main/webapp/resources/images/codingCharacter.png" alt="Coding Character" width="200" style="border-radius: 50%;" />
     </div>
     <div style="display: flex; justify-content: center; flex-wrap: wrap; margin-bottom: 20px;">
       <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=coffee&logoColor=white" alt="Java" />
