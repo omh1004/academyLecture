@@ -1,6 +1,6 @@
 <div style="display: flex; justify-content: space-around; align-items: flex-start; margin-top: 30px; font-family: 'Arial, sans-serif';">
   <!-- 첫 번째 프로필 -->
-  <div style="width: 45%; text-align: left;">
+  <div style="width: 45%; text-align: left; border-right: 1px solid #ddd; padding-right: 20px;">
     <h1 style="font-size: 2em; color: #4CAF50;">
       <strong>🌟 Profile 1: omh_dev 🌟</strong>
     </h1>
@@ -38,9 +38,9 @@
   </div>
 
   <!-- 두 번째 프로필 -->
-  <div style="width: 45%; text-align: left;">
+  <div style="width: 45%; text-align: left; padding-left: 20px;">
     <h1 style="font-size: 2em; color: #4CAF50;">
-      <strong>🌟 Profile 2: SK 🌟</strong>
+      <strong>🌟 Profile 2: SK_Dev 🌟</strong>
     </h1>
     <div style="text-align: center; margin-bottom: 20px;">
       <img src="https://raw.githubusercontent.com/omh1004/univora/dev/src/main/webapp/resources/images/codingCharacter.png" alt="Coding Character" width="200" />
