@@ -4,7 +4,7 @@
   </h1>
 
   <div style="text-align: center;">
-    <img src="A_cute_cartoon_character_enthusiastically_coding_o.png" alt="Coding Character" width="300" />
+    <img src="https://github.com/omh1004/univora/tree/dev/src/main/webapp/resources/images/codingcharacter.png" alt="Coding Character" width="300" />
   </div>
 
   <div style="display: flex; justify-content: center;">
@@ -24,3 +24,4 @@
     </div>
   </div>
 </p>
+
