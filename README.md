@@ -3,7 +3,7 @@
     <strong>🌟 omh_dev's Tech Stack 🌟</strong>
   </h1>
 
-  <div style="text-align: center;">
+  <div style="display: flex; justify-content: center; margin-bottom: 20px;">
     <img src="https://raw.githubusercontent.com/omh1004/univora/dev/src/main/webapp/resources/images/codingCharacter.png" alt="Coding Character" width="300" />
   </div>
 
