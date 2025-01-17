@@ -43,7 +43,6 @@
       <strong>🌟 Profile 2: Another_Dev 🌟</strong>
     </h1>
     <div style="text-align: center; margin-bottom: 20px;">
-      <!-- 이미지에 동그란 효과 추가 -->
       <img src="https://raw.githubusercontent.com/omh1004/univora/dev/src/main/webapp/resources/images/sulgi.png" alt="Coding Character" width="200" style="border-radius: 50%;" />
     </div>
     <div style="display: flex; justify-content: center; flex-wrap: wrap; margin-bottom: 20px;">
