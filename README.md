@@ -3,6 +3,10 @@
     <strong>🌟 omh_dev's Tech Stack 🌟</strong>
   </h1>
 
+  <div style="text-align: center;">
+    <img src="A_cute_cartoon_character_enthusiastically_coding_o.png" alt="Coding Character" width="300" />
+  </div>
+
   <div style="display: flex; justify-content: center;">
     <div style="margin-right: 20px;">
       <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=coffee&logoColor=white" alt="Java" />
@@ -15,6 +19,8 @@
       <img src="https://img.shields.io/badge/Spring%20Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white" alt="Spring Boot" />
       <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white" alt="MySQL" />
       <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Linux" />
+      <img src="https://img.shields.io/badge/CentOS-262577?style=for-the-badge&logo=centos&logoColor=white" alt="CentOS" />
+      <img src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white" alt="Ubuntu" />
     </div>
   </div>
 </p>
